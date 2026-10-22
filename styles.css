@@ -55,6 +55,9 @@
     /* Transitions */
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --transition-smooth: 0.5s var(--ease-out-expo);
+
+    /* Layout Panel Width */
+    --panel-width: clamp(440px, 42vw, 580px);
 }
 
 /* ========================================================================
@@ -226,14 +229,27 @@ body {
 }
 
 /* ========================================================================
-   Map
+   Map & Left Backdrop
    ======================================================================== */
+
+.story-left-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--panel-width);
+    height: 100vh;
+    background: var(--color-ocean-900);
+    border-right: 1px solid rgba(100, 181, 246, 0.14);
+    box-shadow: 8px 0 28px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    pointer-events: none;
+}
 
 #map {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: var(--panel-width);
+    width: calc(100% - var(--panel-width));
     height: 100%;
     z-index: 1;
 }
@@ -241,15 +257,14 @@ body {
 .map-overlay {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: var(--panel-width);
+    width: calc(100% - var(--panel-width));
     height: 100%;
     z-index: 2;
     pointer-events: none;
     background:
-        linear-gradient(to bottom, rgba(2, 12, 27, 0.4) 0%, transparent 15%),
-        linear-gradient(to top, rgba(2, 12, 27, 0.5) 0%, transparent 20%),
-        linear-gradient(to right, rgba(2, 12, 27, 0.3) 0%, transparent 40%);
+        linear-gradient(to bottom, rgba(2, 12, 27, 0.3) 0%, transparent 12%),
+        linear-gradient(to top, rgba(2, 12, 27, 0.4) 0%, transparent 15%);
 }
 
 /* ========================================================================
@@ -259,6 +274,7 @@ body {
 .story {
     position: relative;
     z-index: 3;
+    width: 100%;
 }
 
 /* ========================================================================
@@ -267,15 +283,17 @@ body {
 
 .hero {
     min-height: 100vh;
+    width: var(--panel-width);
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: var(--space-xl);
+    justify-content: flex-start;
+    text-align: left;
+    padding: var(--space-2xl) clamp(28px, 4vw, 52px);
+    box-sizing: border-box;
 }
 
 .hero__content {
-    max-width: 700px;
+    max-width: 100%;
     animation: hero-appear 1.5s var(--ease-out-expo) 0.5s both;
 }
 
@@ -301,9 +319,9 @@ body {
 
 .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.12;
     margin-bottom: var(--space-lg);
     background: linear-gradient(135deg, var(--color-text-primary), var(--color-ocean-200));
     -webkit-background-clip: text;
@@ -317,17 +335,17 @@ body {
 }
 
 .hero__subtitle {
-    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(1rem, 2vw, 1.25rem);
     color: var(--color-text-secondary);
     font-weight: 300;
     line-height: 1.6;
-    margin-bottom: var(--space-3xl);
+    margin-bottom: var(--space-2xl);
 }
 
 .hero__scroll-cue {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--space-sm);
     color: var(--color-text-dim);
     font-size: 0.8rem;
@@ -346,44 +364,48 @@ body {
 }
 
 /* ========================================================================
-   Scene Cards
+   Scene Content (Direct text layout, no cards)
    ======================================================================== */
 
 .scene {
     min-height: 100vh;
+    width: var(--panel-width);
     display: flex;
     align-items: center;
-    padding: var(--space-xl);
+    justify-content: flex-start;
+    padding: var(--space-2xl) 0;
+    box-sizing: border-box;
 }
 
 .scene-spacer {
-    height: 40vh;
+    height: 30vh;
 }
 
 .scene__card {
-    max-width: 480px;
-    padding: var(--space-xl) var(--space-lg);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    opacity: 0.25;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s var(--ease-out-expo), border-color 0.6s ease;
+    width: 100%;
+    max-width: 100%;
+    padding: var(--space-xl) clamp(28px, 4vw, 52px);
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 0.22;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s var(--ease-out-expo);
+    box-sizing: border-box;
 }
 
 .scene__card--wide {
-    max-width: 600px;
+    max-width: 100%;
 }
 
 .scene__card.is-active {
     opacity: 1;
     transform: translateY(0);
-    border-color: var(--glass-border-active);
-    box-shadow:
-        0 0 40px rgba(74, 143, 231, 0.08),
-        0 24px 48px rgba(0, 0, 0, 0.4);
+    border: none;
+    box-shadow: none;
 }
 
 .scene__number {
@@ -773,28 +795,32 @@ body {
 
 .closing {
     min-height: 100vh;
+    width: var(--panel-width);
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: var(--space-xl);
+    justify-content: flex-start;
+    text-align: left;
+    padding: var(--space-2xl) clamp(28px, 4vw, 52px);
+    box-sizing: border-box;
 }
 
 .closing__content {
-    max-width: 600px;
-    padding: var(--space-2xl);
-    background: var(--glass-bg);
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    border: 1px solid var(--glass-border);
-    border-radius: var(--radius-lg);
-    opacity: 0.25;
-    transition: opacity 0.6s ease, border-color 0.6s ease;
+    max-width: 100%;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 0.22;
+    transition: opacity 0.6s ease;
 }
 
 .closing__content.is-active {
     opacity: 1;
-    border-color: var(--glass-border-active);
+    border: none;
+    box-shadow: none;
 }
 
 .closing__title {
@@ -828,15 +854,43 @@ body {
    Responsive Adjustments
    ======================================================================== */
 
-@media (max-width: 768px) {
-    .scene__card {
-        max-width: 100%;
-        margin: 0 var(--space-sm);
-        padding: var(--space-lg) var(--space-md);
+@media (max-width: 860px) {
+    :root {
+        --panel-width: 100%;
     }
 
-    .scene__card--wide {
-        max-width: 100%;
+    .story-left-backdrop {
+        display: none;
+    }
+
+    #map {
+        left: 0;
+        width: 100%;
+        height: 38vh;
+        top: 0;
+    }
+
+    .map-overlay {
+        left: 0;
+        width: 100%;
+        height: 38vh;
+    }
+
+    .story {
+        margin-top: 36vh;
+    }
+
+    .hero,
+    .scene,
+    .closing {
+        width: 100%;
+        min-height: 60vh;
+        padding: var(--space-xl) var(--space-md);
+        background: var(--color-ocean-900);
+    }
+
+    .scene__card {
+        padding: var(--space-md) 0;
     }
 
     .scene__charts-grid {
@@ -852,7 +906,7 @@ body {
     }
 
     .hero__title {
-        font-size: clamp(2rem, 10vw, 3.5rem);
+        font-size: clamp(2rem, 10vw, 3.2rem);
     }
 
     .metric-grid {

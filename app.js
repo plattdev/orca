@@ -430,6 +430,7 @@
                 resizeTimer = setTimeout(() => {
                     scroller.resize();
                     Charts.redraw();
+                    if (map) map.resize();
                 }, 250);
             });
         });
