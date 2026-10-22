@@ -25,22 +25,51 @@
         nature: '#06d6a0',
         bathymetry: '#e63946',
         town: '#f4a261',
-        almadraba: '#e9c46a'
+        almadraba: '#e9c46a',
+        'sill-channel': '#e63946',
+        basin: '#9d4edd'
     };
 
     function createMarkerElement(type, label) {
         const el = document.createElement('div');
         el.className = 'map-marker';
-        el.style.cssText = `
+        
+        let customStyles = `
             width: 12px;
             height: 12px;
             border-radius: 50%;
             background: ${markerColors[type] || '#fff'};
-            border: 2px solid rgba(255,255,255,0.8);
+            border: 2px solid rgba(255,255,255,0.85);
             box-shadow: 0 0 12px ${markerColors[type] || '#fff'}80;
             cursor: pointer;
             transition: transform 0.3s ease;
         `;
+
+        if (type === 'sill-channel') {
+            customStyles = `
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: #e63946;
+                border: 2px solid #ffffff;
+                box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.6), 0 0 14px rgba(230, 57, 70, 0.9);
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            `;
+        } else if (type === 'basin') {
+            customStyles = `
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #9d4edd;
+                border: 2px solid rgba(255,255,255,0.9);
+                box-shadow: 0 0 10px rgba(157, 78, 221, 0.7);
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            `;
+        }
+
+        el.style.cssText = customStyles;
 
         // Tooltip label
         const tooltip = document.createElement('div');
@@ -56,20 +85,22 @@
             font-size: 11px;
             font-weight: 500;
             color: #e6f1ff;
-            background: rgba(10, 25, 47, 0.9);
+            background: rgba(10, 25, 47, 0.92);
             backdrop-filter: blur(8px);
             padding: 4px 10px;
             border-radius: 6px;
-            border: 1px solid rgba(100, 181, 246, 0.2);
+            border: 1px solid rgba(100, 181, 246, 0.25);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
+            z-index: 10;
         `;
 
         el.appendChild(tooltip);
 
         el.addEventListener('mouseenter', () => {
-            el.style.transform = 'scale(1.5)';
+            el.style.transform = 'scale(1.4)';
             tooltip.style.opacity = '1';
         });
         el.addEventListener('mouseleave', () => {
@@ -101,18 +132,77 @@
         });
     }
 
-    /* ── Current Arrows (Scene 4) ────────────────────────────────────── */
+    /* ── Camarinal Sill Transect (Scene 3 & 4) ────────────────────────── */
+
+    let camarinalLineAdded = false;
+
+    function addCamarinalTransect() {
+        if (camarinalLineAdded) {
+            map.setLayoutProperty('camarinal-transect-line', 'visibility', 'visible');
+            map.setLayoutProperty('camarinal-transect-glow', 'visibility', 'visible');
+            return;
+        }
+
+        map.addSource('camarinal-transect-src', {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                geometry: {
+                    type: 'LineString',
+                    coordinates: camarinalTransectCoordinates
+                }
+            }
+        });
+
+        map.addLayer({
+            id: 'camarinal-transect-glow',
+            type: 'line',
+            source: 'camarinal-transect-src',
+            paint: {
+                'line-color': '#06d6a0',
+                'line-width': 8,
+                'line-opacity': 0.25,
+                'line-blur': 4
+            }
+        });
+
+        map.addLayer({
+            id: 'camarinal-transect-line',
+            type: 'line',
+            source: 'camarinal-transect-src',
+            paint: {
+                'line-color': '#06d6a0',
+                'line-width': 2.5,
+                'line-opacity': 0.95
+            }
+        });
+
+        camarinalLineAdded = true;
+    }
+
+    function hideCamarinalTransect() {
+        if (!camarinalLineAdded) return;
+        try {
+            map.setLayoutProperty('camarinal-transect-line', 'visibility', 'none');
+            map.setLayoutProperty('camarinal-transect-glow', 'visibility', 'none');
+        } catch (e) { }
+    }
+
+    /* ── Current Circulation: Atlantic, LIW & WMDW (Scene 4) ──────────── */
 
     let currentLinesAdded = false;
 
     function addCurrentArrows() {
         if (currentLinesAdded) {
             map.setLayoutProperty('atlantic-current', 'visibility', 'visible');
-            map.setLayoutProperty('med-current', 'visibility', 'visible');
+            map.setLayoutProperty('liw-current', 'visibility', 'visible');
+            map.setLayoutProperty('liw-current-glow', 'visibility', 'visible');
+            map.setLayoutProperty('wmdw-current', 'visibility', 'visible');
+            map.setLayoutProperty('wmdw-current-glow', 'visibility', 'visible');
             return;
         }
 
-        // Atlantic surface current path (east-flowing)
+        // 1. Atlantic Surface Current (East-flowing: Gulf of Cadiz -> Alboran Sea)
         map.addSource('atlantic-current-src', {
             type: 'geojson',
             data: {
@@ -120,11 +210,12 @@
                 geometry: {
                     type: 'LineString',
                     coordinates: [
-                        [-6.2, 35.95],
-                        [-5.9, 35.98],
-                        [-5.6, 35.96],
-                        [-5.3, 35.92],
-                        [-5.0, 35.88]
+                        [-6.30, 35.96],
+                        [-5.95, 35.98],
+                        [-5.65, 35.97],
+                        [-5.35, 35.94],
+                        [-5.00, 35.92],
+                        [-4.60, 35.88]
                     ]
                 }
             }
@@ -136,39 +227,102 @@
             source: 'atlantic-current-src',
             paint: {
                 'line-color': '#4a8fe7',
-                'line-width': 3,
-                'line-opacity': 0.7,
-                'line-dasharray': [2, 2]
+                'line-width': 3.5,
+                'line-opacity': 0.8,
+                'line-dasharray': [3, 2]
             }
         });
 
-        // Mediterranean deep outflow (west-flowing)
-        map.addSource('med-current-src', {
+        // 2. LIW — Levantine Intermediate Water (West-flowing: along Spanish slope past Gibraltar/Tarifa into CSN)
+        map.addSource('liw-current-src', {
             type: 'geojson',
             data: {
                 type: 'Feature',
                 geometry: {
                     type: 'LineString',
                     coordinates: [
-                        [-5.0, 35.82],
-                        [-5.3, 35.84],
-                        [-5.6, 35.87],
-                        [-5.9, 35.90],
-                        [-6.2, 35.88]
+                        [-4.70, 36.26],
+                        [-5.00, 36.20],
+                        [-5.25, 36.16],
+                        [-5.36, 36.13],
+                        [-5.48, 36.08],
+                        [-5.60, 36.01],
+                        [-5.755, 35.948], // Enters CSN (Camarinal Sill North)
+                        [-5.84, 35.91],
+                        [-6.02, 35.88]
                     ]
                 }
             }
         });
 
         map.addLayer({
-            id: 'med-current',
+            id: 'liw-current-glow',
             type: 'line',
-            source: 'med-current-src',
+            source: 'liw-current-src',
             paint: {
-                'line-color': '#e63946',
-                'line-width': 2.5,
-                'line-opacity': 0.6,
-                'line-dasharray': [3, 3]
+                'line-color': '#ffb703',
+                'line-width': 8,
+                'line-opacity': 0.25,
+                'line-blur': 4
+            }
+        });
+
+        map.addLayer({
+            id: 'liw-current',
+            type: 'line',
+            source: 'liw-current-src',
+            paint: {
+                'line-color': '#ffb703',
+                'line-width': 3,
+                'line-opacity': 0.95,
+                'line-dasharray': [4, 2]
+            }
+        });
+
+        // 3. WMDW — Western Mediterranean Deep Water (West-flowing: along Moroccan slope past Ceuta into CSS & Tangier Basin)
+        map.addSource('wmdw-current-src', {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                geometry: {
+                    type: 'LineString',
+                    coordinates: [
+                        [-4.60, 35.84],
+                        [-4.90, 35.87],
+                        [-5.15, 35.90],
+                        [-5.316, 35.889], // Past Ceuta
+                        [-5.50, 35.88],
+                        [-5.65, 35.885],
+                        [-5.775, 35.905], // Enters CSS (Camarinal Sill South)
+                        [-5.84, 35.88],   // Tangier Basin (TB)
+                        [-5.97, 35.86],   // Espartel Sill (ESP)
+                        [-6.18, 35.83]
+                    ]
+                }
+            }
+        });
+
+        map.addLayer({
+            id: 'wmdw-current-glow',
+            type: 'line',
+            source: 'wmdw-current-src',
+            paint: {
+                'line-color': '#2979ff',
+                'line-width': 8,
+                'line-opacity': 0.25,
+                'line-blur': 4
+            }
+        });
+
+        map.addLayer({
+            id: 'wmdw-current',
+            type: 'line',
+            source: 'wmdw-current-src',
+            paint: {
+                'line-color': '#2979ff',
+                'line-width': 3.5,
+                'line-opacity': 0.95,
+                'line-dasharray': [4, 2]
             }
         });
 
@@ -179,8 +333,11 @@
         if (!currentLinesAdded) return;
         try {
             map.setLayoutProperty('atlantic-current', 'visibility', 'none');
-            map.setLayoutProperty('med-current', 'visibility', 'none');
-        } catch (e) { /* layer may not exist yet */ }
+            map.setLayoutProperty('liw-current', 'visibility', 'none');
+            map.setLayoutProperty('liw-current-glow', 'visibility', 'none');
+            map.setLayoutProperty('wmdw-current', 'visibility', 'none');
+            map.setLayoutProperty('wmdw-current-glow', 'visibility', 'none');
+        } catch (e) { }
     }
 
     /* ── Tuna Migration Route (Scene 5) ──────────────────────────────── */
@@ -338,6 +495,7 @@
         }
 
         // Scene-specific overlays
+        hideCamarinalTransect();
         hideCurrentArrows();
         hideMigrationRoute();
         hideAlmadrabaZones();
@@ -348,7 +506,11 @@
         setMarkersForScene(sceneKey);
 
         switch (sceneKey) {
+            case 'scene3':
+                addCamarinalTransect();
+                break;
             case 'scene4':
+                addCamarinalTransect();
                 addCurrentArrows();
                 break;
             case 'scene5':

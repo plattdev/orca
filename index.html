@@ -87,7 +87,7 @@
 
         <!-- SCENE 1: The Meeting of Two Worlds -->
         <section class="scene" id="scene-1">
-            <div class="scene__card step"
+            <div class="scene__content step"
                  data-lng="-5.6"
                  data-lat="35.9"
                  data-zoom="4.5"
@@ -126,7 +126,7 @@
 
         <!-- SCENE 2: The Geographic Funnel -->
         <section class="scene" id="scene-2">
-            <div class="scene__card step"
+            <div class="scene__content step"
                  data-lng="-5.58"
                  data-lat="35.96"
                  data-zoom="9.5"
@@ -178,55 +178,62 @@
 
         <!-- SCENE 3: Bathymetry, Toponymy & Nature -->
         <section class="scene" id="scene-3">
-            <div class="scene__card step"
-                 data-lng="-5.78"
-                 data-lat="36.05"
-                 data-zoom="11"
-                 data-pitch="50"
-                 data-bearing="30"
+            <div class="scene__content step"
+                 data-lng="-5.77"
+                 data-lat="35.96"
+                 data-zoom="10.4"
+                 data-pitch="45"
+                 data-bearing="20"
                  data-speed="0.6">
                 <div class="scene__number">III</div>
                 <h2 class="scene__title">The Hidden Landscape Below</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    Beneath the surface lies a dramatic terrain. The <strong>Camarinal Sill</strong>
-                    — a massive submarine ridge — rises from ~900 m to just
-                    <strong>280 m</strong> below the waves, aligned with Punta Camarinal on the
-                    Spanish coast. This underwater barrier forces deep currents upward,
-                    creating turbulence, nutrient upwelling, and the conditions that make
-                    this strait one of the most biologically productive waters on Earth.
+                    Beneath the surface lies nature's grandest barrier: the <strong>Camarinal Sill (CS)</strong> transect.
+                    Spanning from Punta Camarinal in Spain to the Moroccan coast near Tangier, this underwater ridge rises
+                    from ~900 m to two narrow submarine channels: the <strong>North Channel (CSN)</strong> and
+                    <strong>South Channel (CSS)</strong>, both plunging to <strong>~290 m</strong> and separated by a
+                    submerged central crest (~180 m). Just west lies the deep <strong>Tangier Basin (TB, ~430 m)</strong>
+                    and the <strong>Espartel Sill (ESP)</strong>, forming the ultimate gateway of exchange between the
+                    Atlantic and Mediterranean.
                 </p>
                 <div class="scene__facts">
                     <div class="fact-chip">
                         <span class="fact-chip__icon">⛰️</span>
-                        <span class="fact-chip__text">Camarinal Sill: ~280 m depth</span>
+                        <span class="fact-chip__text">CSN & CSS Channels: ~290 m</span>
                     </div>
                     <div class="fact-chip">
-                        <span class="fact-chip__icon">🏖️</span>
-                        <span class="fact-chip__text">Zahara de los Atunes</span>
+                        <span class="fact-chip__icon">📡</span>
+                        <span class="fact-chip__text">CS Mooring Lines (CSN / CSS)</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🌊</span>
+                        <span class="fact-chip__text">Tangier Basin & Espartel Sill</span>
                     </div>
                     <div class="fact-chip">
                         <span class="fact-chip__icon">🌿</span>
-                        <span class="fact-chip__text">Camarina: protected dune shrub</span>
+                        <span class="fact-chip__text">Camarina: protected coastal shrub</span>
                     </div>
                 </div>
                 <!-- Bathymetry profile -->
                 <div class="scene__chart-container" id="bathymetry-profile">
-                    <h4>Bathymetric Cross-Section</h4>
+                    <h4>Camarinal Sill (CS) Bathymetric Transect</h4>
                     <div class="bathymetry-viz">
-                        <svg id="bathymetry-svg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet"></svg>
+                        <svg id="bathymetry-svg" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid meet"></svg>
                     </div>
                     <div class="bathymetry-labels">
-                        <span>Atlantic Basin</span>
-                        <span class="highlight">Camarinal Sill</span>
-                        <span>Mediterranean</span>
+                        <span>Morocco (35.85°N)</span>
+                        <span class="highlight">CSS & CSN Mooring Sites</span>
+                        <span>Spain / P. Camarinal (36.05°N)</span>
                     </div>
                 </div>
                 <div class="scene__places">
-                    <span class="place-tag">Barbate</span>
-                    <span class="place-tag">Conil de la Frontera</span>
+                    <span class="place-tag">Punta Camarinal</span>
                     <span class="place-tag">Tarifa</span>
                     <span class="place-tag">Zahara de los Atunes</span>
+                    <span class="place-tag">Barbate</span>
+                    <span class="place-tag">Conil</span>
+                    <span class="place-tag">Tangier</span>
                 </div>
             </div>
         </section>
@@ -235,51 +242,58 @@
 
         <!-- SCENE 4: The Ocean Engine -->
         <section class="scene" id="scene-4">
-            <div class="scene__card step"
-                 data-lng="-5.6"
-                 data-lat="35.92"
-                 data-zoom="8.5"
-                 data-pitch="30"
-                 data-bearing="-10"
+            <div class="scene__content step"
+                 data-lng="-5.45"
+                 data-lat="35.95"
+                 data-zoom="9.2"
+                 data-pitch="38"
+                 data-bearing="-15"
                  data-speed="0.7">
                 <div class="scene__number">IV</div>
                 <h2 class="scene__title">The Ocean Engine</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    The Strait operates as a colossal two-layer pump. Cool, nutrient-rich
-                    <strong>Atlantic water</strong> flows east along the surface, while warmer,
-                    saltier <strong>Mediterranean outflow</strong> slides westward along the bottom.
-                    This thermohaline exchange creates powerful currents that dictate where
-                    marine life concentrates — and where predators learn to hunt.
+                    The Strait operates as a colossal two-layer hydrodynamic engine. In the upper 150 m, cool,
+                    low-salinity <strong>Atlantic water</strong> flows east into the Alborán Sea. Beneath this surface inflow,
+                    the dense Mediterranean outflow splits into two distinct water masses: <strong>LIW (Levantine Intermediate Water)</strong>,
+                    which hugs the northern Spanish slope past Gibraltar and Tarifa to funnel through the <strong>North Channel (CSN)</strong>,
+                    and <strong>WMDW (Western Mediterranean Deep Water)</strong>, the densest bottom layer, which streams along the
+                    southern African margin past Ceuta to cascade through the <strong>South Channel (CSS)</strong> into the Tangier Basin.
                 </p>
                 <div class="scene__facts">
                     <div class="fact-chip">
                         <span class="fact-chip__icon">➡️</span>
-                        <span class="fact-chip__text">Surface: Atlantic → Mediterranean</span>
+                        <span class="fact-chip__text">Surface (0–150m): Atlantic Inflow (East)</span>
                     </div>
                     <div class="fact-chip">
-                        <span class="fact-chip__icon">⬅️</span>
-                        <span class="fact-chip__text">Deep: Mediterranean → Atlantic</span>
+                        <span class="fact-chip__icon">🟡</span>
+                        <span class="fact-chip__text">LIW: Levantine Water via CSN (West)</span>
                     </div>
                     <div class="fact-chip">
-                        <span class="fact-chip__icon">💧</span>
-                        <span class="fact-chip__text">Thermohaline circulation</span>
+                        <span class="fact-chip__icon">🔵</span>
+                        <span class="fact-chip__text">WMDW: Deep Water via CSS (West)</span>
                     </div>
                 </div>
                 <!-- Current diagram -->
                 <div class="scene__infobox current-diagram">
-                    <h4>Two-Layer Flow System</h4>
+                    <h4>Water Mass Circulation System</h4>
                     <div class="current-flow">
                         <div class="current-layer surface">
                             <span class="current-arrow">→ → → →</span>
-                            <span class="current-label">Surface Current (Atlantic inflow)</span>
+                            <span class="current-label">Surface Atlantic Inflow (Gulf of Cadiz → Alborán)</span>
                             <span class="current-depth">0–150 m</span>
                         </div>
                         <div class="current-separator"></div>
-                        <div class="current-layer deep">
+                        <div class="current-layer liw">
                             <span class="current-arrow">← ← ← ←</span>
-                            <span class="current-label">Deep Current (Mediterranean outflow)</span>
-                            <span class="current-depth">150–900 m</span>
+                            <span class="current-label">LIW — Levantine Intermediate Water (via CSN)</span>
+                            <span class="current-depth">150–300 m</span>
+                        </div>
+                        <div class="current-separator"></div>
+                        <div class="current-layer wmdw">
+                            <span class="current-arrow">← ← ← ←</span>
+                            <span class="current-label">WMDW — Western Med Deep Water (via CSS & TB)</span>
+                            <span class="current-depth">&gt;300 m</span>
                         </div>
                     </div>
                 </div>
@@ -290,7 +304,7 @@
 
         <!-- SCENE 5: The Tuna Route & the Orcas -->
         <section class="scene" id="scene-5">
-            <div class="scene__card scene__card--wide step"
+            <div class="scene__content step"
                  data-lng="-5.68"
                  data-lat="36.02"
                  data-zoom="10"
@@ -342,7 +356,7 @@
                     </div>
                 </div>
 
-                <!-- Energy metrics card -->
+                <!-- Energy metrics panel -->
                 <div class="scene__infobox energy-card">
                     <h4>Energy & Depredation (2004 Study)</h4>
                     <div class="metric-grid">
@@ -371,7 +385,7 @@
 
         <!-- SCENE 6: The Almadraba -->
         <section class="scene" id="scene-6">
-            <div class="scene__card step"
+            <div class="scene__content step"
                  data-lng="-5.85"
                  data-lat="36.18"
                  data-zoom="10.5"

@@ -64,25 +64,35 @@ const sceneLocations = {
         ]
     },
     scene3: {
-        center: [-5.78, 36.05],
-        zoom: 11,
-        pitch: 50,
-        bearing: 30,
+        center: [-5.77, 35.96],
+        zoom: 10.4,
+        pitch: 45,
+        bearing: 20,
         markers: [
+            { lng: -5.755, lat: 35.948, label: "CSN — North Channel (290 m)", type: "sill-channel", code: "CSN" },
+            { lng: -5.775, lat: 35.905, label: "CSS — South Channel (290 m)", type: "sill-channel", code: "CSS" },
+            { lng: -5.840, lat: 35.880, label: "TB — Tangier Basin (~430 m)", type: "basin", code: "TB" },
+            { lng: -5.970, lat: 35.860, label: "ESP — Espartel Sill (~360 m)", type: "basin", code: "ESP" },
             { lng: -5.798, lat: 36.065, label: "Punta Camarinal", type: "nature" },
-            { lng: -5.75, lat: 35.933, label: "Camarinal Sill (~280m)", type: "bathymetry" },
+            { lng: -5.605, lat: 36.013, label: "Tarifa", type: "town" },
             { lng: -5.853, lat: 36.136, label: "Zahara de los Atunes", type: "town" },
             { lng: -5.919, lat: 36.185, label: "Barbate", type: "town" },
             { lng: -6.088, lat: 36.277, label: "Conil de la Frontera", type: "town" },
-            { lng: -5.605, lat: 36.013, label: "Tarifa", type: "town" }
+            { lng: -5.810, lat: 35.780, label: "Tangier", type: "town" }
         ]
     },
     scene4: {
-        center: [-5.6, 35.92],
-        zoom: 8.5,
-        pitch: 30,
-        bearing: -10,
-        markers: []
+        center: [-5.45, 35.95],
+        zoom: 9.2,
+        pitch: 38,
+        bearing: -15,
+        markers: [
+            { lng: -5.353, lat: 36.140, label: "Gibraltar (LIW northern entry)", type: "town" },
+            { lng: -5.316, lat: 35.889, label: "Ceuta (WMDW southern entry)", type: "town" },
+            { lng: -5.605, lat: 36.013, label: "Tarifa", type: "town" },
+            { lng: -5.755, lat: 35.948, label: "CSN — LIW Outflow", type: "sill-channel", code: "CSN" },
+            { lng: -5.775, lat: 35.905, label: "CSS — WMDW Outflow", type: "sill-channel", code: "CSS" }
+        ]
     },
     scene5: {
         center: [-5.68, 36.02],
@@ -105,17 +115,32 @@ const sceneLocations = {
     }
 };
 
-/* Bathymetry cross-section data (approximate depths in meters) */
+/* Camarinal Sill (CS) Transect line across the Strait (Morocco to Spain) */
+const camarinalTransectCoordinates = [
+    [-5.765, 35.850],
+    [-5.775, 35.905], // CSS site
+    [-5.768, 35.928], // Central submarine ridge
+    [-5.755, 35.948], // CSN site
+    [-5.778, 36.012],
+    [-5.798, 36.050]  // Punta Camarinal (Spain)
+];
+
+/* Real Camarinal Sill (CS) bathymetry cross-section (South to North: Morocco to Spain)
+   Reference: CSN and CSS mooring stations and bathymetric profile from reference sketch */
 const bathymetryProfile = [
-    { x: 0, depth: -300, label: "Atlantic" },
-    { x: 40, depth: -700 },
-    { x: 80, depth: -850 },
-    { x: 120, depth: -900 },
-    { x: 160, depth: -700 },
-    { x: 200, depth: -280, label: "Camarinal Sill" },
-    { x: 240, depth: -450 },
-    { x: 280, depth: -600 },
-    { x: 320, depth: -800 },
-    { x: 360, depth: -700 },
-    { x: 400, depth: -400, label: "Mediterranean" }
+    { lat: 35.850, depth: 0, label: "Morocco" },
+    { lat: 35.858, depth: -40 },
+    { lat: 35.870, depth: -110 },
+    { lat: 35.885, depth: -200 },
+    { lat: 35.905, depth: -290, label: "CSS", isMooring: true, name: "Camarinal Sill South (290 m)" },
+    { lat: 35.918, depth: -240 },
+    { lat: 35.928, depth: -180, label: "Crest", name: "Central Ridge (180 m)" },
+    { lat: 35.938, depth: -230 },
+    { lat: 35.948, depth: -290, label: "CSN", isMooring: true, name: "Camarinal Sill North (290 m)" },
+    { lat: 35.962, depth: -190 },
+    { lat: 35.978, depth: -120, label: "Ridge", name: "Submerged Ridge (120 m)" },
+    { lat: 35.992, depth: -230 },
+    { lat: 36.012, depth: -140 },
+    { lat: 36.030, depth: -50 },
+    { lat: 36.050, depth: 0, label: "Spain", name: "Punta Camarinal" }
 ];

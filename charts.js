@@ -41,16 +41,22 @@ const Charts = (() => {
         svg.selectAll('*').remove();
 
         const width = 400;
-        const height = 200;
-        const margin = { top: 20, right: 10, bottom: 30, left: 40 };
+        const height = 210;
+        const margin = { top: 22, right: 18, bottom: 32, left: 38 };
         const iw = width - margin.left - margin.right;
         const ih = height - margin.top - margin.bottom;
 
         const g = svg.append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 
-        const x = d3.scaleLinear().domain([0, 400]).range([0, iw]);
-        const y = d3.scaleLinear().domain([-950, 0]).range([ih, 0]);
+        // Scales based on actual latitude and depth from reference sketch
+        const x = d3.scaleLinear()
+            .domain([35.845, 36.055])
+            .range([0, iw]);
+
+        const y = d3.scaleLinear()
+            .domain([-350, 0])
+            .range([ih, 0]);
 
         // Water surface
         g.append('line')
@@ -58,42 +64,43 @@ const Charts = (() => {
             .attr('y1', y(0)).attr('y2', y(0))
             .attr('stroke', C.ocean300)
             .attr('stroke-width', 1.5)
-            .attr('stroke-dasharray', '6,4')
-            .attr('opacity', 0.6);
+            .attr('stroke-dasharray', '5,3')
+            .attr('opacity', 0.8);
 
         g.append('text')
-            .attr('x', iw - 4).attr('y', y(0) - 6)
+            .attr('x', iw).attr('y', y(0) - 6)
             .attr('text-anchor', 'end')
-            .attr('fill', C.ocean300)
+            .attr('fill', C.ocean200)
             .attr('font-size', '8px')
             .attr('font-family', fontMono)
-            .text('Sea Level');
+            .text('Sea Level (0 m)');
 
-        // Area fill
+        // Background terrain fill
         const area = d3.area()
-            .x(d => x(d.x))
+            .x(d => x(d.lat))
             .y0(ih)
             .y1(d => y(d.depth))
-            .curve(d3.curveBasis);
+            .curve(d3.curveMonotoneX);
 
         const defs = svg.append('defs');
         const gradient = defs.append('linearGradient')
             .attr('id', 'bath-gradient')
             .attr('x1', '0%').attr('y1', '0%')
             .attr('x2', '0%').attr('y2', '100%');
-        gradient.append('stop').attr('offset', '0%').attr('stop-color', C.ocean300).attr('stop-opacity', 0.3);
-        gradient.append('stop').attr('offset', '100%').attr('stop-color', '#0a192f').attr('stop-opacity', 0.8);
+        gradient.append('stop').attr('offset', '0%').attr('stop-color', 'rgba(100, 181, 246, 0.35)');
+        gradient.append('stop').attr('offset', '60%').attr('stop-color', 'rgba(10, 25, 47, 0.85)');
+        gradient.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(2, 12, 27, 0.98)');
 
         g.append('path')
             .datum(bathymetryProfile)
             .attr('d', area)
             .attr('fill', 'url(#bath-gradient)');
 
-        // Profile line
+        // Sea bottom contour line
         const line = d3.line()
-            .x(d => x(d.x))
+            .x(d => x(d.lat))
             .y(d => y(d.depth))
-            .curve(d3.curveBasis);
+            .curve(d3.curveMonotoneX);
 
         g.append('path')
             .datum(bathymetryProfile)
@@ -102,44 +109,124 @@ const Charts = (() => {
             .attr('stroke', C.ocean200)
             .attr('stroke-width', 2);
 
-        // Camarinal Sill marker
-        const sill = bathymetryProfile.find(d => d.label === 'Camarinal Sill');
-        if (sill) {
-            g.append('circle')
-                .attr('cx', x(sill.x))
-                .attr('cy', y(sill.depth))
-                .attr('r', 5)
-                .attr('fill', C.orcaAccent)
-                .attr('stroke', '#fff')
-                .attr('stroke-width', 1.5);
-
-            g.append('text')
-                .attr('x', x(sill.x))
-                .attr('y', y(sill.depth) - 12)
-                .attr('text-anchor', 'middle')
-                .attr('fill', C.orcaAccent)
-                .attr('font-size', '8px')
-                .attr('font-weight', '600')
-                .attr('font-family', fontMono)
-                .text('~280 m');
-        }
-
-        // Y-axis depth labels
-        [-200, -400, -600, -800].forEach(d => {
+        // Depth grid lines & labels
+        [-50, -100, -150, -200, -250, -300].forEach(d => {
+            const yy = y(d);
             g.append('line')
                 .attr('x1', 0).attr('x2', iw)
-                .attr('y1', y(d)).attr('y2', y(d))
+                .attr('y1', yy).attr('y2', yy)
                 .attr('stroke', C.gridLine)
                 .attr('stroke-width', 0.5);
 
             g.append('text')
-                .attr('x', -6).attr('y', y(d) + 3)
+                .attr('x', -6).attr('y', yy + 3)
                 .attr('text-anchor', 'end')
                 .attr('fill', C.textDim)
-                .attr('font-size', '7px')
+                .attr('font-size', '7.5px')
                 .attr('font-family', fontMono)
                 .text(`${Math.abs(d)}m`);
         });
+
+        // Latitude grid lines & labels
+        [35.85, 35.90, 35.95, 36.00, 36.05].forEach(lat => {
+            const xx = x(lat);
+            g.append('line')
+                .attr('x1', xx).attr('x2', xx)
+                .attr('y1', 0).attr('y2', ih)
+                .attr('stroke', 'rgba(255,255,255,0.04)')
+                .attr('stroke-width', 0.5);
+
+            g.append('text')
+                .attr('x', xx).attr('y', ih + 14)
+                .attr('text-anchor', 'middle')
+                .attr('fill', C.textDim)
+                .attr('font-size', '7.5px')
+                .attr('font-family', fontMono)
+                .text(`${lat.toFixed(2)}°N`);
+        });
+
+        // Mooring stations from reference sketch: CSS and CSN
+        const moorings = bathymetryProfile.filter(d => d.isMooring);
+        moorings.forEach(m => {
+            const mx = x(m.lat);
+            const my = y(m.depth);
+
+            // Vertical dashed mooring line
+            g.append('line')
+                .attr('x1', mx).attr('x2', mx)
+                .attr('y1', y(0)).attr('y2', my)
+                .attr('stroke', C.tunaRed)
+                .attr('stroke-width', 1)
+                .attr('stroke-dasharray', '3,2')
+                .attr('opacity', 0.6);
+
+            // Outer red target ring
+            g.append('circle')
+                .attr('cx', mx)
+                .attr('cy', my)
+                .attr('r', 6)
+                .attr('fill', 'none')
+                .attr('stroke', C.tunaRed)
+                .attr('stroke-width', 1.5);
+
+            // Inner red dot
+            g.append('circle')
+                .attr('cx', mx)
+                .attr('cy', my)
+                .attr('r', 2.5)
+                .attr('fill', C.tunaRed);
+
+            // Label tag (CSS / CSN)
+            g.append('rect')
+                .attr('x', mx - 14)
+                .attr('y', my - 22)
+                .attr('width', 28)
+                .attr('height', 13)
+                .attr('rx', 3)
+                .attr('fill', 'rgba(230, 57, 70, 0.25)')
+                .attr('stroke', C.tunaRed)
+                .attr('stroke-width', 0.8);
+
+            g.append('text')
+                .attr('x', mx)
+                .attr('y', my - 13)
+                .attr('text-anchor', 'middle')
+                .attr('fill', '#fff')
+                .attr('font-size', '8px')
+                .attr('font-weight', '700')
+                .attr('font-family', fontMono)
+                .text(m.label);
+
+            // Depth tag
+            g.append('text')
+                .attr('x', mx)
+                .attr('y', my + 13)
+                .attr('text-anchor', 'middle')
+                .attr('fill', C.tunaRed)
+                .attr('font-size', '7px')
+                .attr('font-weight', '600')
+                .attr('font-family', fontMono)
+                .text('290 m');
+        });
+
+        // Central ridge label (between CSS and CSN)
+        const crest = bathymetryProfile.find(d => d.label === 'Crest');
+        if (crest) {
+            const cx = x(crest.lat);
+            const cy = y(crest.depth);
+            g.append('circle')
+                .attr('cx', cx).attr('cy', cy)
+                .attr('r', 2.5)
+                .attr('fill', C.gold);
+
+            g.append('text')
+                .attr('x', cx).attr('y', cy - 8)
+                .attr('text-anchor', 'middle')
+                .attr('fill', C.gold)
+                .attr('font-size', '6.5px')
+                .attr('font-family', fontMono)
+                .text('Ridge ~180m');
+        }
     }
 
     /* ── Orca Population Chart (Canvas via D3) ───────────────────────── */
