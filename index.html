@@ -3,9 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Where Titans Meet — Orcas, Tuna & Humans in the Strait of Gibraltar</title>
+    <meta name="description" content="An immersive map storytelling experience exploring the ancient relationship between orcas, bluefin tuna, and human fisheries in the Strait of Gibraltar.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- MapLibre GL JS -->
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader__inner">
+            <div class="loader__wave">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <p class="loader__text">Charting the waters…</p>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="progress-bar">
+        <div id="progress-fill" class="progress-bar__fill"></div>
+    </div>
+
+    <!-- Scene Navigation Dots -->
+    <nav id="scene-nav" class="scene-nav" aria-label="Scene navigation">
+        <button class="scene-nav__dot is-active" data-scene="0" aria-label="Scene 1: The Meeting of Two Worlds">
+            <span class="scene-nav__label">Two Worlds</span>
+        </button>
+        <button class="scene-nav__dot" data-scene="1" aria-label="Scene 2: The Geographic Funnel">
+            <span class="scene-nav__label">The Funnel</span>
+        </button>
+        <button class="scene-nav__dot" data-scene="2" aria-label="Scene 3: Bathymetry & Nature">
+            <span class="scene-nav__label">Depths</span>
+        </button>
+        <button class="scene-nav__dot" data-scene="3" aria-label="Scene 4: Ocean Engine">
+            <span class="scene-nav__label">Currents</span>
+        </button>
+        <button class="scene-nav__dot" data-scene="4" aria-label="Scene 5: Tuna Route">
+            <span class="scene-nav__label">Migration</span>
+        </button>
+        <button class="scene-nav__dot" data-scene="5" aria-label="Scene 6: Almadraba">
+            <span class="scene-nav__label">Almadraba</span>
+        </button>
+    </nav>
+
+    <!-- Fixed Map Background -->
+    <div id="map"></div>
+
+    <!-- Map Overlay Gradient -->
+    <div class="map-overlay"></div>
+
+    <!-- Story Container -->
+    <main id="story" class="story">
+
+        <!-- Hero / Title Card -->
+        <header class="hero">
+            <div class="hero__content">
+                <p class="hero__eyebrow">An Interactive Map Story</p>
+                <h1 class="hero__title">Where <em>Titans</em> Meet</h1>
+                <p class="hero__subtitle">Orcas, Bluefin Tuna & Humans<br>in the Strait of Gibraltar</p>
+                <div class="hero__scroll-cue">
+                    <span>Scroll to begin</span>
+                    <div class="hero__scroll-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M5 12l7 7 7-7"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- SCENE 1: The Meeting of Two Worlds -->
+        <section class="scene" id="scene-1">
+            <div class="scene__card step"
+                 data-lng="-5.6"
+                 data-lat="35.9"
+                 data-zoom="4.5"
+                 data-pitch="0"
+                 data-bearing="0"
+                 data-speed="1.2">
+                <div class="scene__number">I</div>
+                <h2 class="scene__title">The Meeting of Two Worlds</h2>
+                <div class="scene__divider"></div>
+                <p class="scene__narrative">
+                    At the western gate of the Mediterranean, Africa reaches toward Europe
+                    across a sliver of sea. Here, where the Atlantic breathes into an ancient basin,
+                    two continents nearly touch — separated by just <strong>14 kilometres</strong>
+                    of churning water. This narrow passage has shaped civilisations, migrations,
+                    and ecosystems for millions of years.
+                </p>
+                <div class="scene__facts">
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🌍</span>
+                        <span class="fact-chip__text">2 continents converge</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">📏</span>
+                        <span class="fact-chip__text">14 km at narrowest</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🌊</span>
+                        <span class="fact-chip__text">2 oceans exchange</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transition -->
+        <div class="scene-spacer"></div>
+
+        <!-- SCENE 2: The Geographic Funnel -->
+        <section class="scene" id="scene-2">
+            <div class="scene__card step"
+                 data-lng="-5.58"
+                 data-lat="35.96"
+                 data-zoom="9.5"
+                 data-pitch="40"
+                 data-bearing="-20"
+                 data-speed="0.8">
+                <div class="scene__number">II</div>
+                <h2 class="scene__title">The Geographic Funnel</h2>
+                <div class="scene__divider"></div>
+                <p class="scene__narrative">
+                    The Strait of Gibraltar is nature's most dramatic bottleneck. At its
+                    narrowest — between Punta de Tarifa and Punta Cires — the channel
+                    squeezes to barely <strong>10–11 km</strong>. Every marine creature
+                    migrating between the Atlantic and Mediterranean must pass through
+                    this gauntlet. There is no alternative route.
+                </p>
+                <div class="scene__facts">
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">📐</span>
+                        <span class="fact-chip__text">10–11 km narrowest point</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🐋</span>
+                        <span class="fact-chip__text">Obligatory migration corridor</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">⚓</span>
+                        <span class="fact-chip__text">58 km total length</span>
+                    </div>
+                </div>
+                <!-- Scale reference card -->
+                <div class="scene__infobox">
+                    <h4>Scale Reference</h4>
+                    <div class="scale-bar">
+                        <div class="scale-bar__line"></div>
+                        <div class="scale-bar__labels">
+                            <span>0</span><span>7 km</span><span>14 km</span>
+                        </div>
+                    </div>
+                    <p class="scene__infobox-text">
+                        At its narrowest, the strait is roughly the distance of a half-marathon.
+                        On a clear day, you can see Africa from the coast of Spain.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="scene-spacer"></div>
+
+        <!-- SCENE 3: Bathymetry, Toponymy & Nature -->
+        <section class="scene" id="scene-3">
+            <div class="scene__card step"
+                 data-lng="-5.78"
+                 data-lat="36.05"
+                 data-zoom="11"
+                 data-pitch="50"
+                 data-bearing="30"
+                 data-speed="0.6">
+                <div class="scene__number">III</div>
+                <h2 class="scene__title">The Hidden Landscape Below</h2>
+                <div class="scene__divider"></div>
+                <p class="scene__narrative">
+                    Beneath the surface lies a dramatic terrain. The <strong>Camarinal Sill</strong>
+                    — a massive submarine ridge — rises from ~900 m to just
+                    <strong>280 m</strong> below the waves, aligned with Punta Camarinal on the
+                    Spanish coast. This underwater barrier forces deep currents upward,
+                    creating turbulence, nutrient upwelling, and the conditions that make
+                    this strait one of the most biologically productive waters on Earth.
+                </p>
+                <div class="scene__facts">
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">⛰️</span>
+                        <span class="fact-chip__text">Camarinal Sill: ~280 m depth</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🏖️</span>
+                        <span class="fact-chip__text">Zahara de los Atunes</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🌿</span>
+                        <span class="fact-chip__text">Camarina: protected dune shrub</span>
+                    </div>
+                </div>
+                <!-- Bathymetry profile -->
+                <div class="scene__chart-container" id="bathymetry-profile">
+                    <h4>Bathymetric Cross-Section</h4>
+                    <div class="bathymetry-viz">
+                        <svg id="bathymetry-svg" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid meet"></svg>
+                    </div>
+                    <div class="bathymetry-labels">
+                        <span>Atlantic Basin</span>
+                        <span class="highlight">Camarinal Sill</span>
+                        <span>Mediterranean</span>
+                    </div>
+                </div>
+                <div class="scene__places">
+                    <span class="place-tag">Barbate</span>
+                    <span class="place-tag">Conil de la Frontera</span>
+                    <span class="place-tag">Tarifa</span>
+                    <span class="place-tag">Zahara de los Atunes</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="scene-spacer"></div>
+
+        <!-- SCENE 4: The Ocean Engine -->
+        <section class="scene" id="scene-4">
+            <div class="scene__card step"
+                 data-lng="-5.6"
+                 data-lat="35.92"
+                 data-zoom="8.5"
+                 data-pitch="30"
+                 data-bearing="-10"
+                 data-speed="0.7">
+                <div class="scene__number">IV</div>
+                <h2 class="scene__title">The Ocean Engine</h2>
+                <div class="scene__divider"></div>
+                <p class="scene__narrative">
+                    The Strait operates as a colossal two-layer pump. Cool, nutrient-rich
+                    <strong>Atlantic water</strong> flows east along the surface, while warmer,
+                    saltier <strong>Mediterranean outflow</strong> slides westward along the bottom.
+                    This thermohaline exchange creates powerful currents that dictate where
+                    marine life concentrates — and where predators learn to hunt.
+                </p>
+                <div class="scene__facts">
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">➡️</span>
+                        <span class="fact-chip__text">Surface: Atlantic → Mediterranean</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">⬅️</span>
+                        <span class="fact-chip__text">Deep: Mediterranean → Atlantic</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">💧</span>
+                        <span class="fact-chip__text">Thermohaline circulation</span>
+                    </div>
+                </div>
+                <!-- Current diagram -->
+                <div class="scene__infobox current-diagram">
+                    <h4>Two-Layer Flow System</h4>
+                    <div class="current-flow">
+                        <div class="current-layer surface">
+                            <span class="current-arrow">→ → → →</span>
+                            <span class="current-label">Surface Current (Atlantic inflow)</span>
+                            <span class="current-depth">0–150 m</span>
+                        </div>
+                        <div class="current-separator"></div>
+                        <div class="current-layer deep">
+                            <span class="current-arrow">← ← ← ←</span>
+                            <span class="current-label">Deep Current (Mediterranean outflow)</span>
+                            <span class="current-depth">150–900 m</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="scene-spacer"></div>
+
+        <!-- SCENE 5: The Tuna Route & the Orcas -->
+        <section class="scene" id="scene-5">
+            <div class="scene__card scene__card--wide step"
+                 data-lng="-5.68"
+                 data-lat="36.02"
+                 data-zoom="10"
+                 data-pitch="35"
+                 data-bearing="15"
+                 data-speed="0.6">
+                <div class="scene__number">V</div>
+                <h2 class="scene__title">The Tuna Route & the Orcas</h2>
+                <div class="scene__divider"></div>
+                <p class="scene__narrative">
+                    Every spring, Atlantic bluefin tuna (<em>Thunnus thynnus</em>) surge through
+                    the Strait on their ancestral spawning migration. And the orcas know.
+                    A resident community of <strong>39 individuals</strong> (as of 2011) has
+                    learned to intercept the tuna here, developing sophisticated hunting
+                    techniques — including <strong>"espartes"</strong>, cooperative drives
+                    that exploit the narrow geography.
+                </p>
+
+                <!-- Population & Catch Charts -->
+                <div class="scene__charts-grid">
+                    <div class="chart-panel" id="chart-population">
+                        <h4>Orca Population Growth</h4>
+                        <div class="chart-container">
+                            <canvas id="canvas-population"></canvas>
+                        </div>
+                        <p class="chart-caption">Total community abundance, 1999–2011</p>
+                    </div>
+                    <div class="chart-panel" id="chart-tuna">
+                        <h4>Tuna Catches vs. Calf Survival</h4>
+                        <div class="chart-container">
+                            <canvas id="canvas-tuna"></canvas>
+                        </div>
+                        <p class="chart-caption">Tuna catches (tons) and interacting pod calf survival rate</p>
+                    </div>
+                </div>
+
+                <div class="scene__facts">
+                    <div class="fact-chip fact-chip--danger">
+                        <span class="fact-chip__icon">🔴</span>
+                        <span class="fact-chip__text">IUCN: Critically Endangered (E. Atlantic)</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🐳</span>
+                        <span class="fact-chip__text">39 orcas in 2011 community</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🐟</span>
+                        <span class="fact-chip__text">1,654 t/year required (2011)</span>
+                    </div>
+                </div>
+
+                <!-- Energy metrics card -->
+                <div class="scene__infobox energy-card">
+                    <h4>Energy & Depredation (2004 Study)</h4>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <span class="metric__value">14</span>
+                            <span class="metric__label">Interacting orcas</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">1M</span>
+                            <span class="metric__label">kcal/day needed</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">539 t</span>
+                            <span class="metric__label">Active hunting/year</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">92 t</span>
+                            <span class="metric__label">Depredation/season</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="scene-spacer"></div>
+
+        <!-- SCENE 6: The Almadraba -->
+        <section class="scene" id="scene-6">
+            <div class="scene__card step"
+                 data-lng="-5.85"
+                 data-lat="36.18"
+                 data-zoom="10.5"
+                 data-pitch="45"
+                 data-bearing="-25"
+                 data-speed="0.5">
+                <div class="scene__number">VI</div>
+                <h2 class="scene__title">The Almadraba</h2>
+                <div class="scene__divider"></div>
+                <p class="scene__narrative">
+                    For over <strong>3,000 years</strong>, humans have set great labyrinth-nets
+                    called <em>almadrabas</em> along these coasts — trapping tuna as they pass.
+                    This ancient practice, inherited from Phoenician and Roman fishers, has
+                    coexisted with orcas across millennia. In Tarifa alone (2004),
+                    <strong>48 boats</strong> landed <strong>597 tons</strong>, while orcas
+                    depredated just 42 tuna from the fleet. A fragile equilibrium, sustained
+                    by tradition and respect for the sea.
+                </p>
+                <div class="scene__facts">
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">🏺</span>
+                        <span class="fact-chip__text">3,000+ years of tradition</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">⛵</span>
+                        <span class="fact-chip__text">48 boats in Tarifa (2004)</span>
+                    </div>
+                    <div class="fact-chip">
+                        <span class="fact-chip__icon">⚖️</span>
+                        <span class="fact-chip__text">597 t landed vs. 42 depredated</span>
+                    </div>
+                </div>
+
+                <!-- Tarifa case study -->
+                <div class="scene__infobox tarifa-card">
+                    <h4>Tarifa Case Study — 2004 Season</h4>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <span class="metric__value">597 t</span>
+                            <span class="metric__label">Landed by fleet</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">42</span>
+                            <span class="metric__label">Tuna depredated</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">6</span>
+                            <span class="metric__label">Tuna bitten</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">8,648 kg</span>
+                            <span class="metric__label">Tuna provided to orcas</span>
+                        </div>
+                    </div>
+                    <p class="scene__infobox-text">
+                        Artisanal fishers sometimes release tuna to orcas to prevent gear damage — a form of
+                        coexistence unique in the world.
+                    </p>
+                </div>
+
+                <!-- Almadraba locations -->
+                <div class="scene__places">
+                    <span class="place-tag place-tag--almadraba">Conil Almadraba</span>
+                    <span class="place-tag place-tag--almadraba">Zahara Almadraba</span>
+                    <span class="place-tag place-tag--almadraba">Barbate Almadraba</span>
+                    <span class="place-tag place-tag--almadraba">Tarifa Almadraba</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Closing / Credits -->
+        <footer class="closing">
+            <div class="closing__content step"
+                 data-lng="-5.6"
+                 data-lat="35.9"
+                 data-zoom="6"
+                 data-pitch="0"
+                 data-bearing="0"
+                 data-speed="0.4">
+                <h2 class="closing__title">Three Titans. One Strait.<br>A Story Unfinished.</h2>
+                <p class="closing__text">
+                    The Strait of Gibraltar remains one of the last places on Earth where
+                    apex predators, ancient fisheries, and marine biodiversity intersect in a
+                    living, breathing equilibrium — one that demands our understanding and protection.
+                </p>
+                <div class="closing__credits">
+                    <p>Data sources: Guinet et al., de Stephanis et al., IUCN Red List</p>
+                    <p>Built with MapLibre GL JS · D3.js · Scrollama</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- MapLibre GL JS -->
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <!-- Scrollama -->
+    <script src="https://unpkg.com/scrollama@3.2.0/build/scrollama.min.js"></script>
+    <!-- D3.js (for charts) -->
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <!-- App JS -->
+    <script src="data.js"></script>
+    <script src="charts.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
