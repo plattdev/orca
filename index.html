@@ -43,14 +43,14 @@
         <a class="scene-nav__dot" data-scene="3" aria-label="Scene 4: The Iberian Orcas">
             <span class="scene-nav__label">Orcas</span>
         </a>
-        <a class="scene-nav__dot" data-scene="4" aria-label="Scene 5: Fishermen & Stone Fishing">
+        <a class="scene-nav__dot" data-scene="4" aria-label="Scene 5: Fishermen">
             <span class="scene-nav__label">Fishermen</span>
         </a>
-        <a class="scene-nav__dot" data-scene="5" aria-label="Scene 6: Depredation & Demography">
-            <span class="scene-nav__label">Depredation</span>
+        <a class="scene-nav__dot" data-scene="5" aria-label="Scene 6: Co-Hunting">
+            <span class="scene-nav__label">Co-Hunting</span>
         </a>
-        <a class="scene-nav__dot" data-scene="6" aria-label="Closing: Three Titans & References">
-            <span class="scene-nav__label">References</span>
+        <a class="scene-nav__dot" data-scene="6" aria-label="Closing: Cultural Learning">
+            <span class="scene-nav__label">Cultural Learning</span>
         </a>
     </nav>
 
@@ -197,52 +197,11 @@
                 <h2 class="scene__title">The Iberian Orcas</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    The entire resident community of Iberian killer whales consists of just <strong>39 individuals</strong>, structured into <strong>5 matrilineal pods</strong> (named A1, A2, B, C, and D). They converge on an underwater plateau called <strong>"Las Bajas"</strong> — a 2 nautical mile × 1 nautical mile shelf (6.9 km²) located midway between Tarifa and Tangier. Every 6-hour tidal cycle, rising waters create turbulence over the seafloor that upwells nutrients and concentrates fish, turning Las Bajas into the <strong>arena where tuna, orcas, and fishermen collide</strong>.
-                    When actively hunting free-swimming tuna, orcas engage in prolonged pursuits lasting up to <strong>30 minutes</strong> at sustained speeds of <strong>3.7 to 6.0 m/s (~13–21 km/h)</strong>. However, active endurance-exhaustion hunting can only catch small-to-medium tuna (<strong>0.8 m to 1.5 m</strong> long, weighing <strong>20–70 kg</strong>); larger tuna exceed the orcas' aerobic limits for open-water chases.
+                    The entire resident community of Iberian killer whales consists of just <strong>39 individuals</strong>, structured into <strong>5 matrilineal pods</strong>. When actively hunting free-swimming tuna, orcas engage in prolonged pursuits lasting up to <strong>30 minutes</strong> at sustained speeds of <strong>3.7 to 6.0 m/s (~13–21 km/h)</strong>. However, active endurance-exhaustion hunting can only catch small-to-medium tuna (<strong>0.8 m to 1.5 m</strong> long, weighing <strong>20–70 kg</strong>); larger tuna exceed the orcas' aerobic limits for open-water chases. iller whale reproduction in the Strait is extremely sensitive to prey availability. When bluefin tuna stocks dropped, lactating mothers could not secure sufficient calories through depredation, resulting in nutritional stress (and potentially mobilizing bioaccumulated toxic pollutants stored in blubber), which caused total calf mortality across the interacting pods.</em>
                 </p>
 
-                <!-- The Arena info -->
-                <div class="energy-section">
-                    <h4>The Arena — Las Bajas</h4>
-                    <div class="metric-grid">
-                        <div class="metric">
-                            <span class="metric__value">39</span>
-                            <span class="metric__label">Total community (5 pods)</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric__value">5 pods</span>
-                            <span class="metric__label">A1, A2, B, C, D</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric__value">6.9 km²</span>
-                            <span class="metric__label">Las Bajas plateau (2×1 nm)</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric__value">6 h</span>
-                            <span class="metric__label">Tidal upwelling cycle</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Population & Catch Charts -->
-                <div class="scene__charts-grid">
-                    <div class="chart-item" id="chart-population">
-                        <h4>Orca Population Growth</h4>
-                        <div class="chart-container">
-                            <canvas id="canvas-population"></canvas>
-                        </div>
-                        <p class="chart-caption">Total community abundance, 1999–2011</p>
-                    </div>
-                    <div class="chart-item" id="chart-tuna">
-                        <h4>Tuna Catches vs. Calf Survival</h4>
-                        <div class="chart-container">
-                            <canvas id="canvas-tuna"></canvas>
-                        </div>
-                        <p class="chart-caption">Tuna catches (tons) and interacting pod calf survival rate</p>
-                    </div>
-                </div>
-
-                <!-- Active hunting metrics -->
+                                <!-- Active hunting metrics -->
                 <div class="energy-section">
                     <h4>Active Endurance-Exhaustion Hunting</h4>
                     <div class="metric-grid">
@@ -287,13 +246,32 @@
                         </div>
                     </div>
                 </div>
+                <!-- Population & Catch Charts -->
+                <div class="scene__charts-grid">
+                    <div class="chart-item" id="chart-population">
+                        <h4>Orca Population Growth</h4>
+                        <div class="chart-container">
+                            <canvas id="canvas-population"></canvas>
+                        </div>
+                        <p class="chart-caption">Total community abundance, 1999–2011</p>
+                    </div>
+                    <div class="chart-item" id="chart-tuna">
+                        <h4>Tuna Catches vs. Calf Survival</h4>
+                        <div class="chart-container">
+                            <canvas id="canvas-tuna"></canvas>
+                        </div>
+                        <p class="chart-caption">Tuna catches (tons) and interacting pod calf survival rate</p>
+                    </div>
+                </div>
+
+
 
             </div>
         </section>
 
         <div class="scene-spacer"></div>
 
-        <!-- SCENE 5: Fishermen & Stone Fishing -->
+        <!-- SCENE 5: Fishermen & Almadraba -->
         <section class="scene" id="scene-5">
             <div class="scene__content step"
                  data-lng="-5.82"
@@ -303,38 +281,14 @@
                  data-bearing="-20"
                  data-speed="0.5">
 
-                <h2 class="scene__title">Fishermen &amp; "Stone Fishing"</h2>
+                <h2 class="scene__title">Fishermen &amp; 'Almadraba'</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    For over <strong>3,000 years</strong>, humans have set great labyrinth-nets
-                    called <em>almadrabas</em> along the Spanish Atlantic coasts — trapping tuna as they pass in spring.
-                    This ancient practice, inherited from Phoenician and Roman fishers, has
-                    coexisted with orcas across millennia. But when tuna return to the Atlantic in summer, a different artisanal technique takes over: <strong>"stone fishing" (<em>pesca de la piedra</em>)</strong>. Small <strong>5–6 meter Moroccan wooden boats</strong> and Spanish artisanal vessels deploy a <strong>10–14 kg stone</strong> tied with a false knot to lower three baited hooks down to <strong>300+ meters</strong>. When the stone hits bottom, fishermen pull the line to snap the knot, leaving the stone on the seabed as the baited hooks float upward. Hauling a hooked tuna back up by hand takes <strong>~20 minutes</strong>.
-                    On a typical summer day, <strong>50–60 Moroccan boats</strong> and <strong>10–20 Spanish vessels</strong> gather at Las Bajas, creating a density of about <strong>8.7 fishing lines per km²</strong>. Each boat drops about <strong>18 stones per 6-hour tide</strong>, hooking <strong>1 tuna for every 10 stone drops</strong>.
+                    In spring, for over <strong>3,000 years</strong>, humans have set great labyrinth-nets
+                    called <em>almadrabas</em> along the Spanish Atlantic coasts — trapping tuna as they pass west-to-east on their journey to spawn. Riding the shallow Atlantic inflow, the tuna face a dual trial: human nets anchored along the shoreline and pods of Iberian orcas hunting in the open shallows, driving the fish to exhaustion in rapid, sustained pursuits.
                 </p>
 
-                <!-- Stone fishing gear -->
-                <div class="tarifa-section">
-                    <h4>The Stone Fishing Gear</h4>
-                    <div class="metric-grid">
-                        <div class="metric">
-                            <span class="metric__value">5–6 m</span>
-                            <span class="metric__label">Boat length (wooden)</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric__value">10–14 kg</span>
-                            <span class="metric__label">Stone weight (false knot)</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric__value">300+ m</span>
-                            <span class="metric__label">Hook deployment depth</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric__value">~20 min</span>
-                            <span class="metric__label">Hand-haul time per tuna</span>
-                        </div>
-                    </div>
-                </div>
+
 
                 <!-- Fleet density -->
                 <div class="tarifa-section">
@@ -392,9 +346,11 @@
             </div>
         </section>
 
+        <img class="scene__image" src="/assets/images/almadraba.svg" alt="Almadraba">
+
         <div class="scene-spacer"></div>
 
-        <!-- SCENE 6: Depredation, Cultural Learning & Demography -->
+        <!-- SCENE 6: Long-lining & Orca Co-Hunting -->
         <section class="scene" id="scene-6">
             <div class="scene__content step"
                  data-lng="-5.73"
@@ -404,12 +360,48 @@
                  data-bearing="10"
                  data-speed="0.5">
 
-                <h2 class="scene__title">Tactile Assessment &amp; Cultural Learning</h2>
+                <h2 class="scene__title">Co-Hunting</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    Out of the 5 pods, only <strong>2 pods (A1 and A2, totalling 18 whales)</strong> have learned to steal from drop-lines. Rather than diving 300+ meters, the orcas wait in the <strong>top 2 to 50 meters</strong>. Video analysis reveals that orcas swim along the vertical lines, pressing their <strong>pectoral fins, snouts, melons, and bellies</strong> against the ropes to feel line tension and weight vibrations — detecting whether a fish is hooked below. This cultural strategy spread across Pod A in <strong>less than a generation</strong> after stone fishing was introduced in 1995.
+                    In summer, when tuna return to the Atlantic, a different artisanal technique takes over: <strong>'drop-line' fishery (<em>pesca de la piedra</em>)</strong>. Again, orcas-tuna-fisheremen converge on an underwater plateau called <strong>'Las Bajas'</strong> — a 2 nautical mile × 1 nautical mile shelf (6.9 km²) located midway between Tarifa and Tangier. Every 6-hour tidal cycle, rising waters create turbulence over the seafloor that upwells nutrients and concentrates fish, turning Las Bajas into the <strong>arena where tuna, orcas, and fishermen collide</strong>. Here, small <strong>5–6 meter Moroccan wooden boats</strong> and Spanish artisanal vessels deploy a <strong>10–14 kg stone</strong> tied with a false knot to lower three baited hooks down to <strong>300+ meters</strong>. When the stone hits bottom, fishermen pull the line to snap the knot, leaving the stone on the seabed as the baited hooks float upward. Hauling a hooked tuna back up by hand takes <strong>~20 minutes</strong>.
+                    On a typical summer day, <strong>50–60 Moroccan boats</strong> and <strong>10–20 Spanish vessels</strong> gather at Las Bajas, creating a density of about <strong>8.7 fishing lines per km²</strong>. Each boat drops about <strong>18 stones per 6-hour tide</strong>, hooking <strong>1 tuna for every 10 stone drops</strong>.Within the Iberian Orca subpopulation, 2 out of 5 pods have learned to steal large tuna hooked in artisanal drop-line fisheries. Rather than diving 300+ meters, the orcas wait in the <strong>top 2 to 50 meters</strong>. Video analysis reveals that orcas swim along the vertical lines, pressing their <strong>pectoral fins, snouts, melons, and bellies</strong> against the ropes to feel line tension and weight vibrations — detecting whether a fish is hooked below. This cultural strategy spread in <strong>less than a generation</strong> after stone fishing was introduced in 1995.
                 </p>
 
+<!-- Add chart of the killer whale population with interactions blue line -->
+
+
+
+
+
+
+ 
+
+                <!-- IMAGE OF orca feeling the line tension -->
+                <img class="orcaLongLine" src="assets/images/longlineFishing.svg" alt="Orca feeling the line tension">
+
+                                <!-- Stone fishing gear -->
+                <div class="tarifa-section">
+                    <h4>The Stone Fishing Gear</h4>
+                    <div class="metric-grid">
+                        <div class="metric">
+                            <span class="metric__value">5–6 m</span>
+                            <span class="metric__label">Boat length (wooden)</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">10–14 kg</span>
+                            <span class="metric__label">Stone weight (false knot)</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">300+ m</span>
+                            <span class="metric__label">Hook deployment depth</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__value">~20 min</span>
+                            <span class="metric__label">Hand-haul time per tuna</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Depredation payoff -->
                 <div class="energy-section">
                     <h4>The Depredation Payoff</h4>
@@ -426,10 +418,7 @@
                             <span class="metric__value">92 t/season</span>
                             <span class="metric__label">Summer requirement via depredation</span>
                         </div>
-                        <div class="metric">
-                            <span class="metric__value">Since 1995</span>
-                            <span class="metric__label">Cultural spread (&lt;1 generation)</span>
-                        </div>
+
                     </div>
                 </div>
 
@@ -456,20 +445,6 @@
                     </div>
                 </div>
 
-                <!-- Crisis point -->
-                <div class="energy-section">
-                    <h4>The Crisis Point</h4>
-                    <div class="metric-grid metric-grid--crisis">
-                        <div class="metric">
-                            <span class="metric__value">&lt;573 t/yr</span>
-                            <span class="metric__label">Tuna catches after 2005 (overfishing)</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric__value">0%</span>
-                            <span class="metric__label">Calf survival 2006–2010</span>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </section>
@@ -488,7 +463,7 @@
                 <p class="scene__narrative">
                     The Strait of Gibraltar remains one of the last places on Earth where
                     apex predators, ancient fisheries, and marine biodiversity intersect in a
-                    living, breathing equilibrium — one that demands our understanding and protection. A fragile equilibrium, sustained by tradition and respect for the sea. A romantic hypothesis has arisen among some researchers based on the fact that Neanderthals may have hunted in cooperation with orcas — killer whales driving exhausted tuna toward shallow shores, and humans scavenging or assisting at the beach. Given that Neanderthals were last thought to inhabit the coastal caves of Gibraltar, could feeding on tuna facilitated by orcas have prolonged their survival?
+                    living, breathing equilibrium — one that demands our understanding and protection. <strong> A fragile equilibrium, sustained by tradition and respect for the sea</strong>. <br> A romantic hypothesis has arisen among some researchers based on the fact that Neanderthals may have hunted in cooperation with orcas — killer whales driving exhausted tuna toward shallow shores, and humans scavenging or assisting at the beach. Given that Neanderthals were last thought to inhabit the coastal caves of Gibraltar, could feeding on tuna facilitated by orcas have prolonged their survival in this location? Let's hope that the geological and archaelogial records help one day answer this question. <br> 
                 </p>
 
                 <!-- References -->
