@@ -608,6 +608,118 @@ body {
 }
 
 /* ========================================================================
+   Transatlantic Migration Legend (Scene 3)
+   ======================================================================== */
+
+.transatlantic-legend {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin: var(--space-md) 0 var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(10, 25, 47, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(8px);
+}
+
+.route-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: 0.76rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+.route-badge__line {
+    display: inline-block;
+    width: 22px;
+    height: 3px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.route-badge--spring .route-badge__line {
+    background: var(--color-tuna-red);
+    box-shadow: 0 0 8px rgba(230, 57, 70, 0.7);
+}
+
+.route-badge--summer .route-badge__line {
+    background: var(--color-ocean-300);
+    box-shadow: 0 0 8px rgba(74, 143, 231, 0.7);
+}
+
+.route-badge strong {
+    color: var(--color-text-primary);
+}
+
+/* ========================================================================
+   References Section
+   ======================================================================== */
+
+.references-section {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.references-section h4 {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-orca-accent);
+    margin-bottom: var(--space-md);
+}
+
+.references-list {
+    list-style: decimal;
+    padding-left: var(--space-lg);
+    font-size: 0.78rem;
+    line-height: 1.75;
+    color: var(--color-text-secondary);
+    columns: 1;
+}
+
+.references-list li {
+    margin-bottom: var(--space-sm);
+    padding-left: var(--space-xs);
+}
+
+.references-list li em {
+    color: var(--color-ocean-200);
+    font-style: italic;
+}
+
+.references-list li a {
+    color: var(--color-orca-accent);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    transition: color 0.2s ease;
+}
+
+.references-list li a:hover {
+    color: var(--color-ocean-200);
+    text-decoration: underline;
+}
+
+/* ========================================================================
+   Crisis Metric Grid (2-column variant)
+   ======================================================================== */
+
+.metric-grid--crisis {
+    grid-template-columns: 1fr 1fr;
+}
+
+.metric-grid--crisis .metric__value {
+    color: var(--color-tuna-red);
+}
+
+/* ========================================================================
    Responsive Adjustments
    ======================================================================== */
 
