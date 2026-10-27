@@ -1,6 +1,4 @@
-/* ========================================================================
-   ORCA STORYTELLING — Design Tokens & Global Styles
-   ======================================================================== */
+@import "reset.css";
 
 :root {
     /* Color Palette — Deep Ocean Theme */
@@ -50,19 +48,11 @@
     --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
     --transition-smooth: 0.5s var(--ease-out-expo);
 
-    /* Layout Panel Width */
-    --panel-width: clamp(440px, 42vw, 580px);
+    /* Layout Panel Width — exactly half the screen */
+    --panel-width: 50vw;
 }
 
-/* ========================================================================
-   Reset & Base
-   ======================================================================== */
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
 
 html {
     scroll-behavior: smooth;
@@ -75,88 +65,9 @@ body {
     color: var(--color-text-primary);
     background: var(--color-ocean-900);
     overflow-x: hidden;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
-/* ========================================================================
-   Loading Screen
-   ======================================================================== */
-
-.loader {
-    position: fixed;
-    inset: 0;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-ocean-900);
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-}
-
-.loader.is-hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.loader__inner {
-    text-align: center;
-}
-
-.loader__wave {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    margin-bottom: var(--space-lg);
-}
-
-.loader__wave span {
-    width: 4px;
-    height: 30px;
-    background: var(--color-ocean-300);
-    border-radius: 2px;
-    animation: loader-wave 1.2s ease-in-out infinite;
-}
-
-.loader__wave span:nth-child(2) { animation-delay: 0.1s; }
-.loader__wave span:nth-child(3) { animation-delay: 0.2s; }
-.loader__wave span:nth-child(4) { animation-delay: 0.3s; }
-.loader__wave span:nth-child(5) { animation-delay: 0.4s; }
-
-@keyframes loader-wave {
-    0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
-    50% { transform: scaleY(1.2); opacity: 1; }
-}
-
-.loader__text {
-    font-family: var(--font-display);
-    font-style: italic;
-    color: var(--color-text-dim);
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-}
-
-/* ========================================================================
-   Progress Bar
-   ======================================================================== */
-
-.progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    z-index: 9999;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.progress-bar__fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, var(--color-ocean-300), var(--color-orca-accent), var(--color-gold));
-    transition: width 0.3s ease;
-    box-shadow: 0 0 12px var(--color-ocean-300);
-}
 
 /* ========================================================================
    Scene Navigation Dots
@@ -282,7 +193,7 @@ body {
     align-items: center;
     justify-content: flex-start;
     text-align: left;
-    padding: var(--space-2xl) clamp(28px, 4vw, 52px);
+    padding: var(--space-2xl) clamp(36px, 4.5vw, 68px);
     box-sizing: border-box;
 }
 
@@ -302,14 +213,6 @@ body {
     }
 }
 
-.hero__eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--color-orca-accent);
-    margin-bottom: var(--space-lg);
-}
 
 .hero__title {
     font-family: var(--font-display);
@@ -329,11 +232,19 @@ body {
 }
 
 .hero__subtitle {
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(2rem, 2vw, 1.25rem);
     color: var(--color-text-secondary);
     font-weight: 300;
     line-height: 1.6;
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-xl);
+}
+
+.hero__subtitle2 {
+    font-size: clamp(1.5rem, 2vw, 1.25rem);
+    color: var(--color-text-secondary);
+    font-weight: 200;
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
 }
 
 .hero__scroll-cue {
@@ -389,15 +300,6 @@ body {
     transform: translateY(0);
 }
 
-.scene__number {
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-ocean-300);
-    letter-spacing: 0.15em;
-    margin-bottom: var(--space-sm);
-}
-
 .scene__title {
     font-family: var(--font-display);
     font-size: clamp(1.4rem, 4vw, 2rem);
@@ -416,10 +318,12 @@ body {
 }
 
 .scene__narrative {
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     line-height: 1.75;
     color: var(--color-text-secondary);
     margin-bottom: var(--space-lg);
+    columns: 2;
+    column-gap: var(--space-lg);
 }
 
 .scene__narrative strong {
@@ -433,83 +337,39 @@ body {
 }
 
 /* ========================================================================
-   Fact Chips
+   Editorial Sections & Visualisations (Direct text layout, no cards)
    ======================================================================== */
 
-.scene__facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
+
+.current-section,
+.energy-section,
+.tarifa-section,
+ {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.fact-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: 6px 12px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 100px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--color-text-secondary);
-    transition: all 0.3s ease;
-}
-
-.fact-chip:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--color-ocean-300);
-    color: var(--color-text-primary);
-    transform: translateY(-1px);
-}
-
-.fact-chip__icon {
-    font-size: 0.85rem;
-}
-
-.fact-chip--danger {
-    border-color: var(--color-tuna-red-dim);
-    color: var(--color-tuna-red);
-}
-
-.fact-chip--danger:hover {
-    border-color: var(--color-tuna-red);
-    background: rgba(230, 57, 70, 0.1);
-}
-
-/* ========================================================================
-   Info Boxes
-   ======================================================================== */
-
-.scene__infobox {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    margin-bottom: var(--space-lg);
-}
-
-.scene__infobox h4 {
+.current-section h4,
+.energy-section h4,
+.tarifa-section h4 {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 0.72rem;
+    font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-orca-accent);
     margin-bottom: var(--space-md);
 }
 
-.scene__infobox-text {
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: var(--color-text-dim);
-    margin-top: var(--space-sm);
-}
 
-/* Scale Bar */
+/* ========================================================================
+   Scale Bar (Scene 2)
+   ======================================================================== */
+
 .scale-bar {
-    margin-bottom: var(--space-sm);
+    margin: var(--space-md) 0 var(--space-sm);
 }
 
 .scale-bar__line {
@@ -538,45 +398,35 @@ body {
 .scale-bar__labels {
     display: flex;
     justify-content: space-between;
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     color: var(--color-text-dim);
     font-family: var(--font-mono);
-    margin-top: 4px;
+    margin-top: 6px;
 }
 
-/* Current Diagram */
+
+/* ========================================================================
+   Current Flow (Scene 4)
+   ======================================================================== */
+
 .current-flow {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
+    margin: var(--space-md) 0;
 }
 
 .current-layer {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-sm);
-}
-
-.current-layer.surface {
-    background: rgba(74, 143, 231, 0.15);
-    border: 1px solid rgba(74, 143, 231, 0.25);
-}
-
-.current-layer.liw {
-    background: rgba(244, 162, 97, 0.12);
-    border: 1px solid rgba(244, 162, 97, 0.3);
-}
-
-.current-layer.wmdw {
-    background: rgba(41, 121, 255, 0.12);
-    border: 1px solid rgba(41, 121, 255, 0.25);
+    gap: var(--space-md);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .current-arrow {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--color-ocean-300);
     animation: flow-right 2s linear infinite;
     white-space: nowrap;
@@ -589,8 +439,6 @@ body {
 
 .current-layer.wmdw .current-arrow {
     color: #4a90e2;
-    animation: flow-left 2s linear infinite;
-}
     animation: flow-left 2s linear infinite;
 }
 
@@ -607,82 +455,61 @@ body {
 }
 
 .current-label {
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     color: var(--color-text-secondary);
     flex: 1;
 }
 
 .current-depth {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: var(--color-text-dim);
 }
 
-.current-separator {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    margin: 2px 0;
-}
-
 /* ========================================================================
-   Place Tags
+   Place Names (Scene 3 & 6)
    ======================================================================== */
 
 .scene__places {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-}
-
-.place-tag {
-    padding: 4px 10px;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     color: var(--color-text-dim);
-    transition: all 0.3s ease;
+    line-height: 1.8;
+    margin-top: var(--space-md);
 }
 
-.place-tag:hover {
-    color: var(--color-text-primary);
-    border-color: var(--color-ocean-300);
+.place-name {
+    color: var(--color-text-secondary);
+    transition: color 0.2s ease;
 }
 
-.place-tag--almadraba {
-    border-color: var(--color-gold-dim);
+.place-name:hover {
+    color: var(--color-ocean-300);
+}
+
+.place-name--almadraba {
     color: var(--color-gold);
 }
 
-.place-tag--almadraba:hover {
-    border-color: var(--color-gold);
-    background: rgba(244, 162, 97, 0.1);
+.place-name--almadraba:hover {
+    color: var(--color-sand);
 }
 
 /* ========================================================================
-   Charts & Data Visualisation
+   Charts (Scene 5)
    ======================================================================== */
 
 .scene__charts-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-md);
-    margin-bottom: var(--space-lg);
+    gap: var(--space-xl);
+    margin: var(--space-xl) 0;
 }
 
-.chart-panel {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-}
-
-.chart-panel h4 {
+.chart-item h4 {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 500;
+    font-size: 0.68rem;
+    font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-orca-accent);
@@ -701,85 +528,44 @@ body {
 }
 
 .chart-caption {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     color: var(--color-text-dim);
     margin-top: var(--space-xs);
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
-/* Bathymetry Viz */
-.scene__chart-container {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: var(--radius-md);
-    padding: var(--space-md);
-    margin-bottom: var(--space-lg);
-}
+/* ========================================================================
+   Metric Grids (Scene 5 & 6)
+   ======================================================================== */
 
-.scene__chart-container h4 {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-orca-accent);
-    margin-bottom: var(--space-sm);
-}
-
-.bathymetry-viz {
-    width: 100%;
-    overflow: hidden;
-    border-radius: var(--radius-sm);
-}
-
-.bathymetry-viz svg {
-    width: 100%;
-    height: auto;
-}
-
-.bathymetry-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.65rem;
-    color: var(--color-text-dim);
-    font-family: var(--font-mono);
-    margin-top: var(--space-xs);
-}
-
-.bathymetry-labels .highlight {
-    color: var(--color-orca-accent);
-    font-weight: 600;
-}
-
-/* Metric Grid */
 .metric-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-sm);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+    margin: var(--space-md) 0 var(--space-lg);
+    padding: var(--space-sm) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .metric {
-    text-align: center;
-    padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(255, 255, 255, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .metric__value {
-    display: block;
     font-family: var(--font-display);
-    font-size: 1.3rem;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
     font-weight: 700;
     color: var(--color-ocean-200);
-    line-height: 1.2;
+    line-height: 1.15;
 }
 
 .metric__label {
-    display: block;
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     color: var(--color-text-dim);
-    margin-top: 2px;
+    line-height: 1.35;
 }
 
 /* ========================================================================
@@ -914,6 +700,15 @@ body {
 
     .fact-chip {
         width: 100%;
+    }
+
+    .msc-metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .msc-stage {
+        flex-direction: column;
+        gap: 2px;
     }
 
     .scene-nav {

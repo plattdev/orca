@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Where Titans Meet — Orcas, Tuna & Humans in the Strait of Gibraltar</title>
+    <title>Where Titans Meet — Orcas, Tuna & Fishermen in the Strait of Gibraltar</title>
     <meta name="description" content="An immersive map storytelling experience exploring the ancient relationship between orcas, bluefin tuna, and human fisheries in the Strait of Gibraltar.">
 
     <!-- Fonts -->
@@ -14,19 +14,14 @@
     <!-- MapLibre GL JS -->
     <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
 
-    <!-- App CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
     <!-- Loading Screen -->
     <div id="loader" class="loader">
-        <div class="loader__inner">
-            <div class="loader__wave">
-                <span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <p class="loader__text">Charting the waters…</p>
-        </div>
+
     </div>
 
     <!-- Progress Bar -->
@@ -36,24 +31,24 @@
 
     <!-- Scene Navigation Dots -->
     <nav id="scene-nav" class="scene-nav" aria-label="Scene navigation">
-        <button class="scene-nav__dot is-active" data-scene="0" aria-label="Scene 1: The Meeting of Two Worlds">
+        <a class="scene-nav__dot is-active" data-scene="0" aria-label="Scene 1: The 14km Gateway">
+            <span class="scene-nav__label">14K Gateway</span>
+        </a>
+        <a class="scene-nav__dot" data-scene="1" aria-label="Scene 2: The Meeting of Two Worlds">
             <span class="scene-nav__label">Two Worlds</span>
-        </button>
-        <button class="scene-nav__dot" data-scene="1" aria-label="Scene 2: The Geographic Funnel">
-            <span class="scene-nav__label">The Funnel</span>
-        </button>
-        <button class="scene-nav__dot" data-scene="2" aria-label="Scene 3: Bathymetry & Nature">
-            <span class="scene-nav__label">Depths</span>
-        </button>
-        <button class="scene-nav__dot" data-scene="3" aria-label="Scene 4: Ocean Engine">
-            <span class="scene-nav__label">Currents</span>
-        </button>
-        <button class="scene-nav__dot" data-scene="4" aria-label="Scene 5: Tuna Route">
-            <span class="scene-nav__label">Migration</span>
-        </button>
-        <button class="scene-nav__dot" data-scene="5" aria-label="Scene 6: Almadraba">
-            <span class="scene-nav__label">Almadraba</span>
-        </button>
+        </a>
+        <a class="scene-nav__dot" data-scene="2" aria-label="Scene 3: Migration of the Tuna">
+            <span class="scene-nav__label">Tuna migration</span>
+        </a>
+        <a class="scene-nav__dot" data-scene="3" aria-label="Scene 4: Orcas">
+            <span class="scene-nav__label">Orcas</span>
+        </a>
+        <a class="scene-nav__dot" data-scene="4" aria-label="Scene 5: Fishermen">
+            <span class="scene-nav__label">Fishermen</span>
+        </a>
+        <a class="scene-nav__dot" data-scene="5" aria-label="Scene 6: Co-Hunting">
+            <span class="scene-nav__label">Co-Hunting</span>
+        </a>
     </nav>
 
     <!-- Uniform Left Backdrop (Ensures left side is solid color, no map interference) -->
@@ -71,9 +66,9 @@
         <!-- Hero / Title Card -->
         <header class="hero">
             <div class="hero__content">
-                <p class="hero__eyebrow">An Interactive Map Story</p>
                 <h1 class="hero__title">Where <em>Titans</em> Meet</h1>
-                <p class="hero__subtitle">Orcas, Bluefin Tuna & Humans<br>in the Strait of Gibraltar</p>
+                <p class="hero__subtitle">ORCAS, BLUEFIN TUNA & HUMANS<br>IN THE STRAIT OF GIBRALTAR</p>
+                <p class="hero__subtitle2">As human observation of marine wildlife wanes, interspecific and human-wildlife dynamics continue unabated along ancient migratory routes.</p>
                 <div class="hero__scroll-cue">
                     <span>Scroll to begin</span>
                     <div class="hero__scroll-arrow">
@@ -85,39 +80,17 @@
             </div>
         </header>
 
-        <!-- SCENE 1: The Meeting of Two Worlds -->
+        <!-- SCENE 1: Geological history -->
         <section class="scene" id="scene-1">
-            <div class="scene__content step"
-                 data-lng="-5.6"
-                 data-lat="35.9"
-                 data-zoom="4.5"
-                 data-pitch="0"
-                 data-bearing="0"
-                 data-speed="1.2">
-                <div class="scene__number">I</div>
-                <h2 class="scene__title">The Meeting of Two Worlds</h2>
+            <div class="scene__content step">
+                
+                <h2 class="scene__title">The 14K Gateway</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    At the western gate of the Mediterranean, Africa reaches toward Europe
-                    across a sliver of sea. Here, where the Atlantic breathes into an ancient basin,
-                    two continents nearly touch — separated by just <strong>14 kilometres</strong>
-                    of churning water. This narrow passage has shaped civilisations, migrations,
-                    and ecosystems for millions of years.
+                    The Strait of Gibraltar has shaped civilisations, migrations, and ecosystems for millions of years. Around 5.96 million years ago, the modern Strait did not exist. The collision of the African and Eurasian plates closed the Strait, isolating the Mediterranean Sea and leading to its near-total desiccation — the <strong>Messinian Salinity Crisis</strong>. Basin sea levels dropped by ~1,500 m, depositing a massive, kilometer-thick 'salt giant' (>1M km³ of evaporites) across the abyssal plains.
+                    Later, 5.33 million years ago, an Atlantic megafloood refilled the Mediterranean Sea through a process known as the <strong>Zanclean flood</strong>. The two basins were reconnected and the Strait of Gibraltar was established as the <strong>only gateway for marine life to pass between the Atlantic and Mediterranean</strong>.
                 </p>
-                <div class="scene__facts">
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🌍</span>
-                        <span class="fact-chip__text">2 continents converge</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">📏</span>
-                        <span class="fact-chip__text">14 km at narrowest</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🌊</span>
-                        <span class="fact-chip__text">2 oceans exchange</span>
-                    </div>
-                </div>
+
             </div>
         </section>
 
@@ -126,213 +99,62 @@
 
         <!-- SCENE 2: The Geographic Funnel -->
         <section class="scene" id="scene-2">
-            <div class="scene__content step"
-                 data-lng="-5.58"
-                 data-lat="35.96"
-                 data-zoom="9.5"
-                 data-pitch="40"
-                 data-bearing="-20"
-                 data-speed="0.8">
-                <div class="scene__number">II</div>
-                <h2 class="scene__title">The Geographic Funnel</h2>
+            <div class="scene__content step">
+                 
+                
+                <h2 class="scene__title">The Meeting of Two Worlds</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    The Strait of Gibraltar is nature's most dramatic bottleneck. At its
-                    narrowest — between Punta de Tarifa and Punta Cires — the channel
-                    squeezes to barely <strong>10–11 km</strong>. Every marine creature
-                    migrating between the Atlantic and Mediterranean must pass through
-                    this gauntlet. There is no alternative route.
+                    Beneath the surface, lies the Strait's grandest barrier: the <strong>Camarinal Sill</strong>. It is the shallowest underwater mountain connecting Europe and Africa (at a water depth of ~280 m), breaking up the surrounding abysses that reach depths of up to 1,000 m. In the upper 150 m, cool,low-salinity <strong>Atlantic water</strong> flows eastward. Beneath this surface inflow the dense Mediterranean outflows westward.  This is an area of intense currents since when Atlantic and Mediterranean water masses collide nutrient-rich waters upwell along the seafloor. This makes the sector extending from Punta Camarinal to "Las Bajas" a historical fishing ground.
                 </p>
-                <div class="scene__facts">
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">📐</span>
-                        <span class="fact-chip__text">10–11 km narrowest point</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🐋</span>
-                        <span class="fact-chip__text">Obligatory migration corridor</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">⚓</span>
-                        <span class="fact-chip__text">58 km total length</span>
-                    </div>
-                </div>
-                <!-- Scale reference card -->
-                <div class="scene__infobox">
-                    <h4>Scale Reference</h4>
-                    <div class="scale-bar">
-                        <div class="scale-bar__line"></div>
-                        <div class="scale-bar__labels">
-                            <span>0</span><span>7 km</span><span>14 km</span>
-                        </div>
-                    </div>
-                    <p class="scene__infobox-text">
-                        At its narrowest, the strait is roughly the distance of a half-marathon.
-                        On a clear day, you can see Africa from the coast of Spain.
-                    </p>
-                </div>
+
             </div>
         </section>
 
         <div class="scene-spacer"></div>
 
-        <!-- SCENE 3: Bathymetry, Toponymy & Nature -->
+        <!-- SCENE 3: Migration of the Bluefin Tuna, create a zoom out of the map, to recreate the tuna migration from Gulf of Mexico-->
         <section class="scene" id="scene-3">
-            <div class="scene__content step"
-                 data-lng="-5.77"
-                 data-lat="35.96"
-                 data-zoom="10.4"
-                 data-pitch="45"
-                 data-bearing="20"
-                 data-speed="0.6">
-                <div class="scene__number">III</div>
-                <h2 class="scene__title">The Hidden Landscape Below</h2>
+            <div class="scene__content step">
+
+                <h2 class="scene__title">Bluefin Tuna Migration</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    Beneath the surface lies nature's grandest barrier: the <strong>Camarinal Sill (CS)</strong> transect.
-                    Spanning from Punta Camarinal in Spain to the Moroccan coast near Tangier, this underwater ridge rises
-                    from ~900 m to two narrow submarine channels: the <strong>North Channel (CSN)</strong> and
-                    <strong>South Channel (CSS)</strong>, both plunging to <strong>~290 m</strong> and separated by a
-                    submerged central crest (~180 m). Just west lies the deep <strong>Tangier Basin (TB, ~430 m)</strong>
-                    and the <strong>Espartel Sill (ESP)</strong>, forming the ultimate gateway of exchange between the
-                    Atlantic and Mediterranean.
+                    Swimming from the Gulf of Mexico to the Mediterranean Sea and back again, the Atlantic bluefin tuna (<em>Thunnus thynnus</em>) surges in spring to spawn in the Med and returns in summer to feed in the Atlantic. Riding the shallow surface Atlantic inflow eastward and returning through the cold, deep Mediterranean outflow, the <strong>tuna dictate the cadence of the Strait</strong>. Local fishermen adapt their artisanal techniques to harvest them—from coastal trap-nets when they enter the Strait to deep drop-lines when they exit. Interestingly, resident <strong>Iberian killer whales</strong> adapt alongside humans fishing techniques.
                 </p>
-                <div class="scene__facts">
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">⛰️</span>
-                        <span class="fact-chip__text">CSN & CSS Channels: ~290 m</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">📡</span>
-                        <span class="fact-chip__text">CS Mooring Lines (CSN / CSS)</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🌊</span>
-                        <span class="fact-chip__text">Tangier Basin & Espartel Sill</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🌿</span>
-                        <span class="fact-chip__text">Camarina: protected coastal shrub</span>
-                    </div>
-                </div>
-                <!-- Bathymetry profile -->
-                <div class="scene__chart-container" id="bathymetry-profile">
-                    <h4>Camarinal Sill (CS) Bathymetric Transect</h4>
-                    <div class="bathymetry-viz">
-                        <svg id="bathymetry-svg" viewBox="0 0 400 210" preserveAspectRatio="xMidYMid meet"></svg>
-                    </div>
-                    <div class="bathymetry-labels">
-                        <span>Morocco (35.85°N)</span>
-                        <span class="highlight">CSS & CSN Mooring Sites</span>
-                        <span>Spain / P. Camarinal (36.05°N)</span>
-                    </div>
-                </div>
-                <div class="scene__places">
-                    <span class="place-tag">Punta Camarinal</span>
-                    <span class="place-tag">Tarifa</span>
-                    <span class="place-tag">Zahara de los Atunes</span>
-                    <span class="place-tag">Barbate</span>
-                    <span class="place-tag">Conil</span>
-                    <span class="place-tag">Tangier</span>
-                </div>
+
+            
+
             </div>
         </section>
 
         <div class="scene-spacer"></div>
 
-        <!-- SCENE 4: The Ocean Engine -->
-        <section class="scene" id="scene-4">
-            <div class="scene__content step"
-                 data-lng="-5.45"
-                 data-lat="35.95"
-                 data-zoom="9.2"
-                 data-pitch="38"
-                 data-bearing="-15"
-                 data-speed="0.7">
-                <div class="scene__number">IV</div>
-                <h2 class="scene__title">The Ocean Engine</h2>
-                <div class="scene__divider"></div>
-                <p class="scene__narrative">
-                    The Strait operates as a colossal two-layer hydrodynamic engine. In the upper 150 m, cool,
-                    low-salinity <strong>Atlantic water</strong> flows east into the Alborán Sea. Beneath this surface inflow,
-                    the dense Mediterranean outflow splits into two distinct water masses: <strong>LIW (Levantine Intermediate Water)</strong>,
-                    which hugs the northern Spanish slope past Gibraltar and Tarifa to funnel through the <strong>North Channel (CSN)</strong>,
-                    and <strong>WMDW (Western Mediterranean Deep Water)</strong>, the densest bottom layer, which streams along the
-                    southern African margin past Ceuta to cascade through the <strong>South Channel (CSS)</strong> into the Tangier Basin.
-                </p>
-                <div class="scene__facts">
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">➡️</span>
-                        <span class="fact-chip__text">Surface (0–150m): Atlantic Inflow (East)</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🟡</span>
-                        <span class="fact-chip__text">LIW: Levantine Water via CSN (West)</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🔵</span>
-                        <span class="fact-chip__text">WMDW: Deep Water via CSS (West)</span>
-                    </div>
-                </div>
-                <!-- Current diagram -->
-                <div class="scene__infobox current-diagram">
-                    <h4>Water Mass Circulation System</h4>
-                    <div class="current-flow">
-                        <div class="current-layer surface">
-                            <span class="current-arrow">→ → → →</span>
-                            <span class="current-label">Surface Atlantic Inflow (Gulf of Cadiz → Alborán)</span>
-                            <span class="current-depth">0–150 m</span>
-                        </div>
-                        <div class="current-separator"></div>
-                        <div class="current-layer liw">
-                            <span class="current-arrow">← ← ← ←</span>
-                            <span class="current-label">LIW — Levantine Intermediate Water (via CSN)</span>
-                            <span class="current-depth">150–300 m</span>
-                        </div>
-                        <div class="current-separator"></div>
-                        <div class="current-layer wmdw">
-                            <span class="current-arrow">← ← ← ←</span>
-                            <span class="current-label">WMDW — Western Med Deep Water (via CSS & TB)</span>
-                            <span class="current-depth">&gt;300 m</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <div class="scene-spacer"></div>
 
         <!-- SCENE 5: The Tuna Route & the Orcas -->
         <section class="scene" id="scene-5">
-            <div class="scene__content step"
-                 data-lng="-5.68"
-                 data-lat="36.02"
-                 data-zoom="10"
-                 data-pitch="35"
-                 data-bearing="15"
-                 data-speed="0.6">
-                <div class="scene__number">V</div>
-                <h2 class="scene__title">The Tuna Route & the Orcas</h2>
+        
+                            <div class="scene__content step">
+
+                <h2 class="scene__title">The Iberian Orcas</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    Every spring, Atlantic bluefin tuna (<em>Thunnus thynnus</em>) surge through
-                    the Strait on their ancestral spawning migration. And the orcas know.
-                    A resident community of <strong>39 individuals</strong> (as of 2011) has
-                    learned to intercept the tuna here, developing sophisticated hunting
-                    techniques — including <strong>"espartes"</strong>, cooperative drives
-                    that exploit the narrow geography.
+                    
                 </p>
-
+            
                 <!-- Population & Catch Charts -->
                 <div class="scene__charts-grid">
-                    <div class="chart-panel" id="chart-population">
+                    <div class="chart-item" id="chart-population">
                         <h4>Orca Population Growth</h4>
                         <div class="chart-container">
                             <canvas id="canvas-population"></canvas>
                         </div>
                         <p class="chart-caption">Total community abundance, 1999–2011</p>
                     </div>
-                    <div class="chart-panel" id="chart-tuna">
+                    <div class="chart-item" id="chart-tuna">
                         <h4>Tuna Catches vs. Calf Survival</h4>
                         <div class="chart-container">
                             <canvas id="canvas-tuna"></canvas>
@@ -341,43 +163,26 @@
                     </div>
                 </div>
 
-                <div class="scene__facts">
-                    <div class="fact-chip fact-chip--danger">
-                        <span class="fact-chip__icon">🔴</span>
-                        <span class="fact-chip__text">IUCN: Critically Endangered (E. Atlantic)</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🐳</span>
-                        <span class="fact-chip__text">39 orcas in 2011 community</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🐟</span>
-                        <span class="fact-chip__text">1,654 t/year required (2011)</span>
-                    </div>
-                </div>
-
                 <!-- Energy metrics panel -->
-                <div class="scene__infobox energy-card">
-                    <h4>Energy & Depredation (2004 Study)</h4>
+                <div class="energy-section">
+                    <h4>Active Endurance-Exhaustion Hunting</h4>
                     <div class="metric-grid">
                         <div class="metric">
-                            <span class="metric__value">14</span>
-                            <span class="metric__label">Interacting orcas</span>
+                            <span class="metric__value">small-size tuna</span>
+                            <span class="metric__label"></span>
                         </div>
                         <div class="metric">
-                            <span class="metric__value">1M</span>
-                            <span class="metric__label">kcal/day needed</span>
+                            <span class="metric__value">~30 min</span>
+                            <span class="metric__label"></span>
                         </div>
                         <div class="metric">
-                            <span class="metric__value">539 t</span>
-                            <span class="metric__label">Active hunting/year</span>
+                            <span class="metric__value">High energy cost</span>
+                            <span class="metric__label"></span>
                         </div>
-                        <div class="metric">
-                            <span class="metric__value">92 t</span>
-                            <span class="metric__label">Depredation/season</span>
-                        </div>
+                        
                     </div>
                 </div>
+            </div>
             </div>
         </section>
 
@@ -392,35 +197,22 @@
                  data-pitch="45"
                  data-bearing="-25"
                  data-speed="0.5">
-                <div class="scene__number">VI</div>
-                <h2 class="scene__title">The Almadraba</h2>
+                
+                <h2 class="scene__title">Fishermen</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
                     For over <strong>3,000 years</strong>, humans have set great labyrinth-nets
-                    called <em>almadrabas</em> along these coasts — trapping tuna as they pass.
+                    called <em>almadrabas</em> along the Spanish Atlantic coasts — trapping tuna as they pass.
                     This ancient practice, inherited from Phoenician and Roman fishers, has
-                    coexisted with orcas across millennia. In Tarifa alone (2004),
+                    coexisted with orcas across millennia. This technique is used when they pass through the strait. In Tarifa alone (2004),
                     <strong>48 boats</strong> landed <strong>597 tons</strong>, while orcas
-                    depredated just 42 tuna from the fleet. A fragile equilibrium, sustained
-                    by tradition and respect for the sea.
+                    depredated just 42 tuna from the fleet. 
+                    
+                    
                 </p>
-                <div class="scene__facts">
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">🏺</span>
-                        <span class="fact-chip__text">3,000+ years of tradition</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">⛵</span>
-                        <span class="fact-chip__text">48 boats in Tarifa (2004)</span>
-                    </div>
-                    <div class="fact-chip">
-                        <span class="fact-chip__icon">⚖️</span>
-                        <span class="fact-chip__text">597 t landed vs. 42 depredated</span>
-                    </div>
-                </div>
 
                 <!-- Tarifa case study -->
-                <div class="scene__infobox tarifa-card">
+                <div class="tarifa-section">
                     <h4>Tarifa Case Study — 2004 Season</h4>
                     <div class="metric-grid">
                         <div class="metric">
@@ -440,18 +232,17 @@
                             <span class="metric__label">Tuna provided to orcas</span>
                         </div>
                     </div>
-                    <p class="scene__infobox-text">
-                        Artisanal fishers sometimes release tuna to orcas to prevent gear damage — a form of
-                        coexistence unique in the world.
+                    <p class="scene__narrative">
+                        A fragile equilibrium, sustained by tradition and respect for the sea. A romantic hypothesis has arised upon some scientists rely upon the fact that Neanthertals may have hunted in cooperation with orcas, by orcas leafing them exhausted to the beach and Neathertals returning them to the sea for cooperation. 
                     </p>
                 </div>
 
                 <!-- Almadraba locations -->
                 <div class="scene__places">
-                    <span class="place-tag place-tag--almadraba">Conil Almadraba</span>
-                    <span class="place-tag place-tag--almadraba">Zahara Almadraba</span>
-                    <span class="place-tag place-tag--almadraba">Barbate Almadraba</span>
-                    <span class="place-tag place-tag--almadraba">Tarifa Almadraba</span>
+                    <span class="place-name place-name--almadraba">Conil Almadraba</span> ·
+                    <span class="place-name place-name--almadraba">Zahara Almadraba</span> ·
+                    <span class="place-name place-name--almadraba">Barbate Almadraba</span> ·
+                    <span class="place-name place-name--almadraba">Tarifa Almadraba</span>
                 </div>
             </div>
         </section>
@@ -472,7 +263,7 @@
                     living, breathing equilibrium — one that demands our understanding and protection.
                 </p>
                 <div class="closing__credits">
-                    <p>Data sources: Guinet et al., de Stephanis et al., IUCN Red List</p>
+                    <p>Scientific sources: García-Castellanos et al. (<em>Nature</em> &amp; <em>Nature Geoscience</em>), Guinet et al., de Stephanis et al., IUCN Red List</p>
                     <p>Built with MapLibre GL JS · D3.js · Scrollama</p>
                 </div>
             </div>
