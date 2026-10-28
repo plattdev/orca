@@ -72,9 +72,16 @@ img {
     height: 350px;
     width: auto;
     /* center image */
+
+}
+
+/* center almadraba image in the left column */
+.almadraba__image {
+    margin: 0;
+    padding: 0;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 50px;
+
 }
 
 /* ========================================================================
