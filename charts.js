@@ -5,19 +5,20 @@
 
 const Charts = (() => {
 
-    /* ── Colour tokens (match CSS variables) ─────────────────────────── */
+    /* ── Muted Editorial Scientific Palette (matches CSS tokens) ─────── */
     const C = {
-        ocean300: '#4a8fe7',
-        ocean200: '#64b5f6',
-        ocean100: '#a8d8ea',
-        orcaAccent: '#06d6a0',
-        tunaRed: '#e63946',
-        gold: '#f4a261',
+        ocean300: '#6d9dc5',
+        ocean200: '#8fb8d6',
+        ocean100: '#bfd6e8',
+        orcaAccent: '#7fa8c4',
+        tunaRed: '#c47d76',
+        gold: '#d0ab76',
+        ivory: '#e2c799',
         textPrimary: '#e6f1ff',
         textSecondary: '#a8b2d1',
         textDim: '#8892b0',
         gridLine: 'rgba(255,255,255,0.06)',
-        thresholdLine: 'rgba(244,162,97,0.5)'
+        thresholdLine: 'rgba(208,171,118,0.62)'
     };
 
     const fontMono = "'JetBrains Mono', monospace";
@@ -183,7 +184,7 @@ const Charts = (() => {
                 .attr('width', 28)
                 .attr('height', 13)
                 .attr('rx', 3)
-                .attr('fill', 'rgba(230, 57, 70, 0.25)')
+                .attr('fill', 'rgba(196, 125, 118, 0.22)')
                 .attr('stroke', C.tunaRed)
                 .attr('stroke-width', 0.8);
 
@@ -229,7 +230,7 @@ const Charts = (() => {
         }
     }
 
-    /* ── Orca Population Chart (Canvas via D3) ───────────────────────── */
+    /* ── Scene 4: Total Community Abundance Chart (1999–2011) ────────── */
 
     function drawPopulationChart() {
         const canvas = document.getElementById('canvas-population');
@@ -252,7 +253,7 @@ const Charts = (() => {
         const fsNote = Math.round(rootPx * 0.70);
         const fsLegend = Math.round(rootPx * 0.75);
 
-        const margin = { top: 24, right: 16, bottom: 32, left: 36 };
+        const margin = { top: 26, right: 20, bottom: 32, left: 38 };
         const iw = w - margin.left - margin.right;
         const ih = h - margin.top - margin.bottom;
 
@@ -263,16 +264,145 @@ const Charts = (() => {
             .range([0, iw]);
 
         const yScale = d3.scaleLinear()
-            .domain([0, d3.max(data.totalAbundance) * 1.15])
+            .domain([0, 45])
             .range([ih, 0]);
 
         ctx.save();
         ctx.translate(margin.left, margin.top);
 
+        // Subtle horizontal grid
+        ctx.strokeStyle = C.gridLine;
+        ctx.lineWidth = 0.6;
+        [0, 10, 20, 30, 40].forEach(v => {
+            const yy = yScale(v);
+            ctx.beginPath();
+            ctx.moveTo(0, yy);
+            ctx.lineTo(iw, yy);
+            ctx.stroke();
+
+            ctx.fillStyle = C.textSecondary;
+            ctx.font = `${fsAxis}px ${fontMono}`;
+            ctx.textAlign = 'right';
+            ctx.fillText(v, -8, yy + 4);
+        });
+
+        // X labels
+        ctx.fillStyle = C.textSecondary;
+        ctx.font = `${fsAxis}px ${fontMono}`;
+        ctx.textAlign = 'center';
+        data.years.filter((_, i) => i % 2 === 0).forEach(year => {
+            ctx.fillText(year, xScale(year), ih + 20);
+        });
+
+        // Soft muted area fill - total community
+        ctx.beginPath();
+        ctx.moveTo(xScale(data.years[0]), ih);
+        data.years.forEach((year, i) => {
+            ctx.lineTo(xScale(year), yScale(data.totalAbundance[i]));
+        });
+        ctx.lineTo(xScale(data.years[data.years.length - 1]), ih);
+        ctx.closePath();
+
+        const areaGrad = ctx.createLinearGradient(0, 0, 0, ih);
+        areaGrad.addColorStop(0, 'rgba(127, 168, 196, 0.20)');
+        areaGrad.addColorStop(1, 'rgba(127, 168, 196, 0.01)');
+        ctx.fillStyle = areaGrad;
+        ctx.fill();
+
+        // Total community line
+        ctx.beginPath();
+        ctx.strokeStyle = C.orcaAccent;
+        ctx.lineWidth = 2.2;
+        ctx.lineJoin = 'round';
+        data.years.forEach((year, i) => {
+            const px = xScale(year);
+            const py = yScale(data.totalAbundance[i]);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        });
+        ctx.stroke();
+
+        // Data points (total community)
+        data.years.forEach((year, i) => {
+            const px = xScale(year);
+            const py = yScale(data.totalAbundance[i]);
+            ctx.beginPath();
+            ctx.arc(px, py, 3.2, 0, Math.PI * 2);
+            ctx.fillStyle = C.ocean100;
+            ctx.fill();
+            ctx.strokeStyle = '#071426';
+            ctx.lineWidth = 1.4;
+            ctx.stroke();
+        });
+
+        // Final 2011 endpoint annotation (39 surviving individuals)
+        const lastIdx = data.years.length - 1;
+        ctx.fillStyle = C.textPrimary;
+        ctx.font = `600 ${fsNote}px ${fontMono}`;
+        ctx.textAlign = 'right';
+        ctx.fillText('39 whales (2011)', xScale(data.years[lastIdx]) - 6, yScale(data.totalAbundance[lastIdx]) - 9);
+
+        ctx.restore();
+        const lx = margin.left;
+        const ly = 11;
+        ctx.font = `${fsLegend}px ${fontBody}`;
+        ctx.fillStyle = C.orcaAccent;
+        ctx.fillRect(lx, ly - 2, 14, 2.5);
+        ctx.fillStyle = C.textSecondary;
+        ctx.textAlign = 'left';
+        ctx.fillText('Cumulative resident community (5 pods: A1, A2, B, C, D)', lx + 20, ly + 3);
+    }
+
+    /* ── Scene 6: Interacting Pods (INT) vs. Total Community (1999–2011) ─ */
+
+    function drawInteractingChart() {
+        const canvas = document.getElementById('canvas-interacting');
+        if (!canvas) return;
+
+        const container = canvas.parentElement;
+        const { w, h } = responsiveDims(container);
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+
+        const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        const fsAxis = Math.round(rootPx * 0.72);
+        const fsNote = Math.round(rootPx * 0.68);
+        const fsLegend = Math.round(rootPx * 0.74);
+
+        const margin = { top: 26, right: 18, bottom: 32, left: 36 };
+        const iw = w - margin.left - margin.right;
+        const ih = h - margin.top - margin.bottom;
+
+        const data = orcaPopulationData;
+
+        const xScale = d3.scaleLinear()
+            .domain(d3.extent(data.years))
+            .range([0, iw]);
+
+        const yScale = d3.scaleLinear()
+            .domain([0, 45])
+            .range([ih, 0]);
+
+        ctx.save();
+        ctx.translate(margin.left, margin.top);
+
+        // Shaded 2006–2010 calf mortality plateau window
+        const x2005 = xScale(2005.5);
+        const x2010 = xScale(2010.5);
+        ctx.fillStyle = 'rgba(196, 125, 118, 0.08)';
+        ctx.fillRect(x2005, 0, x2010 - x2005, ih);
+
         // Grid
         ctx.strokeStyle = C.gridLine;
-        ctx.lineWidth = 0.5;
-        [10, 20, 30, 40].forEach(v => {
+        ctx.lineWidth = 0.6;
+        [0, 10, 20, 30, 40].forEach(v => {
             const yy = yScale(v);
             ctx.beginPath();
             ctx.moveTo(0, yy);
@@ -293,26 +423,11 @@ const Charts = (() => {
             ctx.fillText(year, xScale(year), ih + 20);
         });
 
-        // Area fill - total
+        // Total community reference line (dashed muted stone + open squares)
         ctx.beginPath();
-        ctx.moveTo(xScale(data.years[0]), ih);
-        data.years.forEach((year, i) => {
-            ctx.lineTo(xScale(year), yScale(data.totalAbundance[i]));
-        });
-        ctx.lineTo(xScale(data.years[data.years.length - 1]), ih);
-        ctx.closePath();
-
-        const areaGrad = ctx.createLinearGradient(0, 0, 0, ih);
-        areaGrad.addColorStop(0, 'rgba(6, 214, 160, 0.25)');
-        areaGrad.addColorStop(1, 'rgba(6, 214, 160, 0.02)');
-        ctx.fillStyle = areaGrad;
-        ctx.fill();
-
-        // Total line
-        ctx.beginPath();
-        ctx.strokeStyle = C.orcaAccent;
-        ctx.lineWidth = 2.5;
-        ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'rgba(189, 178, 158, 0.72)';
+        ctx.lineWidth = 1.6;
+        ctx.setLineDash([4, 3]);
         data.years.forEach((year, i) => {
             const px = xScale(year);
             const py = yScale(data.totalAbundance[i]);
@@ -320,12 +435,37 @@ const Charts = (() => {
             else ctx.lineTo(px, py);
         });
         ctx.stroke();
+        ctx.setLineDash([]);
 
-        // Interacting pods line
+        data.years.forEach((year, i) => {
+            const px = xScale(year);
+            const py = yScale(data.totalAbundance[i]);
+            ctx.fillStyle = '#071426';
+            ctx.strokeStyle = 'rgba(208, 196, 174, 0.85)';
+            ctx.lineWidth = 1.3;
+            ctx.fillRect(px - 2.6, py - 2.6, 5.2, 5.2);
+            ctx.strokeRect(px - 2.6, py - 2.6, 5.2, 5.2);
+        });
+
+        // Soft fill under Interacting pods (INT: A1 & A2 — muted ocean blue)
         ctx.beginPath();
-        ctx.strokeStyle = C.ocean300;
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([5, 3]);
+        ctx.moveTo(xScale(data.years[0]), ih);
+        data.years.forEach((year, i) => {
+            ctx.lineTo(xScale(year), yScale(data.interactingPodsINT[i]));
+        });
+        ctx.lineTo(xScale(data.years[data.years.length - 1]), ih);
+        ctx.closePath();
+        const intGrad = ctx.createLinearGradient(0, yScale(20), 0, ih);
+        intGrad.addColorStop(0, 'rgba(126, 176, 213, 0.24)');
+        intGrad.addColorStop(1, 'rgba(126, 176, 213, 0.02)');
+        ctx.fillStyle = intGrad;
+        ctx.fill();
+
+        // Interacting pods (INT) primary line (muted ocean blue + filled circles)
+        ctx.beginPath();
+        ctx.strokeStyle = C.ocean200;
+        ctx.lineWidth = 2.4;
+        ctx.lineJoin = 'round';
         data.years.forEach((year, i) => {
             const px = xScale(year);
             const py = yScale(data.interactingPodsINT[i]);
@@ -333,52 +473,51 @@ const Charts = (() => {
             else ctx.lineTo(px, py);
         });
         ctx.stroke();
-        ctx.setLineDash([]);
 
-        // Dots for total
         data.years.forEach((year, i) => {
             const px = xScale(year);
-            const py = yScale(data.totalAbundance[i]);
+            const py = yScale(data.interactingPodsINT[i]);
             ctx.beginPath();
-            ctx.arc(px, py, 3, 0, Math.PI * 2);
-            ctx.fillStyle = C.orcaAccent;
+            ctx.arc(px, py, 3.2, 0, Math.PI * 2);
+            ctx.fillStyle = C.ocean200;
             ctx.fill();
-            ctx.strokeStyle = '#0a192f';
-            ctx.lineWidth = 1.5;
+            ctx.strokeStyle = '#071426';
+            ctx.lineWidth = 1.4;
             ctx.stroke();
         });
 
-        // Birth annotations (for notable years)
-        data.years.forEach((year, i) => {
-            if (data.births[i] >= 2) {
-                const px = xScale(year);
-                const py = yScale(data.totalAbundance[i]);
-                ctx.fillStyle = C.gold;
-                ctx.font = `bold ${fsNote}px ${fontMono}`;
-                ctx.textAlign = 'center';
-                ctx.fillText(`+${data.births[i]}`, px, py - 10);
-            }
-        });
+        // Endpoint callout for INT = 18
+        const last = data.years.length - 1;
+        ctx.fillStyle = C.ocean100;
+        ctx.font = `600 ${fsNote}px ${fontMono}`;
+        ctx.textAlign = 'right';
+        ctx.fillText('18 INT (+3.9%/yr)', xScale(data.years[last]) - 4, yScale(data.interactingPodsINT[last]) - 9);
 
-        // Legend
         ctx.restore();
         const lx = margin.left;
         const ly = 11;
         ctx.font = `${fsLegend}px ${fontBody}`;
 
-        ctx.fillStyle = C.orcaAccent;
-        ctx.fillRect(lx, ly - 2, 14, 2.5);
-        ctx.fillStyle = C.textSecondary;
+        // Legend item 1: Interacting (filled circle + solid muted blue line)
+        ctx.fillStyle = C.ocean200;
+        ctx.fillRect(lx, ly - 2, 13, 2.5);
+        ctx.beginPath();
+        ctx.arc(lx + 6.5, ly - 0.8, 2.8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = C.textPrimary;
         ctx.textAlign = 'left';
-        ctx.fillText('Total', lx + 18, ly + 3);
+        ctx.fillText('Interacting (A1, A2)', lx + 17, ly + 3);
 
-        ctx.fillStyle = C.ocean300;
-        ctx.fillRect(lx + 68, ly - 2, 14, 2.5);
+        // Legend item 2: Total (open square + dashed stone)
+        const lx2 = lx + Math.min(iw * 0.56, 142);
+        ctx.strokeStyle = 'rgba(208, 196, 174, 0.85)';
+        ctx.lineWidth = 1.3;
+        ctx.strokeRect(lx2, ly - 4, 6, 6);
         ctx.fillStyle = C.textSecondary;
-        ctx.fillText('Interacting', lx + 86, ly + 3);
+        ctx.fillText('All 5 pods', lx2 + 10, ly + 3);
     }
 
-    /* ── Tuna Catches & Survival Chart (Canvas via D3) ───────────────── */
+    /* ── Scene 6: Drop-Line Tuna Catches & INT Calf Survival ─────────── */
 
     function drawTunaChart() {
         const canvas = document.getElementById('canvas-tuna');
@@ -399,9 +538,9 @@ const Charts = (() => {
         const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
         const fsAxis = Math.round(rootPx * 0.72);
         const fsNote = Math.round(rootPx * 0.68);
-        const fsLegend = Math.round(rootPx * 0.75);
+        const fsLegend = Math.round(rootPx * 0.74);
 
-        const margin = { top: 24, right: 38, bottom: 32, left: 38 };
+        const margin = { top: 26, right: 38, bottom: 32, left: 38 };
         const iw = w - margin.left - margin.right;
         const ih = h - margin.top - margin.bottom;
 
@@ -412,7 +551,7 @@ const Charts = (() => {
             .range([0, iw]);
 
         const yScaleLeft = d3.scaleLinear()
-            .domain([0, 850])
+            .domain([0, 860])
             .range([ih, 0]);
 
         const yScaleRight = d3.scaleLinear()
@@ -424,7 +563,7 @@ const Charts = (() => {
 
         // Grid
         ctx.strokeStyle = C.gridLine;
-        ctx.lineWidth = 0.5;
+        ctx.lineWidth = 0.6;
         [200, 400, 600, 800].forEach(v => {
             const yy = yScaleLeft(v);
             ctx.beginPath();
@@ -438,24 +577,6 @@ const Charts = (() => {
             ctx.fillText(`${v}t`, -5, yy + 4);
         });
 
-        // Threshold lines
-        [data.thresholdStable, data.thresholdGrowth].forEach((t, i) => {
-            const yy = yScaleLeft(t);
-            ctx.beginPath();
-            ctx.strokeStyle = i === 0 ? C.thresholdLine : C.gold;
-            ctx.lineWidth = 1;
-            ctx.setLineDash([4, 4]);
-            ctx.moveTo(0, yy);
-            ctx.lineTo(iw, yy);
-            ctx.stroke();
-            ctx.setLineDash([]);
-
-            ctx.fillStyle = i === 0 ? C.thresholdLine : C.gold;
-            ctx.font = `${fsNote}px ${fontMono}`;
-            ctx.textAlign = 'left';
-            ctx.fillText(i === 0 ? `Stable (${t}t)` : `Growth (${t}t)`, 4, yy - 4);
-        });
-
         // X labels
         ctx.fillStyle = C.textSecondary;
         ctx.font = `${fsAxis}px ${fontMono}`;
@@ -464,21 +585,22 @@ const Charts = (() => {
             ctx.fillText(year, xScale(year), ih + 20);
         });
 
-        // Bars for tuna catches
-        const barWidth = Math.max(iw / data.years.length * 0.6, 4);
+        // Muted bars for drop-line tuna catches
+        const barWidth = Math.max(iw / data.years.length * 0.56, 5);
         data.years.forEach((year, i) => {
             const px = xScale(year) - barWidth / 2;
             const val = data.tunaCatchesTons[i];
             const py = yScaleLeft(val);
-            const barH = ih - py;
 
-            // Color based on threshold
             const isAboveStable = val >= data.thresholdStable;
             ctx.fillStyle = isAboveStable
-                ? 'rgba(6, 214, 160, 0.6)'
-                : 'rgba(230, 57, 70, 0.5)';
+                ? 'rgba(127, 168, 196, 0.44)'
+                : 'rgba(184, 128, 120, 0.34)';
+            ctx.strokeStyle = isAboveStable
+                ? 'rgba(155, 194, 219, 0.65)'
+                : 'rgba(196, 145, 136, 0.52)';
+            ctx.lineWidth = 1;
 
-            // Rounded top
             const r = 2;
             ctx.beginPath();
             ctx.moveTo(px + r, py);
@@ -490,12 +612,29 @@ const Charts = (() => {
             ctx.quadraticCurveTo(px, py, px + r, py);
             ctx.closePath();
             ctx.fill();
+            ctx.stroke();
         });
 
-        // Survival rate line (right axis)
+        // Single clean threshold line: 573t minimum catch for stable INT calf survival (Esteban et al., 2016)
+        const yyThresh = yScaleLeft(data.thresholdStable);
         ctx.beginPath();
-        ctx.strokeStyle = C.tunaRed;
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = C.thresholdLine;
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 3]);
+        ctx.moveTo(0, yyThresh);
+        ctx.lineTo(iw, yyThresh);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = C.ivory;
+        ctx.font = `${fsNote}px ${fontMono}`;
+        ctx.textAlign = 'right';
+        ctx.fillText(`Min. viable catch (${data.thresholdStable}t)`, iw - 2, yyThresh - 5);
+
+        // INT Calf survival rate line (right axis — 1-yr lag response)
+        ctx.beginPath();
+        ctx.strokeStyle = C.ivory;
+        ctx.lineWidth = 2.1;
         ctx.lineJoin = 'round';
         data.years.forEach((year, i) => {
             const px = xScale(year);
@@ -505,17 +644,26 @@ const Charts = (() => {
         });
         ctx.stroke();
 
-        // Survival dots
+        // Survival markers: filled circle when 100%, hollow ring when 0% (shape + color accessibility)
         data.years.forEach((year, i) => {
             const px = xScale(year);
             const py = yScaleRight(data.calfSurvivalRate[i]);
+            const survived = data.calfSurvivalRate[i] > 0;
             ctx.beginPath();
-            ctx.arc(px, py, 3, 0, Math.PI * 2);
-            ctx.fillStyle = data.calfSurvivalRate[i] > 0 ? C.orcaAccent : C.tunaRed;
-            ctx.fill();
-            ctx.strokeStyle = '#0a192f';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
+            ctx.arc(px, py, 3.3, 0, Math.PI * 2);
+            if (survived) {
+                ctx.fillStyle = C.ivory;
+                ctx.fill();
+                ctx.strokeStyle = '#071426';
+                ctx.lineWidth = 1.4;
+                ctx.stroke();
+            } else {
+                ctx.fillStyle = '#071426';
+                ctx.fill();
+                ctx.strokeStyle = C.tunaRed;
+                ctx.lineWidth = 1.7;
+                ctx.stroke();
+            }
         });
 
         // Right axis labels
@@ -532,16 +680,17 @@ const Charts = (() => {
         const ly = 11;
         ctx.font = `${fsLegend}px ${fontBody}`;
 
-        ctx.fillStyle = 'rgba(6, 214, 160, 0.6)';
+        ctx.fillStyle = 'rgba(127, 168, 196, 0.55)';
         ctx.fillRect(lx, ly - 5, 9, 9);
         ctx.fillStyle = C.textSecondary;
         ctx.textAlign = 'left';
-        ctx.fillText('Catches', lx + 13, ly + 3);
+        ctx.fillText('Catches (t)', lx + 13, ly + 3);
 
-        ctx.fillStyle = C.tunaRed;
-        ctx.fillRect(lx + 74, ly - 2, 14, 2.5);
-        ctx.fillStyle = C.textSecondary;
-        ctx.fillText('Calf Survival', lx + 92, ly + 3);
+        const lx2 = lx + Math.min(iw * 0.48, 102);
+        ctx.fillStyle = C.ivory;
+        ctx.fillRect(lx2, ly - 2, 13, 2.2);
+        ctx.fillStyle = C.textPrimary;
+        ctx.fillText('INT Calf Survival', lx2 + 17, ly + 3);
     }
 
     /* ── Public API ──────────────────────────────────────────────────── */
@@ -549,13 +698,15 @@ const Charts = (() => {
     function initAll() {
         drawBathymetry();
         drawPopulationChart();
+        drawInteractingChart();
         drawTunaChart();
     }
 
     function redraw() {
         drawPopulationChart();
+        drawInteractingChart();
         drawTunaChart();
     }
 
-    return { initAll, redraw, drawBathymetry, drawPopulationChart, drawTunaChart };
+    return { initAll, redraw, drawBathymetry, drawPopulationChart, drawInteractingChart, drawTunaChart };
 })();

@@ -164,21 +164,21 @@
             fill="none" stroke="#e9c46a" stroke-width="3" stroke-linejoin="round"/>
 
   <!-- Inward-Angled Boca Jaws (One-Way Entrance Funnel into Cámara) -->
-  <line x1="302" y1="265" x2="320" y2="302" stroke="#06d6a0" stroke-width="2.6" stroke-linecap="round"/>
-  <line x1="365" y1="265" x2="348" y2="302" stroke="#06d6a0" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="302" y1="265" x2="320" y2="302" stroke="#7fb3c8" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="365" y1="265" x2="348" y2="302" stroke="#7fb3c8" stroke-width="2.6" stroke-linecap="round"/>
 
   <!-- Internal One-Way Funnel Doors (Puertas / Endiches: Cámara -> Buche -> Bordonal -> Copo) -->
   <!-- Door 1: Cámara -> Buche (at x=495) -->
-  <line x1="495" y1="265" x2="522" y2="316" stroke="#06d6a0" stroke-width="2.4" stroke-linecap="round"/>
-  <line x1="495" y1="405" x2="522" y2="354" stroke="#06d6a0" stroke-width="2.4" stroke-linecap="round"/>
+  <line x1="495" y1="265" x2="522" y2="316" stroke="#7fb3c8" stroke-width="2.4" stroke-linecap="round"/>
+  <line x1="495" y1="405" x2="522" y2="354" stroke="#7fb3c8" stroke-width="2.4" stroke-linecap="round"/>
 
   <!-- Door 2: Buche -> Bordonal (at x=595) -->
-  <line x1="595" y1="275" x2="620" y2="319" stroke="#06d6a0" stroke-width="2.4" stroke-linecap="round"/>
-  <line x1="595" y1="395" x2="620" y2="351" stroke="#06d6a0" stroke-width="2.4" stroke-linecap="round"/>
+  <line x1="595" y1="275" x2="620" y2="319" stroke="#7fb3c8" stroke-width="2.4" stroke-linecap="round"/>
+  <line x1="595" y1="395" x2="620" y2="351" stroke="#7fb3c8" stroke-width="2.4" stroke-linecap="round"/>
 
   <!-- Door 3: Bordonal -> Copo / Puerta del Copo (at x=705) -->
-  <line x1="705" y1="285" x2="728" y2="321" stroke="#06d6a0" stroke-width="2.6" stroke-linecap="round"/>
-  <line x1="705" y1="385" x2="728" y2="349" stroke="#06d6a0" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="705" y1="285" x2="728" y2="321" stroke="#7fb3c8" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="705" y1="385" x2="728" y2="349" stroke="#7fb3c8" stroke-width="2.6" stroke-linecap="round"/>
 
   <!-- =====================================================================
        LEADER BARRIER NETS (Rabera de Tierra & Rabera de Fuera)
@@ -268,7 +268,7 @@
   <text x="392" y="169" fill="#cbd8ee" font-family="Inter, Arial, sans-serif" font-size="11.5">1–3 km barrier blocking coastal passage</text>
 
   <!-- Boca (Entrance) Callout -->
-  <text x="333" y="254" fill="#06d6a0" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle">BOCA (Entrance)</text>
+  <text x="333" y="254" fill="#9bc5d9" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle">BOCA (Entrance)</text>
 
   <!-- Rabera de Fuera Label -->
   <rect x="590" y="480" width="246" height="44" rx="5" fill="#08182e" fill-opacity="0.88" stroke="#f4a261" stroke-width="1"/>
@@ -314,7 +314,7 @@
     <circle cx="11" cy="-4" r="2.8" fill="#f4a261"/>
     <text x="30" y="0">Leader nets (Raberas)</text>
 
-    <line x1="176" y1="-4" x2="198" y2="-4" stroke="#06d6a0" stroke-width="2.8"/>
+    <line x1="176" y1="-4" x2="198" y2="-4" stroke="#7fb3c8" stroke-width="2.8"/>
     <text x="206" y="0">One-way funnels (Puertas)</text>
 
     <rect x="374" y="-11" width="16" height="12" fill="url(#copoMesh)" stroke="#e9c46a" stroke-width="1.5"/>

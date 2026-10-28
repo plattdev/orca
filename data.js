@@ -15,7 +15,7 @@ const orcaPopulationData = {
     years: [1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
     totalAbundance: [11, 12, 12, 18, 19, 21, 32, 32, 35, 35, 34, 34, 39],
     interactingPodsINT: [11, 12, 12, 13, 14, 15, 15, 15, 15, 15, 15, 15, 18],
-    births: [0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 2, 0, 9]
+    births: [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 2, 0, 4]
 };
 
 const energyAndDepredationMetrics = {
@@ -48,7 +48,7 @@ const energyAndDepredationMetrics = {
 const sceneLocations = {
     scene1: {
         center: [-5.6, 35.9],
-        zoom: 4.8,
+        zoom: 4.5,
         pitch: 0,
         bearing: 0,
         markers: [
@@ -57,66 +57,66 @@ const sceneLocations = {
     },
     scene2: {
         center: [-5.68, 35.96],
-        zoom: 9.8,
+        zoom: 9.6,
         pitch: 42,
         bearing: -15,
         markers: [
-            { lng: -5.755, lat: 35.948, label: "CSN — North Channel (290 m)", type: "sill-channel", code: "CSN" },
-            { lng: -5.775, lat: 35.905, label: "CSS — South Channel (290 m)", type: "sill-channel", code: "CSS" },
-            { lng: -5.798, lat: 36.065, label: "Punta Camarinal", type: "nature" },
-            { lng: -5.6046, lat: 36.0117, label: "Punta de Tarifa", type: "geo" },
-            { lng: -5.5167, lat: 35.9052, label: "Punta Cires", type: "geo" }
+            { lng: -5.755, lat: 35.948, label: "CSN (306 m)", sublabel: "LIW North Trough", type: "sill-channel", alwaysShow: true, anchor: "left" },
+            { lng: -5.775, lat: 35.905, label: "CSS (310 m)", sublabel: "WMDW South Trough", type: "sill-channel", alwaysShow: true, anchor: "right" },
+            { lng: -5.798, lat: 36.065, label: "Punta Camarinal", type: "nature", alwaysShow: true, anchor: "bottom" },
+            { lng: -5.6046, lat: 36.0117, label: "Tarifa", type: "geo", alwaysShow: true, anchor: "bottom-right" },
+            { lng: -5.5167, lat: 35.9052, label: "Punta Cires", type: "geo", alwaysShow: false }
         ]
     },
     scene3: {
-        center: [-38, 32],
-        zoom: 2.8,
+        center: [-41, 32],
+        zoom: 2.3,
         pitch: 0,
         bearing: 0,
         markers: [
-            { lng: -88.0, lat: 26.0, label: "Gulf of Mexico — W. Spawning Ground", type: "nature" },
-            { lng: -5.6, lat: 36.0, label: "Strait of Gibraltar — Gateway (187 kg avg)", type: "geo" },
-            { lng: 6.0, lat: 39.0, label: "Mediterranean — E. Spawning Ground", type: "nature" },
-            { lng: -65.0, lat: 42.0, label: "Grand Banks — Atlantic Foraging", type: "nature" }
+            { lng: -89.0, lat: 25.8, label: "Gulf of Mexico", sublabel: "W. Spawning", type: "nature", alwaysShow: true, anchor: "top-left" },
+            { lng: -5.60, lat: 35.955, label: "Strait of Gibraltar", sublabel: "14 km Gateway", type: "geo", alwaysShow: false },
+            { lng: 4.60, lat: 38.45, label: "Balearic Sea", sublabel: "Med. Spawning", type: "nature", alwaysShow: true, anchor: "bottom-right" },
+            { lng: -58.0, lat: 40.60, label: "Grand Banks", sublabel: "Foraging Grounds", type: "nature", alwaysShow: true, anchor: "bottom" }
         ]
     },
     scene4: {
-        center: [-5.73, 35.95],
-        zoom: 10.4,
+        center: [-5.72, 35.94],
+        zoom: 10.2,
         pitch: 35,
         bearing: 15,
         markers: [
-            { lng: -5.73, lat: 35.92, label: "Las Bajas — Orca Arena (6.9 km², 6-h tide)", type: "nature" },
-            { lng: -5.605, lat: 36.013, label: "Tarifa", type: "town" },
-            { lng: -5.810, lat: 35.780, label: "Tangier", type: "town" }
+            { lng: -5.73, lat: 35.92, label: "Las Bajas Arena", sublabel: "6.9 km² · 6-h tide", type: "nature", alwaysShow: true, anchor: "bottom" },
+            { lng: -5.605, lat: 36.013, label: "Tarifa", type: "town", alwaysShow: true, anchor: "bottom-right" },
+            { lng: -5.810, lat: 35.780, label: "Tangier", type: "town", alwaysShow: true, anchor: "top-left" }
         ]
     },
     scene5: {
-        center: [-5.82, 36.08],
-        zoom: 10.2,
+        center: [-5.85, 36.13],
+        zoom: 9.8,
         pitch: 45,
         bearing: -20,
         markers: [
-            { lng: -5.73, lat: 35.92, label: "Las Bajas — Stone Fishing Ground (8.7 lines/km²)", type: "nature" },
-            { lng: -6.092, lat: 36.289, label: "Almadraba de Conil", type: "almadraba" },
-            { lng: -5.862, lat: 36.14, label: "Almadraba de Zahara", type: "almadraba" },
-            { lng: -5.926, lat: 36.19, label: "Almadraba de Barbate", type: "almadraba" },
-            { lng: -5.62, lat: 36.02, label: "Almadraba de Tarifa", type: "almadraba" }
+            { lng: -6.092, lat: 36.289, label: "Conil", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "right" },
+            { lng: -5.926, lat: 36.19, label: "Barbate", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "left" },
+            { lng: -5.862, lat: 36.14, label: "Zahara", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "right" },
+            { lng: -5.62, lat: 36.02, label: "Tarifa", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "bottom-right" }
         ]
     },
     scene6: {
-        center: [-5.73, 35.93],
-        zoom: 11.2,
-        pitch: 42,
-        bearing: 10,
+        center: [-5.71, 35.90],
+        zoom: 9.9,
+        pitch: 16,
+        bearing: 0,
         markers: [
-            { lng: -5.73, lat: 35.92, label: "Las Bajas — Depredation Zone (Pods A1 & A2)", type: "nature" },
-            { lng: -5.605, lat: 36.013, label: "Tarifa (Artisanal Fleet)", type: "town" }
+            { lng: -5.73, lat: 35.92, label: "Las Bajas Bank (6.9 km²)", sublabel: "Pods A1 & A2 · 300+ m lines", type: "nature", alwaysShow: true, anchor: "bottom" },
+            { lng: -5.606, lat: 36.011, label: "Tarifa Port (Spain)", sublabel: "10–20 drop-line boats/day", type: "town", alwaysShow: true, anchor: "bottom-right" },
+            { lng: -5.805, lat: 35.789, label: "Tangier Port (Morocco)", sublabel: "50–60 wooden boats/day", type: "town", alwaysShow: true, anchor: "top-left" }
         ]
     },
     closing: {
         center: [-5.6, 35.95],
-        zoom: 6.2,
+        zoom: 5.9,
         pitch: 0,
         bearing: 0,
         markers: []
