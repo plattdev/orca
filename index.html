@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="text-scale" content="scale">
     <title>Where Titans Meet — Orcas · Tuna · Fishermen in the Strait of Gibraltar</title>
     <meta name="description" content="An immersive map storytelling experience exploring the ancient relationship between orcas, bluefin tuna, and human fisheries in the Strait of Gibraltar.">
 
@@ -73,9 +74,9 @@
                 <p class="hero__subtitle">ORCAS · BLUEFIN TUNA · FISHERMEN<br>IN THE STRAIT OF GIBRALTAR</p>
                 <p class="hero__subtitle2">Beyond modern shipping lanes and headlines, an ancient drama endures: a fragile, triangular struggle between apex predator, ocean titan, and artisanal fishermen.</p>
                 
-                <!-- Triad Fin: Orca on top, Fishermen left, Tuna right -->
+                <!-- Minimalist White Orca Dorsal Fin Emblem -->
                 <div class="hero__fin-container">
-                    <img class="hero__fin" src="assets/images/triad_fin.svg" alt="The Three Titans Fin: Orca on top, Fishermen on left, Bluefin Tuna on right">
+                    <img class="hero__fin" src="assets/images/triad_fin.svg" width="360" height="205" alt="Minimalist white silhouette of an Iberian orca dorsal fin rising above the Strait of Gibraltar">
                 </div>
                 <div class="hero__scroll-cue">
                     <span>Scroll to begin</span>
@@ -150,8 +151,27 @@
                 <h2 class="scene__title">The Meeting of Two Worlds</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    Beneath the surface, lies the Strait's grandest barrier: the <strong>Camarinal Sill</strong>. It is the shallowest underwater mountain connecting Europe and Africa (at a water depth of ~280 m), breaking up the surrounding abysses that reach depths of up to 1,000 m. In the upper 150 m, cool, low-salinity <strong>Atlantic water</strong> flows eastward. Beneath this surface inflow the dense Mediterranean outflows westward. This is an area of intense currents since when Atlantic and Mediterranean water masses collide nutrient-rich waters upwell along the seafloor. This makes the sector extending from Punta Camarinal to "Las Bajas" a historical fishing ground.
+                    Beneath the surface lies the Strait's grandest submarine barrier: the <strong>Camarinal Sill</strong>. Rising to a shallow crest of ~280 m between Europe and Africa, it separates surrounding basins that plunge past 800–1,000 m. In the upper 150 m, fresher <strong>Atlantic Surface Water (AW, S ≈ 36.2 PSU)</strong> surges eastward into the Mediterranean. Beneath this inflow, dense, hypersaline <strong>Mediterranean Outflow Water (LIW &amp; WMDW, S ≈ 38.45 PSU)</strong> spills westward over the sill's twin channels (<strong>CSN</strong> and <strong>CSS</strong>). Where these two water masses collide over the sill topography, internal hydraulic jumps and intense shear force nutrient-rich deep water upward — making the sector from Punta Camarinal to "Las Bajas" one of the richest historic fishing grounds in the Atlantic–Mediterranean corridor.
                 </p>
+
+                <!-- Camarinal Sill Hydrographic & Bathymetric Transect (ODV + PANGAEA + Ocean Science) -->
+                <figure class="transect-figure">
+                    <div class="transect-figure__img-wrap">
+                        <img
+                            class="transect-figure__img"
+                            src="assets/images/camarinal_sill_transect_odv.png"
+                            width="1496"
+                            height="726"
+                            loading="lazy"
+                            alt="Ocean Data View (ODV) Practical Salinity and bathymetry transect across the Camarinal Sill in the Strait of Gibraltar, showing eastward Atlantic inflow above westward Mediterranean outflow"
+                        >
+                    </div>
+                    <figcaption class="transect-figure__caption">
+                        <span class="transect-figure__title">Hydrographic &amp; Bathymetric Transect of the Camarinal Sill</span>
+                        <span class="transect-figure__desc"><strong>Panel A:</strong> Longitudinal Ocean Data View (ODV) Practical Salinity section reconstructed from <em>in situ</em> PANGAEA MEDAR/CANIGO CTD casts across the Strait axis (6.1°W–5.2°W), showing fresher Atlantic inflow overriding dense Mediterranean outflow spilling over Camarinal Sill (~280 m). <strong>Panel B:</strong> Cross-strait S–N sill profile along ~5.76°W (solid green line on map), resolving the southern (<strong>CSS</strong>, 310 m, WMDW) and northern (<strong>CSN</strong>, 306 m, LIW) outflow troughs.</span>
+                        <span class="transect-figure__credit">Sources: CTD profiles from PANGAEA (<a href="https://doi.org/10.1594/PANGAEA.786179" target="_blank" rel="noopener">10.1594/PANGAEA.786179</a>, <a href="https://doi.org/10.1594/PANGAEA.452043" target="_blank" rel="noopener">.452043</a>, <a href="https://doi.org/10.1594/PANGAEA.804356" target="_blank" rel="noopener">.804356</a>, <a href="https://doi.org/10.1594/PANGAEA.801810" target="_blank" rel="noopener">.801810</a>) · Sill bathymetry &amp; dynamics after García-Lafuente et al. (2017), <a href="https://doi.org/10.5194/os-13-195-2017" target="_blank" rel="noopener"><em>Ocean Sci.</em> 13</a> &amp; Tassigny et al. (2026), <a href="https://doi.org/10.5194/os-22-459-2026" target="_blank" rel="noopener"><em>Ocean Sci.</em> 22</a>.</span>
+                    </figcaption>
+                </figure>
 
             </div>
         </section>
@@ -186,17 +206,10 @@
                     </div>
                 </div>
 
-                <!-- Animated Atlantic Bluefin Tuna Illustration -->
-                <figure class="tuna-showcase">
-                    <div class="tuna-showcase__stage">
-                        <div class="tuna-showcase__current-lines" aria-hidden="true">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </div>
-                        <img class="tuna-showcase__img" src="assets/images/atlanticBluefinTuna.svg" width="785" height="479" alt="Atlantic bluefin tuna (Thunnus thynnus) swimming through the Strait of Gibraltar">
-                    </div>
-                    <figcaption class="tuna-showcase__caption">
+                <!-- Frameless Atlantic Bluefin Tuna Illustration -->
+                <figure class="tuna-figure">
+                    <img class="tuna-figure__img" src="assets/images/atlanticBluefinTuna.svg" width="785" height="479" loading="lazy" alt="Atlantic bluefin tuna (Thunnus thynnus) swimming through the Strait of Gibraltar">
+                    <figcaption class="tuna-figure__caption">
                         Atlantic bluefin tuna (<em>Thunnus thynnus</em>) — pelagic powerhouse built for transatlantic endurance and deep-water dives.
                     </figcaption>
                 </figure>
@@ -243,7 +256,8 @@
                 <h2 class="scene__title">The Iberian Orcas</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    The entire resident community of Iberian killer whales consists of just <strong>39 individuals</strong>, structured into <strong>5 matrilineal pods</strong>. When actively hunting free-swimming tuna, orcas engage in prolonged pursuits lasting up to <strong>30 minutes</strong> at sustained speeds of <strong>3.7 to 6.0 m/s (~13–21 km/h)</strong>. However, active endurance-exhaustion hunting can only catch small-to-medium tuna (<strong>0.8 m to 1.5 m</strong> long, weighing <strong>20–70 kg</strong>); larger tuna exceed the orcas' aerobic limits for open-water chases. iller whale reproduction in the Strait is extremely sensitive to prey availability. When bluefin tuna stocks dropped, lactating mothers could not secure sufficient calories through depredation, resulting in nutritional stress (and potentially mobilizing bioaccumulated toxic pollutants stored in blubber), which caused total calf mortality across the interacting pods.</em>
+                    Despite a deeply ingrained misconception in English, the orca (<em>Orcinus orca</em>) is <strong>not a whale — it is an oceanic dolphin</strong>, and the largest living member of the dolphin family <strong><em>Delphinidae</em></strong>. Even the English name <em>"killer whale"</em> is a historical mistranslation: 18th-century Spanish sailors and whalers who witnessed coordinated orca pods hunting and bringing down giant baleen whales along Iberian coasts called them <strong><em>asesina de ballenas</em></strong> — literally <strong>"whale killer"</strong>, echoing Pliny the Elder's 1st-century AD account off Cádiz (<em>Naturalis Historia</em>). When English mariners borrowed the Spanish phrase, the word order flipped from <em>whale killer</em> to <em>killer whale</em>, obscuring both their true prey-hunting name and their identity as dolphins.<br><br>
+                    Today, the entire critically endangered resident subpopulation of Iberian orcas consists of just <strong>39 individuals</strong>, structured into <strong>5 matrilineal pods</strong>. When actively hunting free-swimming tuna, orcas engage in prolonged pursuits lasting up to <strong>30 minutes</strong> at sustained speeds of <strong>3.7 to 6.0 m/s (~13–21 km/h)</strong>. However, active endurance-exhaustion hunting can only catch small-to-medium tuna (<strong>0.8 m to 1.5 m</strong> long, weighing <strong>20–70 kg</strong>); larger tuna exceed the orcas' aerobic limits for open-water chases. Reproduction in the Strait is extremely sensitive to prey availability: when bluefin tuna stocks dropped, lactating mothers could not secure sufficient calories through depredation, resulting in nutritional stress (and potentially mobilizing bioaccumulated toxic pollutants stored in blubber) that caused total calf mortality across the interacting pods.
                 </p>
 
 
@@ -334,7 +348,24 @@
                     called <em>almadrabas</em> along the Spanish Atlantic coasts — trapping tuna as they pass west-to-east on their journey to spawn. Riding the shallow Atlantic inflow, the tuna face a dual trial: human nets anchored along the shoreline and pods of Iberian orcas hunting in the open shallows, driving the fish to exhaustion in rapid, sustained pursuits.
                 </p>
 
-
+                <!-- Architectural Almadraba Schematic -->
+                <figure class="almadraba-figure">
+                    <div class="almadraba-figure__img-wrap">
+                        <img
+                            class="almadraba-figure__img"
+                            src="assets/images/almadraba.svg"
+                            width="960"
+                            height="600"
+                            loading="lazy"
+                            alt="Architectural top-down plan diagram of a traditional Andalusian almadraba de buche trap-net showing shoreward and seaward leader barriers, entrance (boca), funneling chambers (cámara, buche, bordonal), and final capture chamber (copo)"
+                        >
+                    </div>
+                    <figcaption class="almadraba-figure__caption">
+                        <span class="almadraba-figure__title">How an <em>Almadraba de Buche</em> Labyrinth Works</span>
+                        <span class="almadraba-figure__desc">Anchored perpendicular to the Cádiz coast, a 1–3 km shore leader net (<em>rabera de tierra</em>) blocks migrating bluefin tuna and deflects them through the entrance (<em>boca</em>) into successive one-way net funnels — <em>cámara</em> → <em>buche</em> → <em>bordonal</em> — culminating in the <em>copo</em>, whose mesh floor is raised by artisanal barges during <em>la levantá</em>.</span>
+                        <span class="almadraba-figure__credit">Source: Architectural plan adapted from Rodríguez-Roda (1964), <em>Investigación Pesquera</em> 25, &amp; Florido del Corral (2013), <em>Univ. de Sevilla</em>.</span>
+                    </figcaption>
+                </figure>
 
                 <!-- Fleet density -->
                 <div class="tarifa-section">
@@ -392,8 +423,6 @@
             </div>
         </section>
 
-        <img class="almadraba-image" src="/assets/images/almadraba.svg" alt="Almadraba">
-
         <div class="scene-spacer"></div>
 
         <!-- SCENE 6: Long-lining & Orca Co-Hunting -->
@@ -409,8 +438,8 @@
                 <h2 class="scene__title">Co-Hunting</h2>
                 <div class="scene__divider"></div>
                 <p class="scene__narrative">
-                    In summer, when tuna return to the Atlantic, a different artisanal technique takes over: <strong>'drop-line' fishery (<em>pesca de la piedra</em>)</strong>. Again, orcas-tuna-fisheremen converge on an underwater plateau called <strong>'Las Bajas'</strong> — a 2 nautical mile × 1 nautical mile shelf (6.9 km²) located midway between Tarifa and Tangier. Every 6-hour tidal cycle, rising waters create turbulence over the seafloor that upwells nutrients and concentrates fish, turning Las Bajas into the <strong>arena where tuna, orcas, and fishermen collide</strong>. Here, small <strong>5–6 meter Moroccan wooden boats</strong> and Spanish artisanal vessels deploy a <strong>10–14 kg stone</strong> tied with a false knot to lower three baited hooks down to <strong>300+ meters</strong>. When the stone hits bottom, fishermen pull the line to snap the knot, leaving the stone on the seabed as the baited hooks float upward. Hauling a hooked tuna back up by hand takes <strong>~20 minutes</strong>.
-                    On a typical summer day, <strong>50–60 Moroccan boats</strong> and <strong>10–20 Spanish vessels</strong> gather at Las Bajas, creating a density of about <strong>8.7 fishing lines per km²</strong>. Each boat drops about <strong>18 stones per 6-hour tide</strong>, hooking <strong>1 tuna for every 10 stone drops</strong>.Within the Iberian Orca subpopulation, 2 out of 5 pods have learned to steal large tuna hooked in artisanal drop-line fisheries. Rather than diving 300+ meters, the orcas wait in the <strong>top 2 to 50 meters</strong>. Video analysis reveals that orcas swim along the vertical lines, pressing their <strong>pectoral fins, snouts, melons, and bellies</strong> against the ropes to feel line tension and weight vibrations — detecting whether a fish is hooked below. This cultural strategy spread in <strong>less than a generation</strong> after stone fishing was introduced in 1995.
+                    In summer, when tuna return to the Atlantic, a different artisanal technique takes over: <strong>'drop-line' fishery (<em>pesca de la piedra</em>)</strong>. Again, orcas, tuna, and fishermen converge on an underwater plateau called <strong>'Las Bajas'</strong> — a 2 nautical mile × 1 nautical mile shelf (6.9 km²) located midway between Tarifa and Tangier. Every 6-hour tidal cycle, rising waters create turbulence over the seafloor that upwells nutrients and concentrates fish, turning Las Bajas into the <strong>arena where tuna, orcas, and fishermen collide</strong>. Here, small <strong>5–6 meter Moroccan wooden boats</strong> and Spanish artisanal vessels deploy a <strong>10–14 kg stone</strong> tied with a false knot to lower three baited hooks down to <strong>300+ meters</strong>. When the stone hits bottom, fishermen pull the line to snap the knot, leaving the stone on the seabed as the baited hooks float upward. Hauling a hooked tuna back up by hand takes <strong>~20 minutes</strong>.
+                    On a typical summer day, <strong>50–60 Moroccan boats</strong> and <strong>10–20 Spanish vessels</strong> gather at Las Bajas, creating a density of about <strong>8.7 fishing lines per km²</strong>. Each boat drops about <strong>18 stones per 6-hour tide</strong>, hooking <strong>1 tuna for every 10 stone drops</strong>. Within the Iberian orca subpopulation, 2 out of 5 pods have learned to steal large tuna hooked in artisanal drop-line fisheries. Rather than diving 300+ meters, the orcas wait in the <strong>top 2 to 50 meters</strong>. Video analysis reveals that orcas swim along the vertical lines, pressing their <strong>pectoral fins, snouts, melons, and bellies</strong> against the ropes to feel line tension and weight vibrations — detecting whether a fish is hooked below. This cultural strategy spread in <strong>less than a generation</strong> after stone fishing was introduced in 1995.
                 </p>
 
 <!-- Add chart of the killer whale population with interactions blue line -->
@@ -545,8 +574,8 @@
             </div>
         </section>
 
-        <!-- Closing / Credits -->
-        <footer class="closing">
+        <!-- Closing Scene: Cultural Learning -->
+        <section class="closing" id="scene-closing">
             <div class="closing__content step"
                  data-lng="-5.6"
                  data-lat="35.95"
@@ -555,36 +584,95 @@
                  data-bearing="0"
                  data-speed="0.4">
                 <h2 class="closing__title">Three Titans. One Strait.<br>A Story Unfinished.</h2>
+                <div class="scene__divider"></div>
 
                 <p class="scene__narrative">
                     The Strait of Gibraltar remains one of the last places on Earth where
                     apex predators, ancient fisheries, and marine biodiversity intersect in a
-                    living, breathing equilibrium — one that demands our understanding and protection. <strong> A fragile equilibrium, sustained by tradition and respect for the sea</strong>. <br> A romantic hypothesis has arisen among some researchers based on the fact that Neanderthals may have hunted in cooperation with orcas — killer whales driving exhausted tuna toward shallow shores, and humans scavenging or assisting at the beach. Given that Neanderthals were last thought to inhabit the coastal caves of Gibraltar, could feeding on tuna facilitated by orcas have prolonged their survival in this location? Let's hope that the geological and archaeological records help one day answer this question. <br><br>
-                    Such cross-species cooperation is far from unprecedented. In Twofold Bay (Eden, Australia), shore-based whalers — both Indigenous Thawa Aboriginals and European crews — cooperated for nearly a century with wild orca pods to hunt migrating baleen whales, honoring an unwritten pact known as the <em>'Law of the Tongue'</em> where the killer whales received the tongue and lips before humans towed the carcass. Modeling this historical mutualism through fuzzy rule-based logic, <strong>Coppola et al. (2015)</strong> demonstrated that mutual trust and reciprocal cooperation, rather than simple opportunistic encounters, were the decisive factors that sustained this rare human-cetacean alliance over generations until outside disruption severed the bond.
+                    living, breathing equilibrium — one that demands our understanding and protection. <strong>A fragile equilibrium, sustained by tradition and respect for the sea.</strong><br><br>
+                    A compelling hypothesis has arisen among researchers that coastal hominins — including Neanderthals inhabiting the sea caves of Gibraltar — may have harvested bluefin tuna alongside hunting orcas, as pods drove exhausted fish into shallow embayments where shore crews could beach-seine or spear them, much as pre-modern Strait fishermen did for millennia.<br><br>
+                    Such cross-species cooperation is historically documented. In Twofold Bay (Eden, Australia), shore-based whalers — both Indigenous Thawa people and European boat crews — cooperated for nearly a century with wild orca pods led by the iconic male <em>Old Tom</em>, honoring an unwritten pact known as the <em>'Law of the Tongue'</em> whereby the orcas fed on the tongue and lips before boatmen towed the catch ashore. Modeling this mutualism through fuzzy rule-based logic, <strong>Coppola et al. (2015)</strong> demonstrated that reciprocal trust and cultural learning, rather than mere opportunism, sustained this rare human–cetacean partnership across generations.
                 </p>
 
-                <!-- References -->
-                <div class="references-section">
-                    <h4>References</h4>
-                    <ol class="references-list">
-                        <li>Block, B. A., Teo, S. L. H., Walli, A., et al. (2005). Electronic tagging and population structure of Atlantic bluefin tuna. <em>Nature</em>, 434, 1121–1127. <a href="https://doi.org/10.1038/nature03463" target="_blank" rel="noopener">doi:10.1038/nature03463</a></li>
-                        <li>Cermeño, P., Quílez-Badia, G., Ospina-Álvarez, A., et al. (2015). Electronic tagging of Atlantic bluefin tuna (<em>Thunnus thynnus</em>, L.) reveals habitat use and behaviors in the Mediterranean Sea. <em>PLOS ONE</em>, 10(2), e0116638. <a href="https://doi.org/10.1371/journal.pone.0116638" target="_blank" rel="noopener">doi:10.1371/journal.pone.0116638</a></li>
-                        <li>Coppola, E., Owens, J. B., Szidarovszky, F., &amp; Jones, R. T. (2015). The Cooperation of Humans and Killer Whales (<em>Orcinus orca</em>): The Application of a Simple Fuzzy Rule-Based Model to a Historical System. <em>European Science Foundation (TECT) &amp; NSF</em>. <a href="assets/papers/The_Cooperation_of_Humans_and_Killer_Wha.pdf" target="_blank" rel="noopener">PDF</a></li>
-                        <li>de Stephanis, R., Giménez, J., Esteban, R., et al. (2015). Dynamics of killer whale, bluefin tuna and human fisheries in the Strait of Gibraltar. <em>Biological Conservation</em>, 191, 31–38. <a href="https://doi.org/10.1016/j.biocon.2015.06.018" target="_blank" rel="noopener">doi:10.1016/j.biocon.2015.06.018</a></li>
-                        <li>Esteban, R., Verborgh, P., Gauffier, P., et al. (2016). Conservation status of killer whales, <em>Orcinus orca</em>, in the Strait of Gibraltar. <em>Advances in Marine Biology</em>, 75, 141–172. <a href="https://doi.org/10.1016/bs.amb.2016.07.001" target="_blank" rel="noopener">doi:10.1016/bs.amb.2016.07.001</a></li>
-                        <li>Guinet, C., Domenici, P., de Stephanis, R., et al. (2007). Killer whale predation on bluefin tuna: exploring the hypothesis of the endurance-exhaustion technique. <em>Marine Ecology Progress Series</em>, 347, 111–119. <a href="https://doi.org/10.3354/meps07035" target="_blank" rel="noopener">doi:10.3354/meps07035</a></li>
-                        <li>García-Castellanos, D., Estrada, F., Jiménez-Munt, I., et al. (2009). Catastrophic flood of the Mediterranean after the Messinian salinity crisis. <em>Nature</em>, 462, 778–781. <a href="https://doi.org/10.1038/nature08555" target="_blank" rel="noopener">doi:10.1038/nature08555</a></li>
-                        <li>Rooker, J. R., Secor, D. H., DeMetrio, G., et al. (2008). Natal homing and connectivity in Atlantic bluefin tuna populations. <em>Science</em>, 322, 742–744. <a href="https://doi.org/10.1126/science.1161473" target="_blank" rel="noopener">doi:10.1126/science.1161473</a></li>
-                        <li>Esteban, R., Verborgh, P., Gauffier, P., et al. (2014). Dynamics of killer whale, bluefin tuna and human fisheries in the Strait of Gibraltar. <em>ICCAT Collective Volume of Scientific Papers</em>, 70(5), 2148–2159.</li>
-                        <li>IUCN (2017). <em>Orcinus orca</em> (Strait of Gibraltar subpopulation). The IUCN Red List of Threatened Species. Critically Endangered.</li>
-                        <li>Paubahi (2009). Paleogeographic reconstructions of the Mediterranean during the Messinian Salinity Crisis and Zanclean Flooding stages. <em>Wikimedia Commons</em>. <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a></li>
-                        <li>Esteve, M. (2026). Iberian killer whales assess deep-set fishing lines to detect hooked Atlantic bluefin tuna. <em>Journal of Ethology</em>, 44, 213–219. <a href="https://doi.org/10.1007/s10164-026-00890-y" target="_blank" rel="noopener">doi:10.1007/s10164-026-00890-y</a> · <a href="assets/papers/2026Iberiankillerwhalesassessdeep-setfishinglines.pdf" target="_blank" rel="noopener">PDF</a></li>
-                    </ol>
-                </div>
+                <!-- Historical Cooperation & Ancient Tuna Harvest Archival Plates -->
+                <div class="cooperation-section">
+                    <h4>Archival Evidence — Ancient Coastal Tuna Harvest &amp; Wild Orca–Human Cooperation</h4>
+                    <div class="cooperation-grid">
+                        <figure class="cooperation-card">
+                            <div class="cooperation-card__image-container">
+                                <img
+                                    class="cooperation-card__image"
+                                    src="assets/images/conil_tuna_fishery_hoefnagel_1575.jpg"
+                                    width="1249"
+                                    height="440"
+                                    loading="lazy"
+                                    alt="1575 engraving by Joris Hoefnagel showing ancient fishermen at Conil on the Strait of Gibraltar beach-seining and processing giant Atlantic bluefin tuna"
+                                >
+                            </div>
+                            <figcaption class="cooperation-card__caption">
+                                <span class="cooperation-card__title">Ancient Shore-Based Tuna Harvest at the Strait (Conil, c. 1565)</span>
+                                <span class="cooperation-card__desc">Traditional fishermen at the Strait of Hercules hauling Atlantic bluefin tuna directly onto the beach with coastal seine nets (<em>almadraba de tiro</em>) and salting the catch onshore.</span>
+                                <span class="cooperation-card__credit">Joris Hoefnagel (1575), <em>Civitates Orbis Terrarum</em> II · Bibliothèque nationale de France / <a href="https://commons.wikimedia.org/wiki/File:Conil_;_Xeres_de_la_Frontera_-_Depingebat_Georgius_Hoefnagle_-_btv1b531945406_(2_of_3).jpg" target="_blank" rel="noopener">Wikimedia Commons (Public Domain)</a></span>
+                            </figcaption>
+                        </figure>
 
-                <div class="closing__credits">
-                    <p>Built with MapLibre GL JS · D3.js · Scrollama</p>
+                        <figure class="cooperation-card">
+                            <div class="cooperation-card__image-container">
+                                <img
+                                    class="cooperation-card__image"
+                                    src="assets/images/old_tom_whalers_1910.jpg"
+                                    width="612"
+                                    height="480"
+                                    loading="lazy"
+                                    alt="c. 1910 photograph by Charles Eden Wellings showing the wild orca Old Tom surfacing directly beside a wooden boat of traditional fishermen/whalers during a cooperative hunt in Twofold Bay"
+                                >
+                            </div>
+                            <figcaption class="cooperation-card__caption">
+                                <span class="cooperation-card__title">Wild Orca (<em>Old Tom</em>) &amp; Boatmen Co-Hunting (Twofold Bay, c. 1910)</span>
+                                <span class="cooperation-card__desc">Rare archival photograph of the wild male orca <em>Old Tom</em> surfacing beside an open wooden boat crew during a cooperative hunt governed by the reciprocal <em>"Law of the Tongue"</em> (Coppola et al., 2015).</span>
+                                <span class="cooperation-card__credit">Charles Eden Wellings (c. 1910), National Library of Australia (<code>nla.obj-140622977</code>) / <a href="https://commons.wikimedia.org/wiki/File:Killer_whale_(Old_Tom)_and_whalers_-_original.jpeg" target="_blank" rel="noopener">Wikimedia Commons (Public Domain)</a></span>
+                            </figcaption>
+                        </figure>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Generous visual separation before final end-matter References -->
+        <div class="references-spacer" aria-hidden="true"></div>
+
+        <!-- References & Credits (End of Document) -->
+        <footer class="references-footer" id="references">
+            <div class="references-section">
+                <h4>Scientific &amp; Historical References</h4>
+                <ol class="references-list">
+                    <li>Block, B. A., Teo, S. L. H., Walli, A., et al. (2005). Electronic tagging and population structure of Atlantic bluefin tuna. <em>Nature</em>, 434, 1121–1127. <a href="https://doi.org/10.1038/nature03463" target="_blank" rel="noopener">doi:10.1038/nature03463</a></li>
+                    <li>Cermeño, P., Quílez-Badia, G., Ospina-Álvarez, A., et al. (2015). Electronic tagging of Atlantic bluefin tuna (<em>Thunnus thynnus</em>, L.) reveals habitat use and behaviors in the Mediterranean Sea. <em>PLOS ONE</em>, 10(2), e0116638. <a href="https://doi.org/10.1371/journal.pone.0116638" target="_blank" rel="noopener">doi:10.1371/journal.pone.0116638</a></li>
+                    <li>Coppola, E., Owens, J. B., Szidarovszky, F., &amp; Jones, R. T. (2015). The Cooperation of Humans and Killer Whales (<em>Orcinus orca</em>): The Application of a Simple Fuzzy Rule-Based Model to a Historical System. <em>European Science Foundation (TECT) &amp; NSF</em>. <a href="assets/papers/The_Cooperation_of_Humans_and_Killer_Wha.pdf" target="_blank" rel="noopener">PDF</a></li>
+                    <li>de Stephanis, R., Giménez, J., Esteban, R., et al. (2015). Dynamics of killer whale, bluefin tuna and human fisheries in the Strait of Gibraltar. <em>Biological Conservation</em>, 191, 31–38. <a href="https://doi.org/10.1016/j.biocon.2015.06.018" target="_blank" rel="noopener">doi:10.1016/j.biocon.2015.06.018</a></li>
+                    <li>Esteban, R., Verborgh, P., Gauffier, P., et al. (2014). Dynamics of killer whale, bluefin tuna and human fisheries in the Strait of Gibraltar. <em>ICCAT Collective Volume of Scientific Papers</em>, 70(5), 2148–2159.</li>
+                    <li>Esteban, R., Verborgh, P., Gauffier, P., et al. (2016). Conservation status of killer whales, <em>Orcinus orca</em>, in the Strait of Gibraltar. <em>Advances in Marine Biology</em>, 75, 141–172. <a href="https://doi.org/10.1016/bs.amb.2016.07.001" target="_blank" rel="noopener">doi:10.1016/bs.amb.2016.07.001</a></li>
+                    <li>Esteve, M. (2026). Iberian killer whales assess deep-set fishing lines to detect hooked Atlantic bluefin tuna. <em>Journal of Ethology</em>, 44, 213–219. <a href="https://doi.org/10.1007/s10164-026-00890-y" target="_blank" rel="noopener">doi:10.1007/s10164-026-00890-y</a> · <a href="assets/papers/2026Iberiankillerwhalesassessdeep-setfishinglines.pdf" target="_blank" rel="noopener">PDF</a></li>
+                    <li>Florido del Corral, D. (2013). Las almadrabas andaluzas bajo el consorcio nacional almadrabero (1928–1971): historia y etnología. <em>Editorial Universidad de Sevilla</em>.</li>
+                    <li>Ford, J. K. B. (2018). Killer Whale (<em>Orcinus orca</em>). In B. Würsig, J. G. M. Thewissen, &amp; K. M. Kovacs (Eds.), <em>Encyclopedia of Marine Mammals</em> (3rd ed., pp. 531–537). Academic Press. <a href="https://doi.org/10.1016/B978-0-12-804327-1.00010-8" target="_blank" rel="noopener">doi:10.1016/B978-0-12-804327-1.00010-8</a></li>
+                    <li>García-Castellanos, D., Estrada, F., Jiménez-Munt, I., et al. (2009). Catastrophic flood of the Mediterranean after the Messinian salinity crisis. <em>Nature</em>, 462, 778–781. <a href="https://doi.org/10.1038/nature08555" target="_blank" rel="noopener">doi:10.1038/nature08555</a></li>
+                    <li>García-Lafuente, J., Naranjo, C., Sammartino, S., Sánchez-Garrido, J. C., &amp; Delgado, J. (2017). The Mediterranean outflow in the Strait of Gibraltar and its connection with upstream conditions in the Alborán Sea. <em>Ocean Science</em>, 13, 195–207. <a href="https://doi.org/10.5194/os-13-195-2017" target="_blank" rel="noopener">doi:10.5194/os-13-195-2017</a> · PANGAEA: <a href="https://doi.org/10.1594/PANGAEA.864967" target="_blank" rel="noopener">doi:10.1594/PANGAEA.864967</a></li>
+                    <li>Guinet, C., Domenici, P., de Stephanis, R., et al. (2007). Killer whale predation on bluefin tuna: exploring the hypothesis of the endurance-exhaustion technique. <em>Marine Ecology Progress Series</em>, 347, 111–119. <a href="https://doi.org/10.3354/meps07035" target="_blank" rel="noopener">doi:10.3354/meps07035</a></li>
+                    <li>Hoefnagel, J. (1575). <em>Conil, insigne Hispaniae oppidum ad fretum Herculeum, quaestuosa tynnorum piscatione nobile</em>. In G. Braun &amp; F. Hogenberg, <em>Civitates Orbis Terrarum</em> (Vol. II, Plate 6). Bibliothèque nationale de France / <a href="https://commons.wikimedia.org/wiki/File:Conil_;_Xeres_de_la_Frontera_-_Depingebat_Georgius_Hoefnagle_-_btv1b531945406_(2_of_3).jpg" target="_blank" rel="noopener">Wikimedia Commons</a>.</li>
+                    <li>IUCN (2017). <em>Orcinus orca</em> (Strait of Gibraltar subpopulation). <em>The IUCN Red List of Threatened Species</em>. Critically Endangered.</li>
+                    <li>MEDAR Group, González, N., &amp; Tsimplis, M. N. (2006–2012). Strait of Gibraltar &amp; CANIGO CTD Hydrographic Profiles (R/V <em>Thalassa</em>, RRS <em>Discovery</em>). <em>PANGAEA</em>. <a href="https://doi.org/10.1594/PANGAEA.786179" target="_blank" rel="noopener">doi:10.1594/PANGAEA.786179</a> · <a href="https://doi.org/10.1594/PANGAEA.452043" target="_blank" rel="noopener">.452043</a> · <a href="https://doi.org/10.1594/PANGAEA.804356" target="_blank" rel="noopener">.804356</a> · <a href="https://doi.org/10.1594/PANGAEA.801810" target="_blank" rel="noopener">.801810</a></li>
+                    <li>Paubahi (2009). Paleogeographic reconstructions of the Mediterranean during the Messinian Salinity Crisis and Zanclean Flooding stages. <em>Wikimedia Commons</em>. <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a></li>
+                    <li>Pliny the Elder (77 AD). <em>Naturalis Historia</em>, Book IX, Ch. 5 (<em>De ballaenis et orcis</em> — observations of orcas off Gades / Cádiz).</li>
+                    <li>Rodríguez-Roda, J. (1964). Biología del atún, <em>Thunnus thynnus</em> (L.), de la costa sudatlántica de España. <em>Investigación Pesquera</em>, 25, 3–147.</li>
+                    <li>Rooker, J. R., Secor, D. H., DeMetrio, G., et al. (2008). Natal homing and connectivity in Atlantic bluefin tuna populations. <em>Science</em>, 322, 742–744. <a href="https://doi.org/10.1126/science.1161473" target="_blank" rel="noopener">doi:10.1126/science.1161473</a></li>
+                    <li>Schlitzer, R. (2023). <em>Ocean Data View</em> (ODV). Alfred Wegener Institute. <a href="https://odv.awi.de" target="_blank" rel="noopener">odv.awi.de</a></li>
+                    <li>Tassigny, A., Bardoel, S. L., Valran, T., Viboud, S., Gostiaux, L., Sommeria, J., Bordois, L., Carton, X., &amp; Negretti, M. E. (2026). A realistic physical model of the Gibraltar Strait. <em>Ocean Science</em>, 22, 459–500. <a href="https://doi.org/10.5194/os-22-459-2026" target="_blank" rel="noopener">doi:10.5194/os-22-459-2026</a></li>
+                    <li>Wellings, C. E. (c. 1910). <em>Killer whale (Old Tom) and whalers, Twofold Bay, Eden</em> [Photograph]. National Library of Australia (<code>PIC P859/34</code>) / <a href="https://commons.wikimedia.org/wiki/File:Killer_whale_(Old_Tom)_and_whalers_-_original.jpeg" target="_blank" rel="noopener">Wikimedia Commons</a>.</li>
+                </ol>
+            </div>
+
+            <div class="closing__credits">
+                <p>Built with MapLibre GL JS · D3.js · Scrollama · Ocean Data View / PANGAEA</p>
             </div>
         </footer>
 

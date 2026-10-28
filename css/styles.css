@@ -65,23 +65,21 @@ body {
     color: var(--color-text-primary);
     background: var(--color-ocean-900);
     overflow-x: hidden;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 img {
-    height: 350px;
-    width: auto;
-    /* center image */
-
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
-/* center almadraba image in the left column */
-.almadraba__image {
-    margin: 0;
-    padding: 0;
+.orcaLongLine {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin: var(--space-lg) auto;
     display: block;
-    margin-left: 50px;
-
 }
 
 /* ========================================================================
@@ -129,13 +127,15 @@ img {
     position: absolute;
     right: calc(100% + 12px);
     top: 50%;
-    transform: translateY(-50%);
     white-space: nowrap;
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
+    background: rgba(2, 12, 27, 0.82);
+    padding: 3px 8px;
+    border-radius: 4px;
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
@@ -231,9 +231,10 @@ img {
 
 .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
     font-weight: 900;
     line-height: 1.12;
+    text-wrap: balance;
     margin-bottom: var(--space-lg);
     background: linear-gradient(135deg, var(--color-text-primary), var(--color-ocean-200));
     -webkit-background-clip: text;
@@ -247,24 +248,28 @@ img {
 }
 
 .hero__subtitle {
-    font-size: clamp(2rem, 2vw, 1.25rem);
-    color: var(--color-text-secondary);
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: var(--space-xl);
+    font-family: var(--font-mono);
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    color: var(--color-ocean-200);
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    line-height: 1.65;
+    margin-bottom: var(--space-lg);
 }
 
 .hero__subtitle2 {
-    font-size: clamp(1rem, 1.4vw, 1.25rem);
+    font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
     color: var(--color-text-secondary);
-    font-weight: 300;
-    line-height: 1.6;
-    margin-bottom: var(--space-md);
+    font-weight: 400;
+    line-height: 1.68;
+    max-width: 60ch;
+    text-wrap: pretty;
+    margin-bottom: var(--space-lg);
 }
 
 .hero__fin-container {
-    margin: var(--space-md) 0 var(--space-xl);
-    max-width: 400px;
+    margin: var(--space-lg) 0 var(--space-xl);
+    max-width: 240px;
     width: 100%;
 }
 
@@ -272,13 +277,13 @@ img {
     width: 100%;
     height: auto;
     display: block;
-    filter: drop-shadow(0 14px 35px rgba(2, 12, 27, 0.75));
-    transition: transform 0.4s var(--ease-out-expo), filter 0.4s ease;
+    opacity: 0.96;
+    transition: opacity 0.35s ease, transform 0.35s var(--ease-out-expo);
 }
 
 .hero__fin:hover {
-    transform: translateY(-4px) scale(1.015);
-    filter: drop-shadow(0 20px 45px rgba(6, 214, 160, 0.15)) drop-shadow(0 14px 35px rgba(2, 12, 27, 0.8));
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 .hero__scroll-cue {
@@ -286,8 +291,8 @@ img {
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-sm);
-    color: var(--color-text-dim);
-    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -336,9 +341,10 @@ img {
 
 .scene__title {
     font-family: var(--font-display);
-    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
     font-weight: 700;
     line-height: 1.2;
+    text-wrap: balance;
     margin-bottom: var(--space-md);
     color: var(--color-text-primary);
 }
@@ -352,8 +358,9 @@ img {
 }
 
 .scene__narrative {
-    font-size: 1.2rem;
-    line-height: 1.75;
+    font-size: 1.15rem;
+    line-height: 1.72;
+    text-wrap: pretty;
     color: var(--color-text-secondary);
     margin-bottom: var(--space-lg);
     columns: 2;
@@ -377,21 +384,20 @@ img {
 
 .current-section,
 .energy-section,
-.tarifa-section,
- {
+.tarifa-section {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-xl);
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .current-section h4,
 .energy-section h4,
 .tarifa-section h4 {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-orca-accent);
     margin-bottom: var(--space-md);
@@ -432,8 +438,8 @@ img {
 .scale-bar__labels {
     display: flex;
     justify-content: space-between;
-    font-size: 0.68rem;
-    color: var(--color-text-dim);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
     font-family: var(--font-mono);
     margin-top: 6px;
 }
@@ -460,7 +466,7 @@ img {
 
 .current-arrow {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.92rem;
     color: var(--color-ocean-300);
     animation: flow-right 2s linear infinite;
     white-space: nowrap;
@@ -489,25 +495,25 @@ img {
 }
 
 .current-label {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--color-text-secondary);
     flex: 1;
 }
 
 .current-depth {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--color-text-dim);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
 }
 
 /* ========================================================================
-   Place Names (Scene 3 & 6)
+   Place Names (Scene 5)
    ======================================================================== */
 
 .scene__places {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-text-dim);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
     line-height: 1.8;
     margin-top: var(--space-md);
 }
@@ -530,7 +536,7 @@ img {
 }
 
 /* ========================================================================
-   Charts (Scene 5)
+   Charts (Scene 4)
    ======================================================================== */
 
 .scene__charts-grid {
@@ -542,9 +548,9 @@ img {
 
 .chart-item h4 {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.875rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-orca-accent);
     margin-bottom: var(--space-sm);
@@ -562,14 +568,15 @@ img {
 }
 
 .chart-caption {
-    font-size: 0.68rem;
-    color: var(--color-text-dim);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
     margin-top: var(--space-xs);
-    line-height: 1.45;
+    line-height: 1.5;
+    text-wrap: pretty;
 }
 
 /* ========================================================================
-   Metric Grids (Scene 5 & 6)
+   Metric Grids (Scenes 3, 4, 5 & 6)
    ======================================================================== */
 
 .metric-grid {
@@ -577,33 +584,33 @@ img {
     grid-template-columns: repeat(4, 1fr);
     gap: var(--space-md);
     margin: var(--space-md) 0 var(--space-lg);
-    padding: var(--space-sm) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: var(--space-md) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .metric {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
 .metric__value {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
     font-weight: 700;
     color: var(--color-ocean-200);
-    line-height: 1.15;
+    line-height: 1.2;
 }
 
 .metric__label {
-    font-size: 0.68rem;
-    color: var(--color-text-dim);
-    line-height: 1.35;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.45;
 }
 
 /* ========================================================================
-   Closing / Footer
+   Closing Scene (Cultural Learning)
    ======================================================================== */
 
 .closing {
@@ -617,28 +624,38 @@ img {
     box-sizing: border-box;
 }
 
+.closing__content {
+    width: 100%;
+    opacity: 0.28;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s var(--ease-out-expo);
+}
 
+.closing__content.is-active {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 .closing__title {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-size: clamp(1.65rem, 3.8vw, 2.3rem);
     font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: var(--space-lg);
+    line-height: 1.25;
+    text-wrap: balance;
+    margin-bottom: var(--space-md);
     background: linear-gradient(135deg, var(--color-text-primary), var(--color-ocean-200));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-
-
 .closing__credits {
-    font-size: 0.7rem;
-    color: var(--color-text-dim);
-    line-height: 1.8;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: var(--space-md);
+    margin-top: var(--space-xl);
 }
 
 /* ========================================================================
@@ -656,7 +673,7 @@ img {
     margin: 0;
     padding: var(--space-sm);
     background: rgba(10, 25, 47, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-sm);
     backdrop-filter: blur(8px);
     display: flex;
@@ -666,7 +683,7 @@ img {
 
 .geology-card:hover {
     transform: translateY(-2px);
-    border-color: rgba(100, 181, 246, 0.3);
+    border-color: rgba(100, 181, 246, 0.35);
 }
 
 .geology-card__image-container {
@@ -692,39 +709,113 @@ img {
 .geology-card__caption {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     margin-top: var(--space-sm);
-    padding: 0 2px;
+    padding: 2px 4px;
 }
 
 .geology-card__title {
     font-family: var(--font-display);
-    font-size: 0.82rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-ocean-200);
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .geology-card__desc {
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     color: var(--color-text-secondary);
-    line-height: 1.4;
+    line-height: 1.55;
+    text-wrap: pretty;
 }
 
 .geology-card__credit {
     font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--color-text-dim);
+    font-size: 0.8125rem;
+    color: #98a6c7;
     margin-top: 2px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .geology-card__credit a {
-    color: var(--color-ocean-300);
+    color: var(--color-ocean-200);
     text-decoration: none;
 }
 
 .geology-card__credit a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================================================
+   Camarinal Sill ODV Transect & Almadraba Figures (Scenes 2 & 5)
+   ======================================================================== */
+
+.transect-figure,
+.almadraba-figure {
+    margin: var(--space-xl) 0;
+}
+
+.transect-figure__img-wrap,
+.almadraba-figure__img-wrap {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(100, 181, 246, 0.2);
+    background: #061326;
+}
+
+.transect-figure__img,
+.almadraba-figure__img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.transect-figure__caption,
+.almadraba-figure__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: var(--space-md);
+}
+
+.transect-figure__title,
+.almadraba-figure__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-ocean-200);
+    line-height: 1.35;
+}
+
+.transect-figure__desc,
+.almadraba-figure__desc {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.transect-figure__desc strong {
+    color: var(--color-text-primary);
+}
+
+.transect-figure__credit,
+.almadraba-figure__credit {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: #98a6c7;
+    line-height: 1.55;
+}
+
+.transect-figure__credit a,
+.almadraba-figure__credit a {
+    color: var(--color-orca-accent);
+    text-decoration: none;
+}
+
+.transect-figure__credit a:hover,
+.almadraba-figure__credit a:hover {
     text-decoration: underline;
 }
 
@@ -735,11 +826,11 @@ img {
 .transatlantic-legend {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: var(--space-sm);
     margin: var(--space-md) 0 var(--space-lg);
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-md);
     background: rgba(10, 25, 47, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-sm);
     backdrop-filter: blur(8px);
 }
@@ -748,14 +839,14 @@ img {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
-    font-size: 0.76rem;
+    font-size: 0.92rem;
     color: var(--color-text-secondary);
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
 .route-badge__line {
     display: inline-block;
-    width: 22px;
+    width: 24px;
     height: 3px;
     border-radius: 2px;
     flex-shrink: 0;
@@ -776,148 +867,32 @@ img {
 }
 
 /* ========================================================================
-   Animated Atlantic Bluefin Tuna Showcase (Scene 3)
+   Frameless Atlantic Bluefin Tuna Figure (Scene 3 — No card, no animations)
    ======================================================================== */
 
-.tuna-showcase {
-    margin: var(--space-lg) 0;
-    padding: var(--space-md);
-    background: radial-gradient(ellipse at 50% 50%, rgba(29, 53, 87, 0.45) 0%, rgba(10, 25, 47, 0.7) 100%);
-    border: 1px solid rgba(100, 181, 246, 0.14);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    position: relative;
-}
-
-.tuna-showcase__stage {
-    position: relative;
+.tuna-figure {
+    margin: var(--space-xl) 0;
+    padding: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: var(--space-md) 0;
-    min-height: 220px;
 }
 
-.tuna-showcase__current-lines {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.tuna-showcase__current-lines span {
-    position: absolute;
-    height: 1.5px;
-    border-radius: 2px;
-    background: linear-gradient(90deg, transparent, rgba(100, 181, 246, 0.35), rgba(6, 214, 160, 0.25), transparent);
-    animation: current-stream 4.2s linear infinite;
-}
-
-.tuna-showcase__current-lines span:nth-child(1) {
-    top: 24%;
-    width: 45%;
-    left: -45%;
-    animation-duration: 3.8s;
-}
-
-.tuna-showcase__current-lines span:nth-child(2) {
-    top: 54%;
-    width: 60%;
-    left: -60%;
-    animation-duration: 4.6s;
-    animation-delay: 1.2s;
-}
-
-.tuna-showcase__current-lines span:nth-child(3) {
-    top: 78%;
-    width: 40%;
-    left: -40%;
-    animation-duration: 3.4s;
-    animation-delay: 2.3s;
-}
-
-@keyframes current-stream {
-    0% {
-        translate: 0 0;
-        opacity: 0;
-    }
-    20% {
-        opacity: 0.75;
-    }
-    80% {
-        opacity: 0.75;
-    }
-    100% {
-        translate: 260% 0;
-        opacity: 0;
-    }
-}
-
-.tuna-showcase__img {
+.tuna-figure__img {
     width: 100%;
-    max-width: 420px;
+    max-width: 440px;
     height: auto;
     display: block;
-    position: relative;
-    z-index: 1;
-    filter: drop-shadow(0 14px 28px rgba(2, 12, 27, 0.75));
-    /* Identity transforms to preserve stacking context and allow independent hover scale */
-    translate: 0px 0px;
-    rotate: 0deg;
-    scale: 1;
-    animation:
-        tuna-swim-glide 5.5s ease-in-out infinite,
-        tuna-swim-pitch 2.75s ease-in-out infinite;
-    transition: scale 0.35s var(--ease-out-expo), filter 0.35s ease;
 }
 
-.tuna-showcase__img:hover {
-    scale: 1.05;
-    filter: drop-shadow(0 18px 36px rgba(74, 143, 231, 0.3)) drop-shadow(0 14px 28px rgba(2, 12, 27, 0.85));
-}
-
-@keyframes tuna-swim-glide {
-    0%, 100% {
-        translate: -14px -6px;
-    }
-    25% {
-        translate: 6px 8px;
-    }
-    50% {
-        translate: 16px -4px;
-    }
-    75% {
-        translate: -4px 7px;
-    }
-}
-
-@keyframes tuna-swim-pitch {
-    0%, 100% {
-        rotate: -1.8deg;
-    }
-    50% {
-        rotate: 2.2deg;
-    }
-}
-
-@supports not (translate: 0px) {
-    .tuna-showcase__img {
-        animation: tuna-swim-fallback 5.5s ease-in-out infinite;
-    }
-    @keyframes tuna-swim-fallback {
-        0%, 100% { transform: translate(-14px, -6px) rotate(-1.8deg); }
-        25% { transform: translate(6px, 8px) rotate(2.2deg); }
-        50% { transform: translate(16px, -4px) rotate(-1.8deg); }
-        75% { transform: translate(-4px, 7px) rotate(2.2deg); }
-    }
-}
-
-.tuna-showcase__caption {
-    font-size: 0.72rem;
-    color: var(--color-text-dim);
+.tuna-figure__caption {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
     text-align: center;
-    margin-top: var(--space-xs);
-    line-height: 1.45;
+    margin-top: var(--space-sm);
+    line-height: 1.55;
+    max-width: 56ch;
+    text-wrap: pretty;
 }
 
 /* ========================================================================
@@ -928,14 +903,14 @@ img {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-xl);
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .video-section h4 {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-orca-accent);
     margin-bottom: var(--space-md);
@@ -951,7 +926,7 @@ img {
     margin: 0;
     padding: var(--space-sm);
     background: rgba(10, 25, 47, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-sm);
     backdrop-filter: blur(8px);
     display: flex;
@@ -981,31 +956,32 @@ img {
 .video-card__caption {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     margin-top: var(--space-sm);
-    padding: 0 2px;
+    padding: 2px 4px;
 }
 
 .video-card__title {
     font-family: var(--font-display);
-    font-size: 0.82rem;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--color-ocean-200);
-    line-height: 1.3;
+    line-height: 1.35;
 }
 
 .video-card__desc {
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     color: var(--color-text-secondary);
-    line-height: 1.45;
+    line-height: 1.55;
+    text-wrap: pretty;
 }
 
 .video-card__credit {
     font-family: var(--font-mono);
-    font-size: 0.62rem;
-    color: var(--color-text-dim);
+    font-size: 0.8125rem;
+    color: #98a6c7;
     margin-top: 2px;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .video-card__credit a {
@@ -1018,38 +994,141 @@ img {
 }
 
 /* ========================================================================
-   References Section
+   Archival Cooperation Gallery (Cultural Learning)
    ======================================================================== */
 
-.references-section {
+.cooperation-section {
     margin-top: var(--space-xl);
-    margin-bottom: var(--space-xl);
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.references-section h4 {
+.cooperation-section h4 {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-orca-accent);
     margin-bottom: var(--space-md);
 }
 
+.cooperation-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.cooperation-card {
+    margin: 0;
+    padding: var(--space-md);
+    background: rgba(10, 25, 47, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(8px);
+}
+
+.cooperation-card__image-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    background: #050f1e;
+}
+
+.cooperation-card__image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cooperation-card__caption {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: var(--space-md);
+}
+
+.cooperation-card__title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-ocean-200);
+    line-height: 1.35;
+}
+
+.cooperation-card__desc {
+    font-size: 0.92rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.cooperation-card__credit {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: #98a6c7;
+    line-height: 1.5;
+}
+
+.cooperation-card__credit code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.cooperation-card__credit a {
+    color: var(--color-orca-accent);
+    text-decoration: none;
+}
+
+.cooperation-card__credit a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================================================
+   End-of-Document References Footer (Separated from Cultural Learning)
+   ======================================================================== */
+
+.references-spacer {
+    height: 45vh;
+    width: var(--panel-width);
+}
+
+.references-footer {
+    width: var(--panel-width);
+    padding: var(--space-3xl) clamp(28px, 4vw, 52px) var(--space-3xl);
+    border-top: 1px solid rgba(100, 181, 246, 0.18);
+    background: rgba(2, 10, 23, 0.96);
+    box-sizing: border-box;
+}
+
+.references-section {
+    margin: 0;
+}
+
+.references-section h4 {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-orca-accent);
+    margin-bottom: var(--space-lg);
+}
+
 .references-list {
     list-style: decimal;
     padding-left: var(--space-lg);
-    font-size: 0.78rem;
+    font-size: 0.95rem;
     line-height: 1.75;
     color: var(--color-text-secondary);
-    columns: 1;
+    max-width: 75ch;
 }
 
 .references-list li {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
     padding-left: var(--space-xs);
+    text-wrap: pretty;
 }
 
 .references-list li em {
@@ -1057,11 +1136,16 @@ img {
     font-style: italic;
 }
 
+.references-list li code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
 .references-list li a {
     color: var(--color-orca-accent);
     text-decoration: none;
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.875rem;
     transition: color 0.2s ease;
 }
 
@@ -1114,15 +1198,25 @@ img {
 
     .hero,
     .scene,
-    .closing {
+    .closing,
+    .references-footer {
         width: 100%;
-        min-height: 60vh;
+        min-height: auto;
         padding: var(--space-xl) var(--space-md);
         background: var(--color-ocean-900);
     }
 
+    .references-spacer {
+        height: 18vh;
+        width: 100%;
+    }
+
     .scene__content {
         padding: var(--space-md) 0;
+    }
+
+    .scene__narrative {
+        columns: 1;
     }
 
     .scene__charts-grid,

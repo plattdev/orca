@@ -82,12 +82,12 @@
             transform: translateX(-50%);
             white-space: nowrap;
             font-family: 'Inter', sans-serif;
-            font-size: 11px;
+            font-size: 0.875rem;
             font-weight: 500;
             color: #e6f1ff;
-            background: rgba(10, 25, 47, 0.92);
+            background: rgba(10, 25, 47, 0.94);
             backdrop-filter: blur(8px);
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             border: 1px solid rgba(100, 181, 246, 0.25);
             box-shadow: 0 4px 16px rgba(0,0,0,0.4);
@@ -769,7 +769,6 @@
         switch (sceneKey) {
             case 'scene2':
                 addCamarinalTransect();
-                addCurrentArrows();
                 break;
             case 'scene3':
                 addTransatlanticMigration();

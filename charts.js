@@ -247,7 +247,12 @@ const Charts = (() => {
         const ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
 
-        const margin = { top: 16, right: 12, bottom: 28, left: 32 };
+        const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        const fsAxis = Math.round(rootPx * 0.72);
+        const fsNote = Math.round(rootPx * 0.70);
+        const fsLegend = Math.round(rootPx * 0.75);
+
+        const margin = { top: 24, right: 16, bottom: 32, left: 36 };
         const iw = w - margin.left - margin.right;
         const ih = h - margin.top - margin.bottom;
 
@@ -274,18 +279,18 @@ const Charts = (() => {
             ctx.lineTo(iw, yy);
             ctx.stroke();
 
-            ctx.fillStyle = C.textDim;
-            ctx.font = `9px ${fontMono}`;
+            ctx.fillStyle = C.textSecondary;
+            ctx.font = `${fsAxis}px ${fontMono}`;
             ctx.textAlign = 'right';
-            ctx.fillText(v, -6, yy + 3);
+            ctx.fillText(v, -6, yy + 4);
         });
 
         // X labels
-        ctx.fillStyle = C.textDim;
-        ctx.font = `9px ${fontMono}`;
+        ctx.fillStyle = C.textSecondary;
+        ctx.font = `${fsAxis}px ${fontMono}`;
         ctx.textAlign = 'center';
         data.years.filter((_, i) => i % 2 === 0).forEach(year => {
-            ctx.fillText(year, xScale(year), ih + 18);
+            ctx.fillText(year, xScale(year), ih + 20);
         });
 
         // Area fill - total
@@ -349,7 +354,7 @@ const Charts = (() => {
                 const px = xScale(year);
                 const py = yScale(data.totalAbundance[i]);
                 ctx.fillStyle = C.gold;
-                ctx.font = `bold 8px ${fontMono}`;
+                ctx.font = `bold ${fsNote}px ${fontMono}`;
                 ctx.textAlign = 'center';
                 ctx.fillText(`+${data.births[i]}`, px, py - 10);
             }
@@ -358,19 +363,19 @@ const Charts = (() => {
         // Legend
         ctx.restore();
         const lx = margin.left;
-        const ly = 8;
-        ctx.font = `9px ${fontBody}`;
+        const ly = 11;
+        ctx.font = `${fsLegend}px ${fontBody}`;
 
         ctx.fillStyle = C.orcaAccent;
-        ctx.fillRect(lx, ly, 12, 2);
+        ctx.fillRect(lx, ly - 2, 14, 2.5);
         ctx.fillStyle = C.textSecondary;
         ctx.textAlign = 'left';
-        ctx.fillText('Total', lx + 16, ly + 4);
+        ctx.fillText('Total', lx + 18, ly + 3);
 
         ctx.fillStyle = C.ocean300;
-        ctx.fillRect(lx + 60, ly, 12, 2);
+        ctx.fillRect(lx + 68, ly - 2, 14, 2.5);
         ctx.fillStyle = C.textSecondary;
-        ctx.fillText('Interacting', lx + 76, ly + 4);
+        ctx.fillText('Interacting', lx + 86, ly + 3);
     }
 
     /* ── Tuna Catches & Survival Chart (Canvas via D3) ───────────────── */
@@ -391,7 +396,12 @@ const Charts = (() => {
         const ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
 
-        const margin = { top: 16, right: 30, bottom: 28, left: 32 };
+        const rootPx = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        const fsAxis = Math.round(rootPx * 0.72);
+        const fsNote = Math.round(rootPx * 0.68);
+        const fsLegend = Math.round(rootPx * 0.75);
+
+        const margin = { top: 24, right: 38, bottom: 32, left: 38 };
         const iw = w - margin.left - margin.right;
         const ih = h - margin.top - margin.bottom;
 
@@ -422,10 +432,10 @@ const Charts = (() => {
             ctx.lineTo(iw, yy);
             ctx.stroke();
 
-            ctx.fillStyle = C.textDim;
-            ctx.font = `8px ${fontMono}`;
+            ctx.fillStyle = C.textSecondary;
+            ctx.font = `${fsAxis}px ${fontMono}`;
             ctx.textAlign = 'right';
-            ctx.fillText(`${v}t`, -4, yy + 3);
+            ctx.fillText(`${v}t`, -5, yy + 4);
         });
 
         // Threshold lines
@@ -441,17 +451,17 @@ const Charts = (() => {
             ctx.setLineDash([]);
 
             ctx.fillStyle = i === 0 ? C.thresholdLine : C.gold;
-            ctx.font = `7px ${fontMono}`;
+            ctx.font = `${fsNote}px ${fontMono}`;
             ctx.textAlign = 'left';
             ctx.fillText(i === 0 ? `Stable (${t}t)` : `Growth (${t}t)`, 4, yy - 4);
         });
 
         // X labels
-        ctx.fillStyle = C.textDim;
-        ctx.font = `9px ${fontMono}`;
+        ctx.fillStyle = C.textSecondary;
+        ctx.font = `${fsAxis}px ${fontMono}`;
         ctx.textAlign = 'center';
         data.years.filter((_, i) => i % 2 === 0).forEach(year => {
-            ctx.fillText(year, xScale(year), ih + 18);
+            ctx.fillText(year, xScale(year), ih + 20);
         });
 
         // Bars for tuna catches
@@ -509,29 +519,29 @@ const Charts = (() => {
         });
 
         // Right axis labels
-        ctx.fillStyle = C.textDim;
-        ctx.font = `8px ${fontMono}`;
+        ctx.fillStyle = C.textSecondary;
+        ctx.font = `${fsAxis}px ${fontMono}`;
         ctx.textAlign = 'left';
         [0, 0.5, 1].forEach(v => {
-            ctx.fillText(`${Math.round(v * 100)}%`, iw + 4, yScaleRight(v) + 3);
+            ctx.fillText(`${Math.round(v * 100)}%`, iw + 5, yScaleRight(v) + 4);
         });
 
         // Legend
         ctx.restore();
         const lx = margin.left;
-        const ly = 8;
-        ctx.font = `8px ${fontBody}`;
+        const ly = 11;
+        ctx.font = `${fsLegend}px ${fontBody}`;
 
         ctx.fillStyle = 'rgba(6, 214, 160, 0.6)';
-        ctx.fillRect(lx, ly - 2, 8, 8);
+        ctx.fillRect(lx, ly - 5, 9, 9);
         ctx.fillStyle = C.textSecondary;
         ctx.textAlign = 'left';
-        ctx.fillText('Catches', lx + 12, ly + 4);
+        ctx.fillText('Catches', lx + 13, ly + 3);
 
         ctx.fillStyle = C.tunaRed;
-        ctx.fillRect(lx + 60, ly, 12, 2);
+        ctx.fillRect(lx + 74, ly - 2, 14, 2.5);
         ctx.fillStyle = C.textSecondary;
-        ctx.fillText('Calf Survival', lx + 76, ly + 4);
+        ctx.fillText('Calf Survival', lx + 92, ly + 3);
     }
 
     /* ── Public API ──────────────────────────────────────────────────── */
