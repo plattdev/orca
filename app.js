@@ -874,11 +874,59 @@
         });
     }
 
+    /* ── Lazy Media Fallback (IntersectionObserver) ───────────────────── */
+
+    function initLazyMedia() {
+        const supportsLazyMedia = Object.hasOwn(HTMLMediaElement.prototype, 'loading');
+        if (supportsLazyMedia) return;
+
+        const lazyMediaElements = document.querySelectorAll(
+            'video[loading="lazy"], audio[loading="lazy"][controls]'
+        );
+
+        const mediaObserver = new IntersectionObserver(
+            (entries, observer) => {
+                for (const entry of entries) {
+                    if (!entry.isIntersecting) continue;
+                    const media = entry.target;
+
+                    if (media.dataset.poster) {
+                        media.poster = media.dataset.poster;
+                        delete media.dataset.poster;
+                    }
+                    if (media.dataset.preload) {
+                        media.preload = media.dataset.preload;
+                        delete media.dataset.preload;
+                    }
+                    media.load();
+                    observer.unobserve(media);
+                }
+            },
+            { rootMargin: '200px 0px' }
+        );
+
+        for (const media of lazyMediaElements) {
+            if (media.hasAttribute('poster')) {
+                media.dataset.poster = media.getAttribute('poster');
+                media.removeAttribute('poster');
+            }
+            if (media.hasAttribute('preload') && media.getAttribute('preload') !== 'none') {
+                media.dataset.preload = media.getAttribute('preload');
+            }
+            media.preload = 'none';
+            mediaObserver.observe(media);
+        }
+    }
+
     /* ── Boot ─────────────────────────────────────────────────────────── */
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => {
+            initLazyMedia();
+            init();
+        });
     } else {
+        initLazyMedia();
         init();
     }
 
