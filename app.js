@@ -33,6 +33,18 @@
     function createMarkerElement(mk) {
         const type = mk.type;
         const label = mk.label;
+
+        // Animated Almadraba trap marker: pulsing dot with no text
+        if (type === 'almadraba') {
+            const almEl = document.createElement('div');
+            almEl.className = 'map-marker map-marker--animated-almadraba';
+            almEl.innerHTML = `
+                <div class="almadraba-pin-pulse"></div>
+                <div class="almadraba-pin-core"></div>
+            `;
+            return almEl;
+        }
+
         const el = document.createElement('div');
         el.className = 'map-marker';
         
@@ -145,7 +157,7 @@
 
         loc.markers.forEach(mk => {
             const el = createMarkerElement(mk);
-            const marker = new maplibregl.Marker({ element: el })
+            const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
                 .setLngLat([mk.lng, mk.lat])
                 .addTo(map);
             markersOnMap.push(marker);
@@ -166,10 +178,10 @@
         const mapWidth = map ? map.getContainer().clientWidth : Math.round(window.innerWidth * 0.4);
         if (mode === 'transatlantic') {
             return {
-                top: 40,
-                bottom: 110,
-                left: 28,
-                right: Math.max(200, Math.round(mapWidth * 0.40))
+                top: 25,
+                bottom: 85,
+                left: 25,
+                right: 35
             };
         }
         if (mode === 'cohunting') {
@@ -424,6 +436,44 @@
         } catch (e) { }
     }
 
+    /* ── Basemap Country / Continent Label Visibility Controls ────────── */
+    let countryLabelLayerIds = [];
+
+    function findCountryLabelLayers() {
+        if (!map) return;
+        const style = map.getStyle();
+        if (!style || !style.layers) return;
+        countryLabelLayerIds = [];
+        style.layers.forEach(layer => {
+            if (layer.type !== 'symbol') return;
+            const id = (layer.id || '').toLowerCase();
+            const srcLayer = (layer['source-layer'] || '').toLowerCase();
+            const filterStr = JSON.stringify(layer.filter || '').toLowerCase();
+
+            if (
+                id.includes('country') ||
+                id.includes('continent') ||
+                id.includes('admin0') ||
+                id.includes('admin-0') ||
+                (srcLayer.includes('place') && (filterStr.includes('country') || filterStr.includes('continent')))
+            ) {
+                countryLabelLayerIds.push(layer.id);
+            }
+        });
+    }
+
+    function setCountryLabelsVisible(visible) {
+        if (!countryLabelLayerIds.length && map) {
+            findCountryLabelLayers();
+        }
+        const val = visible ? 'visible' : 'none';
+        countryLabelLayerIds.forEach(id => {
+            try {
+                map.setLayoutProperty(id, 'visibility', val);
+            } catch (e) { /* ignore if not ready */ }
+        });
+    }
+
     /* ── Tuna Transatlantic Migration (Scene 3 — zoomed out) ────────── */
     /* Based on electronic tagging tracks from Block et al. (2005) Nature
        and Rooker et al. (2008) Science. Spring inbound (Atlantic → Med)
@@ -506,15 +556,13 @@
             source: 'tuna-spring-src',
             layout: {
                 'symbol-placement': 'line',
-                'symbol-spacing': 95,
-                'text-field': '▶',
-                'text-size': 11,
-                'text-keep-upright': false,
-                'text-allow-overlap': true,
-                'text-ignore-placement': true
-            },
-            paint: {
-                'text-color': '#dfa09a'
+                'symbol-spacing': 70,
+                'icon-image': 'arrow-spring',
+                'icon-size': 0.55,
+                'icon-allow-overlap': true,
+                'icon-ignore-placement': true,
+                'icon-rotation-alignment': 'map',
+                'icon-keep-upright': false
             }
         });
 
@@ -577,15 +625,13 @@
             source: 'tuna-summer-src',
             layout: {
                 'symbol-placement': 'line',
-                'symbol-spacing': 95,
-                'text-field': '▶',
-                'text-size': 11,
-                'text-keep-upright': false,
-                'text-allow-overlap': true,
-                'text-ignore-placement': true
-            },
-            paint: {
-                'text-color': '#95bddb'
+                'symbol-spacing': 70,
+                'icon-image': 'arrow-summer',
+                'icon-size': 0.55,
+                'icon-allow-overlap': true,
+                'icon-ignore-placement': true,
+                'icon-rotation-alignment': 'map',
+                'icon-keep-upright': false
             }
         });
 
@@ -784,15 +830,13 @@
             source: 'cohunting-tuna-src',
             layout: {
                 'symbol-placement': 'line',
-                'symbol-spacing': 85,
-                'text-field': '▶',
-                'text-size': 12,
-                'text-keep-upright': false,
-                'text-allow-overlap': true,
-                'text-ignore-placement': true
-            },
-            paint: {
-                'text-color': '#a8cde8'
+                'symbol-spacing': 75,
+                'icon-image': 'arrow-summer',
+                'icon-size': 0.55,
+                'icon-allow-overlap': true,
+                'icon-ignore-placement': true,
+                'icon-rotation-alignment': 'map',
+                'icon-keep-upright': false
             }
         });
 
@@ -860,15 +904,13 @@
             source: 'cohunting-fleets-src',
             layout: {
                 'symbol-placement': 'line',
-                'symbol-spacing': 70,
-                'text-field': '▶',
-                'text-size': 10,
-                'text-keep-upright': false,
-                'text-allow-overlap': true,
-                'text-ignore-placement': true
-            },
-            paint: {
-                'text-color': '#e5c998'
+                'symbol-spacing': 60,
+                'icon-image': 'arrow-fleet',
+                'icon-size': 0.5,
+                'icon-allow-overlap': true,
+                'icon-ignore-placement': true,
+                'icon-rotation-alignment': 'map',
+                'icon-keep-upright': false
             }
         });
 
@@ -963,8 +1005,8 @@
 
         const almadrabaPoints = [
             [-6.092, 36.289],
-            [-5.862, 36.14],
             [-5.926, 36.19],
+            [-5.862, 36.14],
             [-5.62, 36.02]
         ];
 
@@ -1002,9 +1044,8 @@
         } catch (e) { /* */ }
     }
 
-    /* ── Conil Archival Feature (Scene 7 / Closing) ───────────────────── */
+    /* ── Conil Archival Feature (Scene 7 / Closing — animated pin only) ─ */
 
-    let conilPopup = null;
     let conilMarker = null;
 
     function showConilMapFeature() {
@@ -1018,40 +1059,12 @@
             <div class="conil-pin-core"></div>
         `;
 
-        const popupEl = document.createElement('div');
-        popupEl.className = 'conil-map-popup-card';
-        popupEl.innerHTML = `
-            <div class="conil-map-popup-thumb">
-                <img src="assets/images/conil_tuna_fishery_hoefnagel_1575.jpg" alt="Conil 1575 Engraving">
-            </div>
-            <div class="conil-map-popup-meta">
-                <span class="conil-map-popup-badge">Archival Evidence · 1575</span>
-                <span class="conil-map-popup-title">Conil de la Frontera</span>
-                <span class="conil-map-popup-sub">Hoefnagel’s Beach-Seine Tuna Harvest</span>
-            </div>
-        `;
-
-        conilPopup = new maplibregl.Popup({
-            closeButton: false,
-            closeOnClick: false,
-            anchor: 'bottom',
-            offset: [0, -18],
-            className: 'conil-popup-container'
-        })
-        .setLngLat([-6.092, 36.289])
-        .setDOMContent(popupEl)
-        .addTo(map);
-
         conilMarker = new maplibregl.Marker({ element: el })
             .setLngLat([-6.092, 36.289])
             .addTo(map);
     }
 
     function removeConilMapFeature() {
-        if (conilPopup) {
-            conilPopup.remove();
-            conilPopup = null;
-        }
         if (conilMarker) {
             conilMarker.remove();
             conilMarker = null;
@@ -1087,7 +1100,7 @@
         const sceneKey = sceneKeys[idx] || '';
 
         if (sceneKey === 'scene3') {
-            map.fitBounds([[-86.0, 25.5], [6.5, 46.5]], {
+            map.fitBounds([[-91.5, 23.0], [6.5, 43.0]], {
                 padding: getMapPadding('transatlantic'),
                 pitch: 0,
                 bearing: 0,
@@ -1137,6 +1150,7 @@
         hideCoHuntingOverlays();
         removeConilMapFeature();
         updateMapLegend(sceneKey);
+        setCountryLabelsVisible(sceneKey !== 'scene3');
 
         setMarkersForScene(sceneKey);
 
@@ -1154,7 +1168,6 @@
                 break;
             case 'scene5':
                 addAlmadrabaZones();
-                addMigrationRoute();
                 break;
             case 'scene6':
                 addLasBajasArena();
@@ -1195,6 +1208,39 @@
         map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-left');
 
         map.on('load', () => {
+            // Register route directional arrow icons
+            function createArrowImage(color) {
+                const size = 32;
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = color;
+                ctx.strokeStyle = 'rgba(3, 13, 27, 0.85)';
+                ctx.lineWidth = 1.5;
+                ctx.lineJoin = 'round';
+                ctx.beginPath();
+                ctx.moveTo(5, 6);
+                ctx.lineTo(27, 16);
+                ctx.lineTo(5, 26);
+                ctx.lineTo(11, 16);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                return ctx.getImageData(0, 0, size, size);
+            }
+
+            try {
+                map.addImage('arrow-spring', createArrowImage('#ff9a90'));
+                map.addImage('arrow-summer', createArrowImage('#95bddb'));
+                map.addImage('arrow-fleet', createArrowImage('#f2d19b'));
+            } catch (e) {
+                console.warn('Arrow registration error:', e);
+            }
+
+            // Identify basemap country/place label layers for scene toggling
+            findCountryLabelLayers();
+
             // Hide loader
             document.getElementById('loader').classList.add('is-hidden');
 
@@ -1257,7 +1303,7 @@
                     if (map) {
                         map.resize();
                         if (currentScene === 2) {
-                            map.fitBounds([[-90.5, 22.2], [5.8, 42.8]], {
+                            map.fitBounds([[-91.5, 23.0], [6.5, 43.0]], {
                                 padding: getMapPadding('transatlantic'),
                                 pitch: 0,
                                 bearing: 0,

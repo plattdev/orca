@@ -68,15 +68,14 @@ const sceneLocations = {
         ]
     },
     scene3: {
-        center: [-34, 36],
-        zoom: 2.85,
+        center: [-42.5, 33.0],
+        zoom: 2.3,
         pitch: 0,
         bearing: 0,
         markers: [
-            { lng: -89.0, lat: 25.8, label: "Gulf of Mexico", sublabel: "W. Spawning", type: "nature", alwaysShow: true, anchor: "top-left" },
-            { lng: -5.60, lat: 35.955, label: "Strait of Gibraltar", sublabel: "14 km Gateway", type: "geo", alwaysShow: false },
-            { lng: 4.60, lat: 38.45, label: "Balearic Sea", sublabel: "Med. Spawning", type: "nature", alwaysShow: true, anchor: "bottom-right" },
-            { lng: -58.0, lat: 40.60, label: "Grand Banks", sublabel: "Foraging Grounds", type: "nature", alwaysShow: true, anchor: "bottom" }
+            { lng: -89.0, lat: 25.8, label: "Gulf of Mexico", sublabel: "W. Spawning Ground", type: "nature", alwaysShow: true, anchor: "right" },
+            { lng: -58.0, lat: 40.6, label: "Grand Banks", sublabel: "Atlantic Foraging", type: "nature", alwaysShow: true, anchor: "bottom" },
+            { lng: 4.60, lat: 38.45, label: "Balearic Sea", sublabel: "Med. Spawning", type: "nature", alwaysShow: true, anchor: "bottom" }
         ]
     },
     scene4: {
@@ -94,10 +93,10 @@ const sceneLocations = {
         pitch: 45,
         bearing: -20,
         markers: [
-            { lng: -6.092, lat: 36.289, label: "Almadraba de Conil", type: "almadraba", alwaysShow: true, anchor: "right" },
-            { lng: -5.926, lat: 36.19, label: "Almadraba de Barbate", type: "almadraba", alwaysShow: true, anchor: "left" },
-            { lng: -5.862, lat: 36.14, label: "Almadraba de Zahara", type: "almadraba", alwaysShow: true, anchor: "right" },
-            { lng: -5.62, lat: 36.02, label: "Almadraba de Tarifa", type: "almadraba", alwaysShow: true, anchor: "bottom-right" }
+            { lng: -6.092, lat: 36.289, type: "almadraba" },
+            { lng: -5.926, lat: 36.19, type: "almadraba" },
+            { lng: -5.862, lat: 36.14, type: "almadraba" },
+            { lng: -5.62, lat: 36.02, type: "almadraba" }
         ]
     },
     scene6: {
