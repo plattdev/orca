@@ -1,6 +1,6 @@
 /* ========================================================================
-   ORCA STORYTELLING — Main Application
-   MapLibre GL JS + Scrollama integration with scene transitions.
+   ORCA STORYTELLING
+   MapLibre GL JS + Scrollama integration 
    ======================================================================== */
 
 (function () {
