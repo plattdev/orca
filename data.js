@@ -12,10 +12,10 @@ const tunaCatchesAndSurvivalData = {
 };
 
 const orcaPopulationData = {
-    years: [1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
-    totalAbundance: [11, 12, 12, 18, 19, 21, 32, 32, 35, 35, 34, 34, 39],
-    interactingPodsINT: [11, 12, 12, 13, 14, 15, 15, 15, 15, 15, 15, 15, 18],
-    births: [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 2, 0, 4]
+    years: [1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2015, 2018, 2021, 2023],
+    totalAbundance: [11, 12, 12, 18, 19, 21, 32, 32, 35, 35, 34, 34, 39, 33, 34, 35, 36, 37],
+    interactingPodsINT: [11, 12, 12, 13, 14, 15, 15, 15, 15, 15, 15, 15, 18, 18, 18, 18, 18, 18],
+    births: [0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 2, 0, 4, 1, 2, 2, 1, 1]
 };
 
 const energyAndDepredationMetrics = {
@@ -64,13 +64,12 @@ const sceneLocations = {
             { lng: -5.755, lat: 35.948, label: "CSN (306 m)", sublabel: "LIW North Trough", type: "sill-channel", alwaysShow: true, anchor: "left" },
             { lng: -5.775, lat: 35.905, label: "CSS (310 m)", sublabel: "WMDW South Trough", type: "sill-channel", alwaysShow: true, anchor: "right" },
             { lng: -5.798, lat: 36.065, label: "Punta Camarinal", type: "nature", alwaysShow: true, anchor: "bottom" },
-            { lng: -5.6046, lat: 36.0117, label: "Tarifa", type: "geo", alwaysShow: true, anchor: "bottom-right" },
             { lng: -5.5167, lat: 35.9052, label: "Punta Cires", type: "geo", alwaysShow: false }
         ]
     },
     scene3: {
-        center: [-41, 32],
-        zoom: 2.3,
+        center: [-34, 36],
+        zoom: 2.85,
         pitch: 0,
         bearing: 0,
         markers: [
@@ -86,9 +85,7 @@ const sceneLocations = {
         pitch: 35,
         bearing: 15,
         markers: [
-            { lng: -5.73, lat: 35.92, label: "Las Bajas Arena", sublabel: "6.9 km² · 6-h tide", type: "nature", alwaysShow: true, anchor: "bottom" },
-            { lng: -5.605, lat: 36.013, label: "Tarifa", type: "town", alwaysShow: true, anchor: "bottom-right" },
-            { lng: -5.810, lat: 35.780, label: "Tangier", type: "town", alwaysShow: true, anchor: "top-left" }
+            { lng: -5.73, lat: 35.92, label: "Las Bajas Arena", sublabel: "6.9 km² · 6-h tide", type: "nature", alwaysShow: true, anchor: "bottom" }
         ]
     },
     scene5: {
@@ -97,10 +94,10 @@ const sceneLocations = {
         pitch: 45,
         bearing: -20,
         markers: [
-            { lng: -6.092, lat: 36.289, label: "Conil", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "right" },
-            { lng: -5.926, lat: 36.19, label: "Barbate", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "left" },
-            { lng: -5.862, lat: 36.14, label: "Zahara", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "right" },
-            { lng: -5.62, lat: 36.02, label: "Tarifa", sublabel: "Almadraba", type: "almadraba", alwaysShow: true, anchor: "bottom-right" }
+            { lng: -6.092, lat: 36.289, label: "Almadraba de Conil", type: "almadraba", alwaysShow: true, anchor: "right" },
+            { lng: -5.926, lat: 36.19, label: "Almadraba de Barbate", type: "almadraba", alwaysShow: true, anchor: "left" },
+            { lng: -5.862, lat: 36.14, label: "Almadraba de Zahara", type: "almadraba", alwaysShow: true, anchor: "right" },
+            { lng: -5.62, lat: 36.02, label: "Almadraba de Tarifa", type: "almadraba", alwaysShow: true, anchor: "bottom-right" }
         ]
     },
     scene6: {
@@ -109,16 +106,14 @@ const sceneLocations = {
         pitch: 16,
         bearing: 0,
         markers: [
-            { lng: -5.73, lat: 35.92, label: "Las Bajas Bank (6.9 km²)", sublabel: "Pods A1 & A2 · 300+ m lines", type: "nature", alwaysShow: true, anchor: "bottom" },
-            { lng: -5.606, lat: 36.011, label: "Tarifa Port (Spain)", sublabel: "10–20 drop-line boats/day", type: "town", alwaysShow: true, anchor: "bottom-right" },
-            { lng: -5.805, lat: 35.789, label: "Tangier Port (Morocco)", sublabel: "50–60 wooden boats/day", type: "town", alwaysShow: true, anchor: "top-left" }
+            { lng: -5.73, lat: 35.92, label: "Las Bajas Bank (6.9 km²)", sublabel: "Pods A1 & A2 · 300+ m lines", type: "nature", alwaysShow: true, anchor: "bottom" }
         ]
     },
     closing: {
-        center: [-5.6, 35.95],
-        zoom: 5.9,
-        pitch: 0,
-        bearing: 0,
+        center: [-6.092, 36.289],
+        zoom: 9.6,
+        pitch: 20,
+        bearing: -10,
         markers: []
     }
 };

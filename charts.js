@@ -290,7 +290,7 @@ const Charts = (() => {
         ctx.fillStyle = C.textSecondary;
         ctx.font = `${fsAxis}px ${fontMono}`;
         ctx.textAlign = 'center';
-        data.years.filter((_, i) => i % 2 === 0).forEach(year => {
+        [2000, 2005, 2010, 2015, 2020, 2023].forEach(year => {
             ctx.fillText(year, xScale(year), ih + 20);
         });
 
@@ -335,12 +335,17 @@ const Charts = (() => {
             ctx.stroke();
         });
 
-        // Final 2011 endpoint annotation (39 surviving individuals)
-        const lastIdx = data.years.length - 1;
+        // Endpoints annotations (2011 and 2023 updates)
         ctx.fillStyle = C.textPrimary;
         ctx.font = `600 ${fsNote}px ${fontMono}`;
+        ctx.textAlign = 'center';
+        const idx2011 = data.years.indexOf(2011);
+        if (idx2011 !== -1) {
+            ctx.fillText('39 (2011)', xScale(2011), yScale(data.totalAbundance[idx2011]) - 10);
+        }
+        const lastIdx = data.years.length - 1;
         ctx.textAlign = 'right';
-        ctx.fillText('39 whales (2011)', xScale(data.years[lastIdx]) - 6, yScale(data.totalAbundance[lastIdx]) - 9);
+        ctx.fillText('37 whales (2023 · 6 communities)', xScale(data.years[lastIdx]), yScale(data.totalAbundance[lastIdx]) - 10);
 
         ctx.restore();
         const lx = margin.left;
@@ -350,7 +355,7 @@ const Charts = (() => {
         ctx.fillRect(lx, ly - 2, 14, 2.5);
         ctx.fillStyle = C.textSecondary;
         ctx.textAlign = 'left';
-        ctx.fillText('Cumulative resident community (5 pods: A1, A2, B, C, D)', lx + 20, ly + 3);
+        ctx.fillText('Resident subpopulation abundance (Esteban et al., 2016, 2026)', lx + 20, ly + 3);
     }
 
     /* ── Scene 6: Interacting Pods (INT) vs. Total Community (1999–2011) ─ */

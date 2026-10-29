@@ -166,10 +166,10 @@
         const mapWidth = map ? map.getContainer().clientWidth : Math.round(window.innerWidth * 0.4);
         if (mode === 'transatlantic') {
             return {
-                top: 48,
-                bottom: 48,
+                top: 40,
+                bottom: 110,
                 left: 28,
-                right: Math.min(182, Math.round(mapWidth * 0.36))
+                right: Math.max(200, Math.round(mapWidth * 0.40))
             };
         }
         if (mode === 'cohunting') {
@@ -1002,6 +1002,62 @@
         } catch (e) { /* */ }
     }
 
+    /* ── Conil Archival Feature (Scene 7 / Closing) ───────────────────── */
+
+    let conilPopup = null;
+    let conilMarker = null;
+
+    function showConilMapFeature() {
+        if (!map) return;
+        removeConilMapFeature();
+
+        const el = document.createElement('div');
+        el.className = 'conil-map-pin';
+        el.innerHTML = `
+            <div class="conil-pin-pulse"></div>
+            <div class="conil-pin-core"></div>
+        `;
+
+        const popupEl = document.createElement('div');
+        popupEl.className = 'conil-map-popup-card';
+        popupEl.innerHTML = `
+            <div class="conil-map-popup-thumb">
+                <img src="assets/images/conil_tuna_fishery_hoefnagel_1575.jpg" alt="Conil 1575 Engraving">
+            </div>
+            <div class="conil-map-popup-meta">
+                <span class="conil-map-popup-badge">Archival Evidence · 1575</span>
+                <span class="conil-map-popup-title">Conil de la Frontera</span>
+                <span class="conil-map-popup-sub">Hoefnagel’s Beach-Seine Tuna Harvest</span>
+            </div>
+        `;
+
+        conilPopup = new maplibregl.Popup({
+            closeButton: false,
+            closeOnClick: false,
+            anchor: 'bottom',
+            offset: [0, -18],
+            className: 'conil-popup-container'
+        })
+        .setLngLat([-6.092, 36.289])
+        .setDOMContent(popupEl)
+        .addTo(map);
+
+        conilMarker = new maplibregl.Marker({ element: el })
+            .setLngLat([-6.092, 36.289])
+            .addTo(map);
+    }
+
+    function removeConilMapFeature() {
+        if (conilPopup) {
+            conilPopup.remove();
+            conilPopup = null;
+        }
+        if (conilMarker) {
+            conilMarker.remove();
+            conilMarker = null;
+        }
+    }
+
     /* ── Scene Transition Handler ─────────────────────────────────────── */
 
     function onSceneEnter(response) {
@@ -1031,7 +1087,7 @@
         const sceneKey = sceneKeys[idx] || '';
 
         if (sceneKey === 'scene3') {
-            map.fitBounds([[-90.5, 22.2], [5.8, 42.8]], {
+            map.fitBounds([[-86.0, 25.5], [6.5, 46.5]], {
                 padding: getMapPadding('transatlantic'),
                 pitch: 0,
                 bearing: 0,
@@ -1079,6 +1135,7 @@
         hideAlmadrabaZones();
         hideLasBajasArena();
         hideCoHuntingOverlays();
+        removeConilMapFeature();
         updateMapLegend(sceneKey);
 
         setMarkersForScene(sceneKey);
@@ -1105,6 +1162,7 @@
                 setTimeout(() => Charts.redraw(), 450);
                 break;
             case 'closing':
+                showConilMapFeature();
                 break;
         }
     }
@@ -1169,6 +1227,25 @@
                     }
                 });
             });
+
+            // Click on Conil archival card to focus Conil on the map
+            const conilCard = document.getElementById('card-conil');
+            if (conilCard) {
+                conilCard.style.cursor = 'pointer';
+                conilCard.title = 'Click to focus Conil on the map';
+                conilCard.addEventListener('click', () => {
+                    if (map) {
+                        map.flyTo({
+                            center: [-6.092, 36.289],
+                            zoom: 10.2,
+                            pitch: 24,
+                            bearing: -10,
+                            essential: true
+                        });
+                        showConilMapFeature();
+                    }
+                });
+            }
 
             // Resize handler
             let resizeTimer;

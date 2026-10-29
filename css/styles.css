@@ -82,14 +82,6 @@ img {
     display: block;
 }
 
-.orcaLongLine {
-    width: 100%;
-    max-width: 440px;
-    height: auto;
-    margin: var(--space-lg) auto;
-    display: block;
-}
-
 /* ========================================================================
    Scene Navigation Dots
    ======================================================================== */
@@ -351,18 +343,24 @@ img {
 .hero {
     min-height: 100vh;
     min-height: 100dvh;
-    width: var(--panel-width);
+    width: 100%;
+    max-width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    text-align: left;
-    padding: clamp(18px, 2.6dvh, 36px) clamp(36px, 4.5vw, 68px);
+    justify-content: center;
+    text-align: center;
+    padding: clamp(24px, 4dvh, 48px) clamp(24px, 5vw, 64px);
     box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    background: radial-gradient(circle at 50% 40%, rgba(10, 25, 47, 0.94) 0%, rgba(2, 12, 27, 0.98) 75%);
 }
 
 .hero__content {
     width: 100%;
-    max-width: 62ch;
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: center;
     animation: hero-appear 1.5s var(--ease-out-expo) 0.5s both;
 }
 
@@ -385,6 +383,7 @@ img {
     line-height: 1.1;
     text-wrap: balance;
     margin-bottom: var(--space-sm);
+    text-align: center;
     background: linear-gradient(135deg, var(--color-text-primary), var(--color-ocean-200));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -404,6 +403,7 @@ img {
     letter-spacing: 0.12em;
     line-height: 1.5;
     margin-bottom: var(--space-md);
+    text-align: center;
 }
 
 .hero__subtitle2 {
@@ -411,9 +411,11 @@ img {
     color: var(--color-text-secondary);
     font-weight: 400;
     line-height: 1.62;
-    max-width: 100%;
+    max-width: 68ch;
+    margin-inline: auto;
     text-wrap: pretty;
     margin-bottom: var(--space-md);
+    text-align: center;
 }
 
 .hero__fin-container {
@@ -508,24 +510,17 @@ img {
     line-height: 1.2;
     text-wrap: balance;
     margin-bottom: var(--space-md);
-    color: var(--color-text-primary);
+    color: var(--color-ocean-300);
 }
 
 .scene--compact .scene__title {
     font-size: clamp(1.48rem, 1.1rem + 1.5vw, 2rem);
     margin-bottom: 8px;
+    color: var(--color-ocean-300);
 }
 
 .scene__divider {
-    width: 48px;
-    height: 0;
-    border-block-end: 2px solid var(--color-gold);
-    opacity: 0.85;
-    margin-bottom: var(--space-lg);
-}
-
-.scene--compact .scene__divider {
-    margin-bottom: 14px;
+    display: none !important;
 }
 
 .scene__narrative {
@@ -831,10 +826,10 @@ img {
     line-height: 1.25;
     text-wrap: balance;
     margin-bottom: var(--space-md);
-    background: linear-gradient(135deg, var(--color-text-primary), var(--color-ocean-200));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-ocean-300);
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: var(--color-ocean-300);
 }
 
 .closing__credits {
@@ -1291,6 +1286,124 @@ img {
 }
 
 /* ========================================================================
+   Conil Archival Engraving Map Popup & Pin (Scene 7)
+   ======================================================================== */
+
+.conil-map-pin {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.conil-pin-core {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 14px rgba(212, 178, 124, 0.95);
+}
+
+.conil-pin-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(212, 178, 124, 0.45);
+    animation: conil-pulse 2s infinite ease-out;
+}
+
+@keyframes conil-pulse {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+}
+
+.conil-popup-container .maplibregl-popup-content {
+    background: rgba(6, 18, 38, 0.96);
+    border: 1px solid rgba(212, 178, 124, 0.5);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(100, 181, 246, 0.2);
+    padding: 10px;
+    max-width: 290px;
+    backdrop-filter: blur(12px);
+    animation: conil-emerge 0.5s var(--ease-out-expo) both;
+}
+
+.conil-popup-container .maplibregl-popup-tip {
+    border-top-color: rgba(6, 18, 38, 0.96);
+}
+
+@keyframes conil-emerge {
+    from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.conil-map-popup-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.conil-map-popup-thumb {
+    width: 100%;
+    height: 145px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.conil-map-popup-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.conil-map-popup-thumb:hover img {
+    transform: scale(1.05);
+}
+
+.conil-map-popup-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.conil-map-popup-badge {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.conil-map-popup-title {
+    font-family: var(--font-display);
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.conil-map-popup-sub {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary);
+}
+
+/* ========================================================================
    End-of-Document References Footer (Separated from Cultural Learning)
    ======================================================================== */
 
@@ -1527,24 +1640,11 @@ img {
 }
 
 .key-message {
-    margin: var(--space-xl) 0;
-    padding: var(--space-lg) var(--space-xl);
-    background: rgba(11, 29, 54, 0.72);
-    border: 1px solid #456a8c;
-    border-inline-start: 3px solid var(--color-gold);
-    border-radius: var(--radius-sm);
+    margin: var(--space-3xl) 0;
+    padding: var(--space-3xl) 0;
+  
 }
 
-.key-message__kicker {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-gold);
-    margin-block-end: var(--space-xs);
-}
 
 .key-message__quote {
     font-family: var(--font-display);
@@ -1553,15 +1653,16 @@ img {
     font-weight: 700;
     line-height: 1.3;
     color: var(--color-text-primary);
-    margin-block-end: var(--space-sm);
+    margin-block-end: var(--space-md);
     text-wrap: balance;
+    
+    
 }
 
 .key-message__sub {
-    font-size: 0.98rem;
+    font-size: 1.2rem;
+    font-family: var(--font-display);
     line-height: 1.65;
-    color: var(--color-text-secondary);
-    text-wrap: pretty;
 }
 
 @media (forced-colors: active) {
