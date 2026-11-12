@@ -267,6 +267,36 @@ img {
     border-top: 3px dotted #d4b27c;
 }
 
+.map-legend__swatch--transect-a {
+    border-top: 3px dashed #e0a938;
+}
+
+.map-legend__swatch--transect-b {
+    border-top: 3px solid #9bc5d9;
+}
+
+.map-legend__swatch--orca-core {
+    width: 17px;
+    height: 11px;
+    margin-inline: 2px;
+    background: rgba(224, 169, 56, 0.32);
+    border: 1.5px solid #f5c76b;
+    border-radius: 4px;
+}
+
+.map-legend__swatch--orca-range {
+    width: 17px;
+    height: 11px;
+    margin-inline: 2px;
+    background: rgba(126, 200, 227, 0.24);
+    border: 1.5px solid #a8e0f5;
+    border-radius: 4px;
+}
+
+.map-legend__swatch--orca-corridor {
+    border-top: 2.5px dashed #9bc5d9;
+}
+
 .map-callout {
     position: absolute;
     white-space: nowrap;
@@ -1047,8 +1077,7 @@ img {
     color: var(--color-text-primary);
 }
 
-.transect-figure__credit,
-.almadraba-figure__credit {
+.transect-figure__credit {
     font-family: var(--font-mono);
     font-size: 0.76rem;
     color: #98a6c7;
@@ -1056,14 +1085,12 @@ img {
     overflow-wrap: break-word;
 }
 
-.transect-figure__credit a,
-.almadraba-figure__credit a {
+.transect-figure__credit a {
     color: var(--color-orca-accent);
     text-decoration: none;
 }
 
-.transect-figure__credit a:hover,
-.almadraba-figure__credit a:hover {
+.transect-figure__credit a:hover {
     text-decoration: underline;
 }
 
@@ -1142,6 +1169,10 @@ img {
     max-width: 440px;
     height: auto;
     display: block;
+}
+
+.orca-figure__img {
+    max-width: 460px;
 }
 
 .tuna-figure__caption {

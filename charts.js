@@ -146,71 +146,7 @@ const Charts = (() => {
                 .text(`${lat.toFixed(2)}°N`);
         });
 
-        // Mooring stations from reference sketch: CSS and CSN
-        const moorings = bathymetryProfile.filter(d => d.isMooring);
-        moorings.forEach(m => {
-            const mx = x(m.lat);
-            const my = y(m.depth);
-
-            // Vertical dashed mooring line
-            g.append('line')
-                .attr('x1', mx).attr('x2', mx)
-                .attr('y1', y(0)).attr('y2', my)
-                .attr('stroke', C.tunaRed)
-                .attr('stroke-width', 1)
-                .attr('stroke-dasharray', '3,2')
-                .attr('opacity', 0.6);
-
-            // Outer red target ring
-            g.append('circle')
-                .attr('cx', mx)
-                .attr('cy', my)
-                .attr('r', 6)
-                .attr('fill', 'none')
-                .attr('stroke', C.tunaRed)
-                .attr('stroke-width', 1.5);
-
-            // Inner red dot
-            g.append('circle')
-                .attr('cx', mx)
-                .attr('cy', my)
-                .attr('r', 2.5)
-                .attr('fill', C.tunaRed);
-
-            // Label tag (CSS / CSN)
-            g.append('rect')
-                .attr('x', mx - 14)
-                .attr('y', my - 22)
-                .attr('width', 28)
-                .attr('height', 13)
-                .attr('rx', 3)
-                .attr('fill', 'rgba(196, 125, 118, 0.22)')
-                .attr('stroke', C.tunaRed)
-                .attr('stroke-width', 0.8);
-
-            g.append('text')
-                .attr('x', mx)
-                .attr('y', my - 13)
-                .attr('text-anchor', 'middle')
-                .attr('fill', '#fff')
-                .attr('font-size', '8px')
-                .attr('font-weight', '700')
-                .attr('font-family', fontMono)
-                .text(m.label);
-
-            // Depth tag
-            g.append('text')
-                .attr('x', mx)
-                .attr('y', my + 13)
-                .attr('text-anchor', 'middle')
-                .attr('fill', C.tunaRed)
-                .attr('font-size', '7px')
-                .attr('font-weight', '600')
-                .attr('font-family', fontMono)
-                .text('290 m');
-        });
-
-        // Central ridge label (between CSS and CSN)
+        // Central ridge label
         const crest = bathymetryProfile.find(d => d.label === 'Crest');
         if (crest) {
             const cx = x(crest.lat);

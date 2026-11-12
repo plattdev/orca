@@ -26,7 +26,10 @@
         bathymetry: '#c97a74',
         town: '#d4b27c',
         almadraba: '#dfc18b',
-        'sill-channel': '#c97a74',
+        'transect-a': '#e0a938',
+        'transect-b': '#9bc5d9',
+        'orca-core': '#e0a938',
+        'orca-range': '#7ec8e3',
         basin: '#8c7aa8'
     };
 
@@ -59,14 +62,25 @@
             transition: transform 0.3s ease;
         `;
 
-        if (type === 'sill-channel') {
+        if (type === 'transect-a' || type === 'orca-core') {
             customStyles = `
-                width: 14px;
-                height: 14px;
+                width: 12px;
+                height: 12px;
                 border-radius: 50%;
-                background: #c97a74;
+                background: #e0a938;
                 border: 2px solid #ffffff;
-                box-shadow: 0 0 0 2px rgba(201, 122, 116, 0.55), 0 0 12px rgba(201, 122, 116, 0.75);
+                box-shadow: 0 0 0 2px rgba(224, 169, 56, 0.45), 0 0 12px rgba(224, 169, 56, 0.75);
+                cursor: default;
+                transition: transform 0.3s ease;
+            `;
+        } else if (type === 'transect-b' || type === 'orca-range') {
+            customStyles = `
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #7ec8e3;
+                border: 2px solid #ffffff;
+                box-shadow: 0 0 0 2px rgba(126, 200, 227, 0.45), 0 0 12px rgba(126, 200, 227, 0.75);
                 cursor: default;
                 transition: transform 0.3s ease;
             `;
@@ -184,6 +198,14 @@
                 right: 35
             };
         }
+        if (mode === 'iberia') {
+            return {
+                top: 48,
+                bottom: 112,
+                left: 65,
+                right: 55
+            };
+        }
         if (mode === 'cohunting') {
             return {
                 top: 52,
@@ -204,7 +226,41 @@
         const legendEl = document.getElementById('map-legend');
         if (!legendEl) return;
 
-        if (sceneKey === 'scene6') {
+        if (sceneKey === 'scene2') {
+            legendEl.innerHTML = `
+                <div class="map-legend__title">Hydrographic Sections · Strait of Gibraltar</div>
+                <div class="map-legend__items">
+                    <div class="map-legend__item">
+                        <span class="map-legend__swatch map-legend__swatch--transect-a"></span>
+                        <span><strong>Transect A</strong> — Along-Strait W–E section (6.1°W–5.2°W)</span>
+                    </div>
+                    <div class="map-legend__item">
+                        <span class="map-legend__swatch map-legend__swatch--transect-b"></span>
+                        <span><strong>Transect B</strong> — Camarinal Sill S–N section</span>
+                    </div>
+                </div>
+            `;
+            legendEl.classList.add('is-visible');
+        } else if (sceneKey === 'scene4') {
+            legendEl.innerHTML = `
+                <div class="map-legend__title">Iberian Orca Detected Habitat · Esteban et al. (2013–2026)</div>
+                <div class="map-legend__items">
+                    <div class="map-legend__item">
+                        <span class="map-legend__swatch map-legend__swatch--orca-core"></span>
+                        <span><strong>Core Habitat (Area A)</strong> — Strait &amp; Gulf of Cádiz (all 6 communities)</span>
+                    </div>
+                    <div class="map-legend__item">
+                        <span class="map-legend__swatch map-legend__swatch--orca-range"></span>
+                        <span><strong>Seasonal Range (Areas B &amp; C)</strong> — Portugal, Galicia &amp; Biscay (4 communities)</span>
+                    </div>
+                    <div class="map-legend__item">
+                        <span class="map-legend__swatch map-legend__swatch--orca-corridor"></span>
+                        <span><strong>Coastal Corridor</strong> — Seasonal bluefin tuna pursuit route</span>
+                    </div>
+                </div>
+            `;
+            legendEl.classList.add('is-visible');
+        } else if (sceneKey === 'scene6') {
             legendEl.innerHTML = `
                 <div class="map-legend__title">Co-Hunting Arena · July–August</div>
                 <div class="map-legend__items">
@@ -228,17 +284,56 @@
         }
     }
 
-    /* ── Camarinal Sill Transect (Scene 3 & 4) ────────────────────────── */
+    /* ── Hydrographic Transects A & B (Scene 2) ───────────────────────── */
 
     let camarinalLineAdded = false;
 
     function addCamarinalTransect() {
         if (camarinalLineAdded) {
-            map.setLayoutProperty('camarinal-transect-line', 'visibility', 'visible');
-            map.setLayoutProperty('camarinal-transect-glow', 'visibility', 'visible');
+            ['along-strait-transect-glow', 'along-strait-transect-line',
+             'camarinal-transect-glow', 'camarinal-transect-line'].forEach(id => {
+                try { map.setLayoutProperty(id, 'visibility', 'visible'); } catch (e) { }
+            });
             return;
         }
 
+        // Transect A: Along-Strait W–E ODV Section (6.1°W to 5.2°W)
+        map.addSource('along-strait-transect-src', {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                geometry: {
+                    type: 'LineString',
+                    coordinates: alongStraitTransectCoordinates
+                }
+            }
+        });
+
+        map.addLayer({
+            id: 'along-strait-transect-glow',
+            type: 'line',
+            source: 'along-strait-transect-src',
+            paint: {
+                'line-color': '#e0a938',
+                'line-width': 8,
+                'line-opacity': 0.24,
+                'line-blur': 4
+            }
+        });
+
+        map.addLayer({
+            id: 'along-strait-transect-line',
+            type: 'line',
+            source: 'along-strait-transect-src',
+            paint: {
+                'line-color': '#e0a938',
+                'line-width': 2.8,
+                'line-opacity': 0.92,
+                'line-dasharray': [4, 2]
+            }
+        });
+
+        // Transect B: Camarinal Sill S–N Cross-Section (Morocco to Spain)
         map.addSource('camarinal-transect-src', {
             type: 'geojson',
             data: {
@@ -257,7 +352,7 @@
             paint: {
                 'line-color': '#8fb8d6',
                 'line-width': 8,
-                'line-opacity': 0.22,
+                'line-opacity': 0.25,
                 'line-blur': 4
             }
         });
@@ -268,8 +363,8 @@
             source: 'camarinal-transect-src',
             paint: {
                 'line-color': '#9bc5d9',
-                'line-width': 2.5,
-                'line-opacity': 0.9
+                'line-width': 2.8,
+                'line-opacity': 0.94
             }
         });
 
@@ -279,8 +374,10 @@
     function hideCamarinalTransect() {
         if (!camarinalLineAdded) return;
         try {
-            map.setLayoutProperty('camarinal-transect-line', 'visibility', 'none');
-            map.setLayoutProperty('camarinal-transect-glow', 'visibility', 'none');
+            ['along-strait-transect-glow', 'along-strait-transect-line',
+             'camarinal-transect-glow', 'camarinal-transect-line'].forEach(id => {
+                map.setLayoutProperty(id, 'visibility', 'none');
+            });
         } catch (e) { }
     }
 
@@ -329,7 +426,7 @@
             }
         });
 
-        // 2. LIW — Levantine Intermediate Water (West-flowing: along Spanish slope past Gibraltar/Tarifa into CSN)
+        // 2. LIW — Levantine Intermediate Water (West-flowing: along Spanish slope past Gibraltar/Tarifa)
         map.addSource('liw-current-src', {
             type: 'geojson',
             data: {
@@ -343,7 +440,7 @@
                         [-5.36, 36.13],
                         [-5.48, 36.08],
                         [-5.60, 36.01],
-                        [-5.755, 35.948], // Enters CSN (Camarinal Sill North)
+                        [-5.755, 35.948],
                         [-5.84, 35.91],
                         [-6.02, 35.88]
                     ]
@@ -375,7 +472,7 @@
             }
         });
 
-        // 3. WMDW — Western Mediterranean Deep Water (West-flowing: along Moroccan slope past Ceuta into CSS & Tangier Basin)
+        // 3. WMDW — Western Mediterranean Deep Water (West-flowing: along Moroccan slope past Ceuta into Tangier Basin)
         map.addSource('wmdw-current-src', {
             type: 'geojson',
             data: {
@@ -389,7 +486,7 @@
                         [-5.316, 35.889], // Past Ceuta
                         [-5.50, 35.88],
                         [-5.65, 35.885],
-                        [-5.775, 35.905], // Enters CSS (Camarinal Sill South)
+                        [-5.775, 35.905],
                         [-5.84, 35.88],   // Tangier Basin (TB)
                         [-5.97, 35.86],   // Espartel Sill (ESP)
                         [-6.18, 35.83]
@@ -1071,6 +1168,128 @@
         }
     }
 
+    /* ── Iberian Killer Whale Detected Habitat Zones (Scene 4) ────────── */
+    /* Literature: Esteban et al. (2013, 2016a, 2022, 2026) */
+
+    let orcaHabitatAdded = false;
+
+    function addOrcaHabitatZones() {
+        if (orcaHabitatAdded) {
+            ['orca-corridor-glow', 'orca-corridor-line',
+             'orca-habitat-fill', 'orca-habitat-glow', 'orca-habitat-outline'].forEach(id => {
+                try { map.setLayoutProperty(id, 'visibility', 'visible'); } catch (e) { }
+            });
+            return;
+        }
+
+        // 1. Coastal Atlantic–Strait migration corridor
+        map.addSource('orca-corridor-src', {
+            type: 'geojson',
+            data: {
+                type: 'Feature',
+                geometry: {
+                    type: 'LineString',
+                    coordinates: iberianOrcaCorridorCoordinates
+                }
+            }
+        });
+
+        map.addLayer({
+            id: 'orca-corridor-glow',
+            type: 'line',
+            source: 'orca-corridor-src',
+            paint: {
+                'line-color': '#7ec8e3',
+                'line-width': 7,
+                'line-opacity': 0.18,
+                'line-blur': 4
+            }
+        });
+
+        map.addLayer({
+            id: 'orca-corridor-line',
+            type: 'line',
+            source: 'orca-corridor-src',
+            paint: {
+                'line-color': '#9bc5d9',
+                'line-width': 2.0,
+                'line-opacity': 0.72,
+                'line-dasharray': [3, 3]
+            }
+        });
+
+        // 2. Documented habitat polygons (Core Area A vs Seasonal Range Areas B & C)
+        map.addSource('orca-habitat-src', {
+            type: 'geojson',
+            data: iberianOrcaHabitatZones
+        });
+
+        map.addLayer({
+            id: 'orca-habitat-fill',
+            type: 'fill',
+            source: 'orca-habitat-src',
+            paint: {
+                'fill-color': [
+                    'match',
+                    ['get', 'tier'],
+                    'core', '#e0a938',
+                    '#7ec8e3'
+                ],
+                'fill-opacity': [
+                    'match',
+                    ['get', 'tier'],
+                    'core', 0.30,
+                    0.20
+                ]
+            }
+        });
+
+        map.addLayer({
+            id: 'orca-habitat-glow',
+            type: 'line',
+            source: 'orca-habitat-src',
+            paint: {
+                'line-color': [
+                    'match',
+                    ['get', 'tier'],
+                    'core', '#e0a938',
+                    '#7ec8e3'
+                ],
+                'line-width': 7,
+                'line-opacity': 0.25,
+                'line-blur': 4
+            }
+        });
+
+        map.addLayer({
+            id: 'orca-habitat-outline',
+            type: 'line',
+            source: 'orca-habitat-src',
+            paint: {
+                'line-color': [
+                    'match',
+                    ['get', 'tier'],
+                    'core', '#f5c76b',
+                    '#a8e0f5'
+                ],
+                'line-width': 2.0,
+                'line-opacity': 0.92
+            }
+        });
+
+        orcaHabitatAdded = true;
+    }
+
+    function hideOrcaHabitatZones() {
+        if (!orcaHabitatAdded) return;
+        try {
+            ['orca-corridor-glow', 'orca-corridor-line',
+             'orca-habitat-fill', 'orca-habitat-glow', 'orca-habitat-outline'].forEach(id => {
+                map.setLayoutProperty(id, 'visibility', 'none');
+            });
+        } catch (e) { }
+    }
+
     /* ── Scene Transition Handler ─────────────────────────────────────── */
 
     function onSceneEnter(response) {
@@ -1105,6 +1324,14 @@
                 pitch: 0,
                 bearing: 0,
                 duration: 1800,
+                essential: true
+            });
+        } else if (sceneKey === 'scene4') {
+            map.fitBounds([[-10.8, 35.3], [-1.2, 44.6]], {
+                padding: getMapPadding('iberia'),
+                pitch: 0,
+                bearing: 0,
+                duration: 1700,
                 essential: true
             });
         } else if (sceneKey === 'scene6') {
@@ -1147,6 +1374,7 @@
         hideTransatlanticMigration();
         hideAlmadrabaZones();
         hideLasBajasArena();
+        hideOrcaHabitatZones();
         hideCoHuntingOverlays();
         removeConilMapFeature();
         updateMapLegend(sceneKey);
@@ -1162,8 +1390,8 @@
                 addTransatlanticMigration();
                 break;
             case 'scene4':
+                addOrcaHabitatZones();
                 addLasBajasArena();
-                addMigrationRoute();
                 setTimeout(() => Charts.redraw(), 450);
                 break;
             case 'scene5':
@@ -1305,6 +1533,13 @@
                         if (currentScene === 2) {
                             map.fitBounds([[-91.5, 23.0], [6.5, 43.0]], {
                                 padding: getMapPadding('transatlantic'),
+                                pitch: 0,
+                                bearing: 0,
+                                duration: 400
+                            });
+                        } else if (currentScene === 3) {
+                            map.fitBounds([[-10.8, 35.3], [-1.2, 44.6]], {
+                                padding: getMapPadding('iberia'),
                                 pitch: 0,
                                 bearing: 0,
                                 duration: 400
