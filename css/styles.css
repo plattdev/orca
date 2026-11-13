@@ -66,13 +66,16 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    max-width: 100%;
+    overflow-x: clip;
 }
 
 body {
     font-family: var(--font-body);
     color: var(--color-text-primary);
     background: var(--color-ocean-900);
-    overflow-x: hidden;
+    max-width: 100%;
+    overflow-x: clip;
     line-height: 1.6;
 }
 
@@ -297,6 +300,16 @@ img {
     border-top: 2.5px dashed #9bc5d9;
 }
 
+.map-legend__swatch--almadraba {
+    width: 14px;
+    height: 14px;
+    margin-inline: 4px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 3px rgba(212, 178, 124, 0.32), 0 0 10px rgba(212, 178, 124, 0.85);
+}
+
 .map-callout {
     position: absolute;
     white-space: nowrap;
@@ -430,6 +443,8 @@ img {
    ======================================================================== */
 
 .hero {
+    height: 100vh;
+    height: 100dvh;
     min-height: 100vh;
     min-height: 100dvh;
     width: 100%;
@@ -438,41 +453,86 @@ img {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: clamp(24px, 4dvh, 48px) clamp(24px, 5vw, 64px);
+    padding: clamp(24px, 4dvh, 48px) clamp(20px, 5dvw, 64px) clamp(72px, 10dvh, 96px);
     box-sizing: border-box;
     position: relative;
+    overflow: hidden;
     z-index: 10;
-    background: radial-gradient(circle at 50% 40%, rgba(10, 25, 47, 0.94) 0%, rgba(2, 12, 27, 0.98) 75%);
+    background: radial-gradient(circle at 50% 45%, rgba(10, 25, 47, 0.94) 0%, rgba(2, 12, 27, 0.98) 78%);
 }
 
-.hero__content {
+.hero__map {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    max-width: 760px;
-    margin-inline: auto;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero__coastline-land {
+    fill: rgba(135, 198, 235, 0.075);
+    stroke: none;
+}
+
+.hero__coastline-shelf {
+    fill: none;
+    stroke: rgba(135, 198, 235, 0.16);
+    stroke-width: 0.75px;
+    stroke-dasharray: 3 4;
+    vector-effect: non-scaling-stroke;
+}
+
+.hero__coastline-line {
+    fill: none;
+    stroke: rgba(145, 206, 242, 0.62);
+    stroke-width: 1.05px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+/* Text sits on land: title over Spain, subtitle + paragraph over Morocco */
+.hero__content {
+    position: absolute;
+    left: 50%;
+    z-index: 2;
+    width: min(620px, 88dvw);
+    transform: translateX(-50%);
     text-align: center;
+    text-shadow: 0 2px 14px rgba(2, 12, 27, 0.88);
     animation: hero-appear 1.5s var(--ease-out-expo) 0.5s both;
+}
+
+.hero__content--top {
+    top: clamp(26px, 6.2dvh, 68px);
+}
+
+.hero__content--bottom {
+    bottom: clamp(66px, 11.8dvh, 118px);
+    width: min(500px, 82dvw);
 }
 
 @keyframes hero-appear {
     from {
         opacity: 0;
-        transform: translateY(40px);
+        translate: 0 40px;
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        translate: 0 0;
     }
 }
 
 
 .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(2.35rem, 1.35rem + 2.8vw, 3.85rem);
+    font-size: clamp(1.9rem, 1.25rem + 2.5dvw, 3.6rem);
     font-weight: 900;
     line-height: 1.1;
     text-wrap: balance;
-    margin-bottom: var(--space-sm);
+    margin: 0;
     text-align: center;
+    text-shadow: none;
     background: linear-gradient(135deg, var(--color-text-primary), var(--color-ocean-200));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -486,54 +546,40 @@ img {
 
 .hero__subtitle {
     font-family: var(--font-mono);
-    font-size: clamp(0.8rem, 0.7rem + 0.28vw, 0.94rem);
+    font-size: clamp(0.76rem, 0.68rem + 0.28dvw, 0.94rem);
     color: var(--color-ocean-200);
     font-weight: 500;
     letter-spacing: 0.12em;
-    line-height: 1.5;
-    margin-bottom: var(--space-md);
+    line-height: 1.45;
+    margin-bottom: var(--space-sm);
     text-align: center;
 }
 
 .hero__subtitle2 {
-    font-size: clamp(1.02rem, 0.9rem + 0.32vw, 1.16rem);
+    font-size: clamp(0.9rem, 0.82rem + 0.32dvw, 1.1rem);
     color: var(--color-text-secondary);
     font-weight: 400;
-    line-height: 1.62;
-    max-width: 68ch;
-    margin-inline: auto;
+    line-height: 1.55;
+    margin: 0 auto;
     text-wrap: pretty;
-    margin-bottom: var(--space-md);
     text-align: center;
 }
 
-.hero__fin-container {
-    margin: clamp(14px, 2.2dvh, 26px) auto clamp(12px, 2dvh, 22px);
-    max-width: min(510px, 94%);
-    width: 100%;
-}
-
 .hero__fin {
-    width: 100%;
-    max-height: min(35dvh, 282px);
-    height: auto;
-    object-fit: contain;
-    margin-inline: auto;
-    display: block;
-    opacity: 0.97;
-    transition: opacity 0.35s ease, transform 0.35s var(--ease-out-expo);
-}
-
-.hero__fin:hover {
-    opacity: 1;
-    transform: translateY(-2px);
+    opacity: 0.98;
+    animation: hero-appear 1.5s var(--ease-out-expo) 0.8s both;
 }
 
 .hero__scroll-cue {
+    position: absolute;
+    bottom: clamp(18px, 3dvh, 34px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: auto;
     gap: 6px;
     color: var(--color-text-secondary);
     font-size: 0.8125rem;
@@ -549,6 +595,58 @@ img {
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(8px); }
+}
+
+/* Portrait tablets & phones: keep text centered inside landmass */
+@media (max-aspect-ratio: 3/4) {
+    .hero__content--top {
+        top: clamp(44px, 11dvh, 108px);
+        width: min(500px, 84dvw);
+    }
+
+    .hero__content--bottom {
+        bottom: clamp(72px, 12.5dvh, 124px);
+        left: 52.5%;
+        width: min(420px, 74dvw);
+    }
+}
+
+/* Short landscape viewports (e.g. mobile landscape) */
+@media (max-height: 540px) {
+    .hero__content--top {
+        top: clamp(8px, 2.5dvh, 18px);
+    }
+
+    .hero__title {
+        font-size: clamp(1.35rem, 0.95rem + 2.2dvh, 2rem);
+    }
+
+    .hero__content--bottom {
+        bottom: clamp(30px, 8dvh, 46px);
+        width: min(330px, 68dvw);
+    }
+
+    .hero__subtitle {
+        font-size: 0.68rem;
+        margin-bottom: 2px;
+    }
+
+    .hero__subtitle2 {
+        font-size: 0.78rem;
+        line-height: 1.3;
+    }
+
+    .hero__scroll-cue {
+        bottom: 6px;
+        flex-direction: row;
+        gap: 6px;
+        font-size: 0.68rem;
+    }
+
+    .hero__scroll-arrow svg {
+        width: 16px;
+        height: 16px;
+    }
 }
 
 /* ========================================================================
@@ -1190,10 +1288,10 @@ img {
    ======================================================================== */
 
 .video-section {
-    margin-top: var(--space-xl);
-    margin-bottom: var(--space-xl);
-    padding-top: var(--space-md);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-2xl);
+    padding-top: 0;
+    border-top: none;
 }
 
 .video-section h4 {
@@ -1288,9 +1386,19 @@ img {
    ======================================================================== */
 
 .cooperation-section {
-    margin-top: var(--space-xl);
+    margin-top: var(--space-lg);
     padding-top: var(--space-md);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cooperation-section--second {
+    margin-top: var(--space-md);
+    padding-top: 0;
+    border-top: none;
+}
+
+.scene__narrative--after-media {
+    margin-top: clamp(40px, 6vh, 68px);
 }
 
 .cooperation-section h4 {
@@ -1498,13 +1606,13 @@ img {
    ======================================================================== */
 
 .references-spacer {
-    height: 45vh;
+    height: 6vh;
     width: var(--panel-width);
 }
 
 .references-footer {
     width: var(--panel-width);
-    padding: var(--space-3xl) clamp(28px, 4vw, 52px) var(--space-3xl);
+    padding: var(--space-xl) clamp(28px, 4vw, 52px) var(--space-xl);
     border-top: 1px solid rgba(100, 181, 246, 0.18);
     background: rgba(2, 10, 23, 0.96);
     box-sizing: border-box;
@@ -1516,26 +1624,26 @@ img {
 
 .references-section h4 {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 600;
     letter-spacing: 0.09em;
     text-transform: uppercase;
     color: var(--color-gold);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-sm);
 }
 
 .references-list {
     list-style: decimal;
     padding-left: var(--space-lg);
-    font-size: 0.95rem;
-    line-height: 1.75;
+    font-size: 0.85rem;
+    line-height: 1.42;
     color: var(--color-text-secondary);
     max-width: 75ch;
     overflow-wrap: break-word;
 }
 
 .references-list li {
-    margin-bottom: var(--space-md);
+    margin-bottom: 0.35rem;
     padding-left: var(--space-xs);
     text-wrap: pretty;
 }
@@ -1717,15 +1825,19 @@ img {
 }
 
 .conservation-note {
-    margin-top: var(--space-md);
-    font-size: 0.94rem;
-    line-height: 1.65;
-    color: var(--color-text-secondary);
+    margin-top: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    font-size: clamp(1.06rem, 0.98rem + 0.28vw, 1.2rem);
+    line-height: 1.68;
+    color: var(--color-text-primary);
+    background: linear-gradient(90deg, rgba(212, 178, 124, 0.12) 0%, rgba(143, 184, 214, 0.05) 100%);
+    border-left: 3.5px solid var(--color-gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     text-wrap: pretty;
 }
 
 .conservation-note strong {
-    color: var(--color-text-primary);
+    color: var(--color-gold);
     font-weight: 600;
 }
 
@@ -1943,11 +2055,19 @@ img {
     }
 
     .story {
-        margin-top: 36vh;
-        margin-top: 36dvh;
+        margin-top: 0;
     }
 
-    .hero,
+    .hero {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+        margin-bottom: 36vh;
+        margin-bottom: 36dvh;
+    }
+
     .scene,
     .closing,
     .references-footer {
@@ -1958,7 +2078,7 @@ img {
     }
 
     .references-spacer {
-        height: 18vh;
+        height: 4vh;
         width: 100%;
     }
 
@@ -1985,7 +2105,7 @@ img {
     }
 
     .hero__title {
-        font-size: clamp(2rem, 1.25rem + 5vw, 3.2rem);
+        font-size: clamp(1.75rem, 1.15rem + 3.2dvw, 3rem);
     }
 
     .metric-grid {
@@ -2027,7 +2147,8 @@ img {
         transition-duration: 0.01ms !important;
     }
 
-    .hero__content {
+    .hero__content,
+    .hero__fin {
         animation: none;
         opacity: 1;
     }

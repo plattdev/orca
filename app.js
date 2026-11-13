@@ -260,6 +260,17 @@
                 </div>
             `;
             legendEl.classList.add('is-visible');
+        } else if (sceneKey === 'scene5') {
+            legendEl.innerHTML = `
+                <div class="map-legend__title">Almadraba Trap-Net Harbors · April–June</div>
+                <div class="map-legend__items">
+                    <div class="map-legend__item">
+                        <span class="map-legend__swatch map-legend__swatch--almadraba"></span>
+                        <span><strong>Active <em>Almadraba</em> Harbors</strong> — Traditional coastal labyrinth-net traps anchored off <strong>Conil</strong>, <strong>Barbate</strong>, <strong>Zahara de los Atunes</strong> &amp; <strong>Tarifa</strong> to intercept pre-spawning bluefin tuna</span>
+                    </div>
+                </div>
+            `;
+            legendEl.classList.add('is-visible');
         } else if (sceneKey === 'scene6') {
             legendEl.innerHTML = `
                 <div class="map-legend__title">Co-Hunting Arena · July–August</div>

@@ -1,19 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 276" width="500" height="276" fill="none" role="img" aria-labelledby="heroEmblemTitle">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 284" width="500" height="284" fill="none" role="img" aria-labelledby="heroEmblemTitle">
   <title id="heroEmblemTitle">Minimalist white triad emblem with ORCA at the top, FISHERMEN on the left, and TUNA on the right framing a large Iberian orca dorsal fin above the Strait of Gibraltar</title>
 
   <!-- Minimalist Triad Frame (pure white hairlines & vertex points) -->
   <g stroke="#ffffff" stroke-linecap="round">
-    <line x1="238" y1="49" x2="80" y2="218" stroke-width="1.1" stroke-opacity="0.40"/>
-    <line x1="262" y1="49" x2="420" y2="218" stroke-width="1.1" stroke-opacity="0.40"/>
+    <line x1="238" y1="53" x2="80" y2="218" stroke-width="1.5" stroke-opacity="0.55"/>
+    <line x1="262" y1="53" x2="420" y2="218" stroke-width="1.5" stroke-opacity="0.55"/>
     <!-- Strait Sea Horizon / Triad Base -->
-    <line x1="84" y1="226" x2="416" y2="226" stroke-width="1.6" stroke-opacity="0.92"/>
+    <line x1="84" y1="226" x2="416" y2="226" stroke-width="1.95" stroke-opacity="0.95"/>
   </g>
 
   <!-- Triad Vertex Nodes -->
-  <g fill="#ffffff" fill-opacity="0.9">
-    <circle cx="250" cy="38" r="2.1"/>
-    <circle cx="72" cy="226" r="2.1"/>
-    <circle cx="428" cy="226" r="2.1"/>
+  <g fill="#ffffff" fill-opacity="0.96">
+    <circle cx="250" cy="41" r="2.7"/>
+    <circle cx="72" cy="226" r="2.7"/>
+    <circle cx="428" cy="226" r="2.7"/>
   </g>
 
   <!-- Large, Commanding Surfacing Orca Back & Tall Dorsal Fin (optically centered inside triad) -->
@@ -35,14 +35,14 @@
 
   <!-- Subtle Strait Current Wave Lines -->
   <path d="M 152 239 C 198 244, 252 235, 306 238 C 326 239, 342 240, 356 240.5"
-        stroke="#ffffff" stroke-width="1.15" stroke-linecap="round" stroke-opacity="0.58"/>
+        stroke="#ffffff" stroke-width="1.25" stroke-linecap="round" stroke-opacity="0.62"/>
   <path d="M 190 250 C 226 247.5, 266 253, 302 251 C 311 250.4, 318 250, 324 249.6"
-        stroke="#ffffff" stroke-width="0.9" stroke-linecap="round" stroke-opacity="0.34"/>
+        stroke="#ffffff" stroke-width="0.95" stroke-linecap="round" stroke-opacity="0.38"/>
 
   <!-- Minimalist Triad Labels: ORCA (top), FISHERMEN (left), TUNA (right) -->
-  <g fill="#ffffff" fill-opacity="0.94" font-family="'Avenir Next', 'Helvetica Neue', 'Inter', system-ui, sans-serif" font-size="12" font-weight="400" text-anchor="middle">
-    <text x="250" y="22" dx="2.1" letter-spacing="4.2">ORCA</text>
-    <text x="82" y="258" dx="1.7" letter-spacing="3.4">FISHERMEN</text>
-    <text x="418" y="258" dx="1.9" letter-spacing="3.8">TUNA</text>
+  <g fill="#95bddb" fill-opacity="1" font-family="'Avenir Next', 'Helvetica Neue', 'Inter', system-ui, sans-serif" font-size="23" font-weight="300" text-anchor="middle">
+    <text x="250" y="24" dx="2.2" letter-spacing="4.4">ORCA</text>
+    <text x="104" y="270" dx="1.8" letter-spacing="3.6">FISHERMEN</text>
+    <text x="412" y="270" dx="2.0" letter-spacing="4.0">TUNA</text>
   </g>
 </svg>
