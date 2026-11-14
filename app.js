@@ -11,7 +11,14 @@
     let map;
     let scroller;
     let currentScene = -1;
+    let closingFinaleActive = false;
     let markersOnMap = [];
+
+    const SCENE_BOUNDS = {
+        scene3: { bounds: [[-91.5, 23.0], [6.5, 43.0]], mode: 'transatlantic', pitch: 0, bearing: 0, duration: 1800 },
+        scene4: { bounds: [[-10.2, 35.5], [-1.5, 44.4]], mode: 'iberia', pitch: 0, bearing: 0, duration: 1700 },
+        scene6: { bounds: [[-5.87, 35.76], [-5.54, 36.04]], mode: 'cohunting', pitch: 16, bearing: 0, duration: 1600 }
+    };
 
     /* ── Map Tile Sources ─────────────────────────────────────────────── */
 
@@ -181,15 +188,17 @@
     function getMapPadding(mode) {
         const isDesktop = window.innerWidth > 960;
         if (!isDesktop) {
+            const mobileMapHeight = map ? map.getContainer().clientHeight : Math.round(window.innerHeight * 0.38);
             return {
-                top: 20,
-                bottom: mode === 'cohunting' ? 78 : 24,
-                left: 20,
-                right: 32
+                top: 16,
+                bottom: mode === 'iberia' ? Math.max(180, Math.round(mobileMapHeight * 0.48)) : (mode === 'cohunting' ? 78 : 24),
+                left: 16,
+                right: 24
             };
         }
 
         const mapWidth = map ? map.getContainer().clientWidth : Math.round(window.innerWidth * 0.4);
+        const mapHeight = map ? map.getContainer().clientHeight : window.innerHeight;
         if (mode === 'transatlantic') {
             return {
                 top: 25,
@@ -200,10 +209,10 @@
         }
         if (mode === 'iberia') {
             return {
-                top: 48,
-                bottom: 112,
-                left: 65,
-                right: 55
+                top: 24,
+                bottom: Math.max(220, Math.round(mapHeight * 0.28)),
+                left: 36,
+                right: 32
             };
         }
         if (mode === 'cohunting') {
@@ -1329,28 +1338,25 @@
         const sceneKeys = ['scene1', 'scene2', 'scene3', 'scene4', 'scene5', 'scene6', 'closing'];
         const sceneKey = sceneKeys[idx] || '';
 
-        if (sceneKey === 'scene3') {
-            map.fitBounds([[-91.5, 23.0], [6.5, 43.0]], {
-                padding: getMapPadding('transatlantic'),
-                pitch: 0,
-                bearing: 0,
-                duration: 1800,
+        const fitCfg = SCENE_BOUNDS[sceneKey];
+        if (fitCfg) {
+            map.fitBounds(fitCfg.bounds, {
+                padding: getMapPadding(fitCfg.mode),
+                pitch: fitCfg.pitch,
+                bearing: fitCfg.bearing,
+                duration: fitCfg.duration,
                 essential: true
             });
-        } else if (sceneKey === 'scene4') {
-            map.fitBounds([[-10.8, 35.3], [-1.2, 44.6]], {
-                padding: getMapPadding('iberia'),
-                pitch: 0,
-                bearing: 0,
-                duration: 1700,
-                essential: true
-            });
-        } else if (sceneKey === 'scene6') {
-            map.fitBounds([[-5.87, 35.76], [-5.54, 36.04]], {
-                padding: getMapPadding('cohunting'),
-                pitch: 16,
-                bearing: 0,
-                duration: 1600,
+        } else if (sceneKey === 'closing' && closingFinaleActive) {
+            const finaleLoc = sceneLocations.closingFinale;
+            map.flyTo({
+                center: finaleLoc.center,
+                zoom: finaleLoc.zoom,
+                pitch: finaleLoc.pitch,
+                bearing: finaleLoc.bearing,
+                padding: getMapPadding('default'),
+                speed: speed,
+                curve: 1.42,
                 essential: true
             });
         } else if (!isNaN(lng) && !isNaN(lat) && !isNaN(zoom)) {
@@ -1391,7 +1397,7 @@
         updateMapLegend(sceneKey);
         setCountryLabelsVisible(sceneKey !== 'scene3');
 
-        setMarkersForScene(sceneKey);
+        setMarkersForScene(sceneKey === 'closing' && closingFinaleActive ? 'closingFinale' : sceneKey);
 
         switch (sceneKey) {
             case 'scene2':
@@ -1414,8 +1420,46 @@
                 setTimeout(() => Charts.redraw(), 450);
                 break;
             case 'closing':
-                showConilMapFeature();
+                if (!closingFinaleActive) {
+                    showConilMapFeature();
+                }
                 break;
+        }
+    }
+
+    function applyClosingFinaleState(isFinale) {
+        if (closingFinaleActive === isFinale) return;
+        closingFinaleActive = isFinale;
+        if (currentScene !== 6 || !map) return;
+
+        if (isFinale) {
+            removeConilMapFeature();
+            setMarkersForScene('closingFinale');
+            const finaleLoc = sceneLocations.closingFinale;
+            map.flyTo({
+                center: finaleLoc.center,
+                zoom: finaleLoc.zoom,
+                pitch: finaleLoc.pitch,
+                bearing: finaleLoc.bearing,
+                padding: getMapPadding('default'),
+                speed: 0.6,
+                curve: 1.42,
+                essential: true
+            });
+        } else {
+            clearMarkers();
+            showConilMapFeature();
+            const conilLoc = sceneLocations.closing;
+            map.flyTo({
+                center: conilLoc.center,
+                zoom: conilLoc.zoom,
+                pitch: conilLoc.pitch,
+                bearing: conilLoc.bearing,
+                padding: getMapPadding('default'),
+                speed: 0.6,
+                curve: 1.42,
+                essential: true
+            });
         }
     }
 
@@ -1520,6 +1564,8 @@
                 conilCard.title = 'Click to focus Conil on the map';
                 conilCard.addEventListener('click', () => {
                     if (map) {
+                        closingFinaleActive = false;
+                        clearMarkers();
                         map.flyTo({
                             center: [-6.092, 36.289],
                             zoom: 10.2,
@@ -1532,6 +1578,26 @@
                 });
             }
 
+            // Observe "Let us never forget our bond with wildlife." finale section
+            // to zoom out from Conil back to the initial Strait of Gibraltar view
+            const closingFinaleEl = document.getElementById('closing-finale');
+            if (closingFinaleEl && 'IntersectionObserver' in window) {
+                const finaleObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            applyClosingFinaleState(true);
+                        } else if (entry.boundingClientRect.top > 0) {
+                            applyClosingFinaleState(false);
+                        }
+                    });
+                }, {
+                    root: null,
+                    rootMargin: '0px 0px -35% 0px',
+                    threshold: 0
+                });
+                finaleObserver.observe(closingFinaleEl);
+            }
+
             // Resize handler
             let resizeTimer;
             window.addEventListener('resize', () => {
@@ -1541,25 +1607,14 @@
                     Charts.redraw();
                     if (map) {
                         map.resize();
-                        if (currentScene === 2) {
-                            map.fitBounds([[-91.5, 23.0], [6.5, 43.0]], {
-                                padding: getMapPadding('transatlantic'),
-                                pitch: 0,
-                                bearing: 0,
-                                duration: 400
-                            });
-                        } else if (currentScene === 3) {
-                            map.fitBounds([[-10.8, 35.3], [-1.2, 44.6]], {
-                                padding: getMapPadding('iberia'),
-                                pitch: 0,
-                                bearing: 0,
-                                duration: 400
-                            });
-                        } else if (currentScene === 5) {
-                            map.fitBounds([[-5.87, 35.76], [-5.54, 36.04]], {
-                                padding: getMapPadding('cohunting'),
-                                pitch: 16,
-                                bearing: 0,
+                        const sceneKeys = ['scene1', 'scene2', 'scene3', 'scene4', 'scene5', 'scene6', 'closing'];
+                        const activeKey = sceneKeys[currentScene] || '';
+                        const fitCfg = SCENE_BOUNDS[activeKey];
+                        if (fitCfg) {
+                            map.fitBounds(fitCfg.bounds, {
+                                padding: getMapPadding(fitCfg.mode),
+                                pitch: fitCfg.pitch,
+                                bearing: fitCfg.bearing,
                                 duration: 400
                             });
                         }

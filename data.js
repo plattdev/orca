@@ -117,6 +117,15 @@ const sceneLocations = {
         pitch: 20,
         bearing: -10,
         markers: []
+    },
+    closingFinale: {
+        center: [-5.6, 35.9],
+        zoom: 4.5,
+        pitch: 0,
+        bearing: 0,
+        markers: [
+            { lng: -5.6, lat: 35.98, label: "Strait of Gibraltar (14 km)", type: "geo" }
+        ]
     }
 };
 

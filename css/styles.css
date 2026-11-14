@@ -196,12 +196,13 @@ img {
 /* Contextual Map Key & Always-Visible Map Callouts */
 .map-legend {
     position: fixed;
-    right: 28px;
-    bottom: 28px;
+    right: 20px;
+    bottom: 44px;
     left: auto;
-    max-width: min(460px, calc(100% - var(--panel-width) - 36px));
+    width: max-content;
+    max-width: min(560px, calc(100% - var(--panel-width) - 28px));
     z-index: 5;
-    padding: 14px 18px;
+    padding: 12px 18px;
     background: rgba(4, 15, 30, 0.92);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(143, 184, 214, 0.35);
@@ -364,6 +365,13 @@ img {
     bottom: calc(100% + 14px);
     right: 0;
     text-align: right;
+}
+
+.map-callout--top {
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
 }
 
 .map-callout--top-left {
