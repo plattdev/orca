@@ -5,20 +5,22 @@
 
 const Charts = (() => {
 
-    /* ── Muted Editorial Scientific Palette (matches CSS tokens) ─────── */
+    /* ── Warm Editorial Scientific Palette (matches CSS tokens) ──────── */
     const C = {
-        ocean300: '#6d9dc5',
-        ocean200: '#8fb8d6',
-        ocean100: '#bfd6e8',
-        orcaAccent: '#7fa8c4',
-        tunaRed: '#c47d76',
-        gold: '#d0ab76',
-        ivory: '#e2c799',
-        textPrimary: '#e6f1ff',
-        textSecondary: '#a8b2d1',
-        textDim: '#8892b0',
-        gridLine: 'rgba(255,255,255,0.06)',
-        thresholdLine: 'rgba(208,171,118,0.62)'
+        canvasBg: '#f6f3ec',
+        ocean300: '#2e5a6b',
+        ocean200: '#244957',
+        ocean100: '#1b3844',
+        orcaAccent: '#3d6b7d',
+        tunaRed: '#b85d4b',
+        gold: '#9e743c',
+        ivory: '#9e743c',
+        stone: '#8c8275',
+        textPrimary: '#1f2933',
+        textSecondary: '#4a5560',
+        textDim: '#6c7680',
+        gridLine: 'rgba(31, 41, 51, 0.09)',
+        thresholdLine: 'rgba(158, 116, 60, 0.68)'
     };
 
     const fontMono = "'JetBrains Mono', monospace";
@@ -88,9 +90,9 @@ const Charts = (() => {
             .attr('id', 'bath-gradient')
             .attr('x1', '0%').attr('y1', '0%')
             .attr('x2', '0%').attr('y2', '100%');
-        gradient.append('stop').attr('offset', '0%').attr('stop-color', 'rgba(100, 181, 246, 0.35)');
-        gradient.append('stop').attr('offset', '60%').attr('stop-color', 'rgba(10, 25, 47, 0.85)');
-        gradient.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(2, 12, 27, 0.98)');
+        gradient.append('stop').attr('offset', '0%').attr('stop-color', 'rgba(46, 90, 107, 0.24)');
+        gradient.append('stop').attr('offset', '60%').attr('stop-color', 'rgba(46, 90, 107, 0.12)');
+        gradient.append('stop').attr('offset', '100%').attr('stop-color', 'rgba(46, 90, 107, 0.04)');
 
         g.append('path')
             .datum(bathymetryProfile)
@@ -134,7 +136,7 @@ const Charts = (() => {
             g.append('line')
                 .attr('x1', xx).attr('x2', xx)
                 .attr('y1', 0).attr('y2', ih)
-                .attr('stroke', 'rgba(255,255,255,0.04)')
+                .attr('stroke', 'rgba(31, 41, 51, 0.06)')
                 .attr('stroke-width', 0.5);
 
             g.append('text')
@@ -240,8 +242,8 @@ const Charts = (() => {
         ctx.closePath();
 
         const areaGrad = ctx.createLinearGradient(0, 0, 0, ih);
-        areaGrad.addColorStop(0, 'rgba(127, 168, 196, 0.20)');
-        areaGrad.addColorStop(1, 'rgba(127, 168, 196, 0.01)');
+        areaGrad.addColorStop(0, 'rgba(61, 107, 125, 0.18)');
+        areaGrad.addColorStop(1, 'rgba(61, 107, 125, 0.01)');
         ctx.fillStyle = areaGrad;
         ctx.fill();
 
@@ -264,9 +266,9 @@ const Charts = (() => {
             const py = yScale(data.totalAbundance[i]);
             ctx.beginPath();
             ctx.arc(px, py, 3.2, 0, Math.PI * 2);
-            ctx.fillStyle = C.ocean100;
+            ctx.fillStyle = C.ocean300;
             ctx.fill();
-            ctx.strokeStyle = '#071426';
+            ctx.strokeStyle = C.canvasBg;
             ctx.lineWidth = 1.4;
             ctx.stroke();
         });
@@ -337,7 +339,7 @@ const Charts = (() => {
         // Shaded 2006–2010 calf mortality plateau window
         const x2005 = xScale(2005.5);
         const x2010 = xScale(2010.5);
-        ctx.fillStyle = 'rgba(196, 125, 118, 0.08)';
+        ctx.fillStyle = 'rgba(184, 93, 75, 0.09)';
         ctx.fillRect(x2005, 0, x2010 - x2005, ih);
 
         // Grid
@@ -366,7 +368,7 @@ const Charts = (() => {
 
         // Total community reference line (dashed muted stone + open squares)
         ctx.beginPath();
-        ctx.strokeStyle = 'rgba(189, 178, 158, 0.72)';
+        ctx.strokeStyle = 'rgba(140, 130, 117, 0.78)';
         ctx.lineWidth = 1.6;
         ctx.setLineDash([4, 3]);
         data.years.forEach((year, i) => {
@@ -381,14 +383,14 @@ const Charts = (() => {
         data.years.forEach((year, i) => {
             const px = xScale(year);
             const py = yScale(data.totalAbundance[i]);
-            ctx.fillStyle = '#071426';
-            ctx.strokeStyle = 'rgba(208, 196, 174, 0.85)';
-            ctx.lineWidth = 1.3;
+            ctx.fillStyle = C.canvasBg;
+            ctx.strokeStyle = C.stone;
+            ctx.lineWidth = 1.4;
             ctx.fillRect(px - 2.6, py - 2.6, 5.2, 5.2);
             ctx.strokeRect(px - 2.6, py - 2.6, 5.2, 5.2);
         });
 
-        // Soft fill under Interacting pods (INT: A1 & A2 — muted ocean blue)
+        // Soft fill under Interacting pods (INT: A1 & A2 — deep Atlantic petrol)
         ctx.beginPath();
         ctx.moveTo(xScale(data.years[0]), ih);
         data.years.forEach((year, i) => {
@@ -397,14 +399,14 @@ const Charts = (() => {
         ctx.lineTo(xScale(data.years[data.years.length - 1]), ih);
         ctx.closePath();
         const intGrad = ctx.createLinearGradient(0, yScale(20), 0, ih);
-        intGrad.addColorStop(0, 'rgba(126, 176, 213, 0.24)');
-        intGrad.addColorStop(1, 'rgba(126, 176, 213, 0.02)');
+        intGrad.addColorStop(0, 'rgba(46, 90, 107, 0.18)');
+        intGrad.addColorStop(1, 'rgba(46, 90, 107, 0.02)');
         ctx.fillStyle = intGrad;
         ctx.fill();
 
-        // Interacting pods (INT) primary line (muted ocean blue + filled circles)
+        // Interacting pods (INT) primary line (deep Atlantic petrol + filled circles)
         ctx.beginPath();
-        ctx.strokeStyle = C.ocean200;
+        ctx.strokeStyle = C.ocean300;
         ctx.lineWidth = 2.4;
         ctx.lineJoin = 'round';
         data.years.forEach((year, i) => {
@@ -420,16 +422,16 @@ const Charts = (() => {
             const py = yScale(data.interactingPodsINT[i]);
             ctx.beginPath();
             ctx.arc(px, py, 3.2, 0, Math.PI * 2);
-            ctx.fillStyle = C.ocean200;
+            ctx.fillStyle = C.ocean300;
             ctx.fill();
-            ctx.strokeStyle = '#071426';
+            ctx.strokeStyle = C.canvasBg;
             ctx.lineWidth = 1.4;
             ctx.stroke();
         });
 
         // Endpoint callout for INT = 18
         const last = data.years.length - 1;
-        ctx.fillStyle = C.ocean100;
+        ctx.fillStyle = C.ocean200;
         ctx.font = `600 ${fsNote}px ${fontMono}`;
         ctx.textAlign = 'right';
         ctx.fillText('18 INT (+3.9%/yr)', xScale(data.years[last]) - 4, yScale(data.interactingPodsINT[last]) - 9);
@@ -440,7 +442,7 @@ const Charts = (() => {
         ctx.font = `${fsLegend}px ${fontBody}`;
 
         // Legend item 1: Interacting (filled circle + solid muted blue line)
-        ctx.fillStyle = C.ocean200;
+        ctx.fillStyle = C.ocean300;
         ctx.fillRect(lx, ly - 2, 13, 2.5);
         ctx.beginPath();
         ctx.arc(lx + 6.5, ly - 0.8, 2.8, 0, Math.PI * 2);
@@ -451,8 +453,8 @@ const Charts = (() => {
 
         // Legend item 2: Total (open square + dashed stone)
         const lx2 = lx + Math.min(iw * 0.56, 142);
-        ctx.strokeStyle = 'rgba(208, 196, 174, 0.85)';
-        ctx.lineWidth = 1.3;
+        ctx.strokeStyle = C.stone;
+        ctx.lineWidth = 1.4;
         ctx.strokeRect(lx2, ly - 4, 6, 6);
         ctx.fillStyle = C.textSecondary;
         ctx.fillText('All 5 pods', lx2 + 10, ly + 3);
@@ -535,11 +537,11 @@ const Charts = (() => {
 
             const isAboveStable = val >= data.thresholdStable;
             ctx.fillStyle = isAboveStable
-                ? 'rgba(127, 168, 196, 0.44)'
-                : 'rgba(184, 128, 120, 0.34)';
+                ? 'rgba(46, 90, 107, 0.28)'
+                : 'rgba(184, 93, 75, 0.26)';
             ctx.strokeStyle = isAboveStable
-                ? 'rgba(155, 194, 219, 0.65)'
-                : 'rgba(196, 145, 136, 0.52)';
+                ? 'rgba(46, 90, 107, 0.58)'
+                : 'rgba(184, 93, 75, 0.56)';
             ctx.lineWidth = 1;
 
             const r = 2;
@@ -595,11 +597,11 @@ const Charts = (() => {
             if (survived) {
                 ctx.fillStyle = C.ivory;
                 ctx.fill();
-                ctx.strokeStyle = '#071426';
+                ctx.strokeStyle = C.canvasBg;
                 ctx.lineWidth = 1.4;
                 ctx.stroke();
             } else {
-                ctx.fillStyle = '#071426';
+                ctx.fillStyle = C.canvasBg;
                 ctx.fill();
                 ctx.strokeStyle = C.tunaRed;
                 ctx.lineWidth = 1.7;
@@ -621,7 +623,7 @@ const Charts = (() => {
         const ly = 11;
         ctx.font = `${fsLegend}px ${fontBody}`;
 
-        ctx.fillStyle = 'rgba(127, 168, 196, 0.55)';
+        ctx.fillStyle = 'rgba(46, 90, 107, 0.45)';
         ctx.fillRect(lx, ly - 5, 9, 9);
         ctx.fillStyle = C.textSecondary;
         ctx.textAlign = 'left';

@@ -22,22 +22,22 @@
 
     /* ── Map Tile Sources ─────────────────────────────────────────────── */
 
-    // Use a beautiful dark basemap style
-    const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
+    // Use a clean, restrained light editorial basemap style
+    const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
     /* ── Marker Styles ────────────────────────────────────────────────── */
 
     const markerColors = {
-        geo: '#6d9dc5',
-        nature: '#8fb8d6',
-        bathymetry: '#c97a74',
-        town: '#d4b27c',
-        almadraba: '#dfc18b',
-        'transect-a': '#e0a938',
-        'transect-b': '#9bc5d9',
-        'orca-core': '#e0a938',
-        'orca-range': '#7ec8e3',
-        basin: '#8c7aa8'
+        geo: '#2e5a6b',
+        nature: '#527366',
+        bathymetry: '#b85d4b',
+        town: '#9e743c',
+        almadraba: '#9e743c',
+        'transect-a': '#9e743c',
+        'transect-b': '#2e5a6b',
+        'orca-core': '#9e743c',
+        'orca-range': '#527366',
+        basin: '#6e5f7a'
     };
 
     function createMarkerElement(mk) {
@@ -62,9 +62,9 @@
             width: 11px;
             height: 11px;
             border-radius: 50%;
-            background: ${markerColors[type] || '#fff'};
-            border: 2px solid rgba(255,255,255,0.88);
-            box-shadow: 0 0 10px ${markerColors[type] || '#fff'}80;
+            background: ${markerColors[type] || '#2e5a6b'};
+            border: 2px solid #fdfbf7;
+            box-shadow: 0 1px 6px rgba(31, 41, 51, 0.25);
             cursor: default;
             transition: transform 0.3s ease;
         `;
@@ -74,9 +74,9 @@
                 width: 12px;
                 height: 12px;
                 border-radius: 50%;
-                background: #e0a938;
-                border: 2px solid #ffffff;
-                box-shadow: 0 0 0 2px rgba(224, 169, 56, 0.45), 0 0 12px rgba(224, 169, 56, 0.75);
+                background: #9e743c;
+                border: 2px solid #fdfbf7;
+                box-shadow: 0 0 0 2px rgba(158, 116, 60, 0.25), 0 2px 6px rgba(31, 41, 51, 0.22);
                 cursor: default;
                 transition: transform 0.3s ease;
             `;
@@ -85,9 +85,9 @@
                 width: 12px;
                 height: 12px;
                 border-radius: 50%;
-                background: #7ec8e3;
-                border: 2px solid #ffffff;
-                box-shadow: 0 0 0 2px rgba(126, 200, 227, 0.45), 0 0 12px rgba(126, 200, 227, 0.75);
+                background: #527366;
+                border: 2px solid #fdfbf7;
+                box-shadow: 0 0 0 2px rgba(82, 115, 102, 0.25), 0 2px 6px rgba(31, 41, 51, 0.22);
                 cursor: default;
                 transition: transform 0.3s ease;
             `;
@@ -96,9 +96,9 @@
                 width: 12px;
                 height: 12px;
                 border-radius: 50%;
-                background: #8c7aa8;
-                border: 2px solid rgba(255,255,255,0.9);
-                box-shadow: 0 0 10px rgba(140, 122, 168, 0.65);
+                background: #6e5f7a;
+                border: 2px solid #fdfbf7;
+                box-shadow: 0 1px 6px rgba(31, 41, 51, 0.24);
                 cursor: default;
                 transition: transform 0.3s ease;
             `;
@@ -137,13 +137,13 @@
             font-family: 'Inter', sans-serif;
             font-size: 0.8125rem;
             font-weight: 500;
-            color: #e6f1ff;
-            background: rgba(10, 25, 47, 0.94);
-            backdrop-filter: blur(8px);
+            color: #1f2933;
+            background: rgba(253, 251, 247, 0.96);
+            backdrop-filter: blur(6px);
             padding: 5px 10px;
             border-radius: 6px;
-            border: 1px solid rgba(100, 181, 246, 0.25);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            border: 1px solid rgba(31, 41, 51, 0.18);
+            box-shadow: 0 4px 14px rgba(31, 41, 51, 0.12);
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -334,10 +334,10 @@
             type: 'line',
             source: 'along-strait-transect-src',
             paint: {
-                'line-color': '#e0a938',
-                'line-width': 8,
-                'line-opacity': 0.24,
-                'line-blur': 4
+                'line-color': '#9e743c',
+                'line-width': 6,
+                'line-opacity': 0.16,
+                'line-blur': 2
             }
         });
 
@@ -346,7 +346,7 @@
             type: 'line',
             source: 'along-strait-transect-src',
             paint: {
-                'line-color': '#e0a938',
+                'line-color': '#9e743c',
                 'line-width': 2.8,
                 'line-opacity': 0.92,
                 'line-dasharray': [4, 2]
@@ -370,10 +370,10 @@
             type: 'line',
             source: 'camarinal-transect-src',
             paint: {
-                'line-color': '#8fb8d6',
-                'line-width': 8,
-                'line-opacity': 0.25,
-                'line-blur': 4
+                'line-color': '#2e5a6b',
+                'line-width': 6,
+                'line-opacity': 0.16,
+                'line-blur': 2
             }
         });
 
@@ -382,7 +382,7 @@
             type: 'line',
             source: 'camarinal-transect-src',
             paint: {
-                'line-color': '#9bc5d9',
+                'line-color': '#2e5a6b',
                 'line-width': 2.8,
                 'line-opacity': 0.94
             }
@@ -439,9 +439,9 @@
             type: 'line',
             source: 'atlantic-current-src',
             paint: {
-                'line-color': '#4a8fe7',
+                'line-color': '#2e5a6b',
                 'line-width': 3.5,
-                'line-opacity': 0.8,
+                'line-opacity': 0.85,
                 'line-dasharray': [3, 2]
             }
         });
@@ -473,10 +473,10 @@
             type: 'line',
             source: 'liw-current-src',
             paint: {
-                'line-color': '#ffb703',
-                'line-width': 8,
-                'line-opacity': 0.25,
-                'line-blur': 4
+                'line-color': '#9e743c',
+                'line-width': 6,
+                'line-opacity': 0.18,
+                'line-blur': 2
             }
         });
 
@@ -485,7 +485,7 @@
             type: 'line',
             source: 'liw-current-src',
             paint: {
-                'line-color': '#ffb703',
+                'line-color': '#9e743c',
                 'line-width': 3,
                 'line-opacity': 0.95,
                 'line-dasharray': [4, 2]
@@ -520,10 +520,10 @@
             type: 'line',
             source: 'wmdw-current-src',
             paint: {
-                'line-color': '#2979ff',
-                'line-width': 8,
-                'line-opacity': 0.25,
-                'line-blur': 4
+                'line-color': '#5b8596',
+                'line-width': 6,
+                'line-opacity': 0.18,
+                'line-blur': 2
             }
         });
 
@@ -532,7 +532,7 @@
             type: 'line',
             source: 'wmdw-current-src',
             paint: {
-                'line-color': '#2979ff',
+                'line-color': '#5b8596',
                 'line-width': 3.5,
                 'line-opacity': 0.95,
                 'line-dasharray': [4, 2]
@@ -647,10 +647,10 @@
             type: 'line',
             source: 'tuna-spring-src',
             paint: {
-                'line-color': '#c97a74',
-                'line-width': ['interpolate', ['linear'], ['zoom'], 1.5, 4, 4.5, 7],
-                'line-opacity': 0.16,
-                'line-blur': 3
+                'line-color': '#b85d4b',
+                'line-width': ['interpolate', ['linear'], ['zoom'], 1.5, 4, 4.5, 6],
+                'line-opacity': 0.14,
+                'line-blur': 2
             }
         });
 
@@ -659,9 +659,9 @@
             type: 'line',
             source: 'tuna-spring-src',
             paint: {
-                'line-color': '#c97a74',
+                'line-color': '#b85d4b',
                 'line-width': ['interpolate', ['linear'], ['zoom'], 1.5, 2.0, 4.5, 2.7],
-                'line-opacity': 0.88,
+                'line-opacity': 0.9,
                 'line-dasharray': [5, 3.5]
             }
         });
@@ -716,10 +716,10 @@
             type: 'line',
             source: 'tuna-summer-src',
             paint: {
-                'line-color': '#6d9dc5',
-                'line-width': ['interpolate', ['linear'], ['zoom'], 1.5, 4, 4.5, 7],
-                'line-opacity': 0.16,
-                'line-blur': 3
+                'line-color': '#2e5a6b',
+                'line-width': ['interpolate', ['linear'], ['zoom'], 1.5, 4, 4.5, 6],
+                'line-opacity': 0.14,
+                'line-blur': 2
             }
         });
 
@@ -728,9 +728,9 @@
             type: 'line',
             source: 'tuna-summer-src',
             paint: {
-                'line-color': '#6d9dc5',
+                'line-color': '#2e5a6b',
                 'line-width': ['interpolate', ['linear'], ['zoom'], 1.5, 2.0, 4.5, 2.7],
-                'line-opacity': 0.88,
+                'line-opacity': 0.9,
                 'line-dasharray': [4.5, 3.5]
             }
         });
@@ -830,9 +830,9 @@
             type: 'line',
             source: 'las-bajas-outer-src',
             paint: {
-                'line-color': '#6d9dc5',
+                'line-color': '#5b8596',
                 'line-width': 1.2,
-                'line-opacity': 0.35,
+                'line-opacity': 0.45,
                 'line-dasharray': [2, 3]
             }
         });
@@ -842,8 +842,8 @@
             type: 'fill',
             source: 'las-bajas-src',
             paint: {
-                'fill-color': '#8fb8d6',
-                'fill-opacity': 0.22
+                'fill-color': '#2e5a6b',
+                'fill-opacity': 0.16
             }
         });
 
@@ -852,10 +852,10 @@
             type: 'line',
             source: 'las-bajas-src',
             paint: {
-                'line-color': '#8fb8d6',
-                'line-width': 7,
-                'line-opacity': 0.24,
-                'line-blur': 4
+                'line-color': '#2e5a6b',
+                'line-width': 5,
+                'line-opacity': 0.14,
+                'line-blur': 2
             }
         });
 
@@ -864,9 +864,9 @@
             type: 'line',
             source: 'las-bajas-src',
             paint: {
-                'line-color': '#b8dcf0',
+                'line-color': '#2e5a6b',
                 'line-width': 2,
-                'line-opacity': 0.9,
+                'line-opacity': 0.88,
                 'line-dasharray': [4, 2.5]
             }
         });
@@ -922,10 +922,10 @@
             type: 'line',
             source: 'cohunting-tuna-src',
             paint: {
-                'line-color': '#6d9dc5',
-                'line-width': 8,
-                'line-opacity': 0.2,
-                'line-blur': 4
+                'line-color': '#2e5a6b',
+                'line-width': 6,
+                'line-opacity': 0.14,
+                'line-blur': 2
             }
         });
 
@@ -934,7 +934,7 @@
             type: 'line',
             source: 'cohunting-tuna-src',
             paint: {
-                'line-color': '#6d9dc5',
+                'line-color': '#2e5a6b',
                 'line-width': 2.8,
                 'line-opacity': 0.9,
                 'line-dasharray': [5, 3.5]
@@ -996,10 +996,10 @@
             type: 'line',
             source: 'cohunting-fleets-src',
             paint: {
-                'line-color': '#d4b27c',
-                'line-width': 6,
-                'line-opacity': 0.18,
-                'line-blur': 3
+                'line-color': '#9e743c',
+                'line-width': 5,
+                'line-opacity': 0.14,
+                'line-blur': 2
             }
         });
 
@@ -1008,7 +1008,7 @@
             type: 'line',
             source: 'cohunting-fleets-src',
             paint: {
-                'line-color': '#d4b27c',
+                'line-color': '#9e743c',
                 'line-width': 2.2,
                 'line-opacity': 0.92,
                 'line-dasharray': [2, 2.5]
@@ -1080,10 +1080,10 @@
             type: 'line',
             source: 'tuna-route-src',
             paint: {
-                'line-color': '#c97a74',
-                'line-width': 8,
-                'line-opacity': 0.15,
-                'line-blur': 6
+                'line-color': '#b85d4b',
+                'line-width': 6,
+                'line-opacity': 0.12,
+                'line-blur': 3
             }
         });
 
@@ -1092,9 +1092,9 @@
             type: 'line',
             source: 'tuna-route-src',
             paint: {
-                'line-color': '#c97a74',
+                'line-color': '#b85d4b',
                 'line-width': 2.4,
-                'line-opacity': 0.72,
+                'line-opacity': 0.85,
                 'line-dasharray': [4, 3]
             }
         });
@@ -1144,10 +1144,10 @@
             source: 'almadraba-src',
             paint: {
                 'circle-radius': 14,
-                'circle-color': 'rgba(212, 178, 124, 0.18)',
-                'circle-stroke-color': '#d4b27c',
+                'circle-color': 'rgba(158, 116, 60, 0.16)',
+                'circle-stroke-color': '#9e743c',
                 'circle-stroke-width': 2,
-                'circle-blur': 0.4
+                'circle-blur': 0.25
             }
         });
 
@@ -1219,10 +1219,10 @@
             type: 'line',
             source: 'orca-corridor-src',
             paint: {
-                'line-color': '#7ec8e3',
-                'line-width': 7,
-                'line-opacity': 0.18,
-                'line-blur': 4
+                'line-color': '#3d6b7d',
+                'line-width': 5,
+                'line-opacity': 0.14,
+                'line-blur': 2
             }
         });
 
@@ -1231,9 +1231,9 @@
             type: 'line',
             source: 'orca-corridor-src',
             paint: {
-                'line-color': '#9bc5d9',
+                'line-color': '#3d6b7d',
                 'line-width': 2.0,
-                'line-opacity': 0.72,
+                'line-opacity': 0.8,
                 'line-dasharray': [3, 3]
             }
         });
@@ -1252,14 +1252,14 @@
                 'fill-color': [
                     'match',
                     ['get', 'tier'],
-                    'core', '#e0a938',
-                    '#7ec8e3'
+                    'core', '#9e743c',
+                    '#527366'
                 ],
                 'fill-opacity': [
                     'match',
                     ['get', 'tier'],
-                    'core', 0.30,
-                    0.20
+                    'core', 0.22,
+                    0.18
                 ]
             }
         });
@@ -1272,12 +1272,12 @@
                 'line-color': [
                     'match',
                     ['get', 'tier'],
-                    'core', '#e0a938',
-                    '#7ec8e3'
+                    'core', '#9e743c',
+                    '#527366'
                 ],
-                'line-width': 7,
-                'line-opacity': 0.25,
-                'line-blur': 4
+                'line-width': 5,
+                'line-opacity': 0.16,
+                'line-blur': 2
             }
         });
 
@@ -1289,11 +1289,11 @@
                 'line-color': [
                     'match',
                     ['get', 'tier'],
-                    'core', '#f5c76b',
-                    '#a8e0f5'
+                    'core', '#9e743c',
+                    '#527366'
                 ],
                 'line-width': 2.0,
-                'line-opacity': 0.92
+                'line-opacity': 0.9
             }
         });
 
@@ -1499,7 +1499,7 @@
                 canvas.height = size;
                 const ctx = canvas.getContext('2d');
                 ctx.fillStyle = color;
-                ctx.strokeStyle = 'rgba(3, 13, 27, 0.85)';
+                ctx.strokeStyle = 'rgba(253, 251, 247, 0.92)';
                 ctx.lineWidth = 1.5;
                 ctx.lineJoin = 'round';
                 ctx.beginPath();
@@ -1514,9 +1514,9 @@
             }
 
             try {
-                map.addImage('arrow-spring', createArrowImage('#ff9a90'));
-                map.addImage('arrow-summer', createArrowImage('#95bddb'));
-                map.addImage('arrow-fleet', createArrowImage('#f2d19b'));
+                map.addImage('arrow-spring', createArrowImage('#b85d4b'));
+                map.addImage('arrow-summer', createArrowImage('#2e5a6b'));
+                map.addImage('arrow-fleet', createArrowImage('#9e743c'));
             } catch (e) {
                 console.warn('Arrow registration error:', e);
             }
